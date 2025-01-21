@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <>
@@ -19,9 +21,31 @@ export default function Home() {
           <h1>Current</h1>
         </TitleDiv>
         <DescDiv>
-          <p>Full-stack software developer at Evernorth</p>
-          <p>Building Artgrp</p>
-          <p>Designing Doma Project</p>
+          <p>
+            Full-stack software developer at{" "}
+            <Link
+              className="font-bold"
+              href="https://evernorth.com"
+              target="_blank"
+            >
+              Evernorth
+            </Link>{" "}
+            <RedirectIcon />
+          </p>
+          <p>
+            Building{" "}
+            <Link className="font-bold" href="" target="_blank">
+              Artgrp
+            </Link>{" "}
+            <RedirectIcon />
+          </p>
+          <p>
+            Designing{" "}
+            <Link className="font-bold" href="" target="_blank">
+              Doma Project
+            </Link>{" "}
+            <RedirectIcon />
+          </p>
         </DescDiv>
       </GroupDiv>
       <GroupDiv>
@@ -30,8 +54,8 @@ export default function Home() {
         </TitleDiv>
         <DescDiv>
           <p>Financial analyst working within advertising and banking </p>
-          <p>General Assembly Bootcamp Graduate</p>
-          <p>Math Bachelor&apos;s from Pace University</p>
+          <p>General Assembly bootcamp graduate</p>
+          <p>B.A. in mathematics from Pace University</p>
         </DescDiv>
       </GroupDiv>
       <GroupDiv>
@@ -40,11 +64,32 @@ export default function Home() {
         </TitleDiv>
         <DescDiv>
           <p>
-            Exploring physical spaces with photography and etheral spaces with
-            color
+            Exploring the world with{" "}
+            <Link className="font-bold" href="" target="_blank">
+              photography
+            </Link>{" "}
+            <RedirectIcon />{" "} </p>
+          <p>
+            Replacing therapy with{" "}
+            <Link className="font-bold" href="" target="_blank">
+              oil pastels
+            </Link>{" "}
+            <RedirectIcon />
           </p>
-          <p>Thinking, thinking, and overthinking.</p>
-          <p>Playing chess @pigeonmania</p>
+          <p>
+            Musing, and occasionally{" "}
+            <Link className="font-bold" href="https://berlins-blog.vercel.app/" target="_blank">
+              writing
+            </Link>{" "}
+            <RedirectIcon />
+          </p>
+          <p>
+            Playing chess{" "}
+            <Link className="font-bold" href="https://chess.com/member/pigeonmania" target="_blank">
+              @pigeonmania
+            </Link>{" "}
+            <RedirectIcon />
+          </p>
         </DescDiv>
       </GroupDiv>
     </>
@@ -58,7 +103,10 @@ const GroupDiv = ({ children }: React.HTMLProps<HTMLDivElement>) => {
 
 const TitleDiv = ({ children }: React.HTMLProps<HTMLDivElement>) => {
   return (
-    <div className="text-md" style={{ flex: "0 0 150px", fontWeight: "500" }}>
+    <div
+      className="text-sm text-gray-500"
+      style={{ flex: "0 0 150px", fontWeight: "500" }}
+    >
       {children}
     </div>
   );
@@ -66,4 +114,11 @@ const TitleDiv = ({ children }: React.HTMLProps<HTMLDivElement>) => {
 
 const DescDiv = ({ children }: React.HTMLProps<HTMLDivElement>) => {
   return <div className="text-sm flex flex-col gap-1.5">{children}</div>;
+};
+
+//Icon
+const RedirectIcon = () => {
+  return (
+    <span style={{ fontSize: "0.8em", verticalAlign: "super" }}>&#x2197;</span>
+  );
 };

@@ -1,4 +1,4 @@
-import { getCurrentYear } from '@/lib/functions'
+import { getCurrentDateLong } from '@/lib/functions'
 import React from 'react'
 
 const Footer = () => {
@@ -9,7 +9,8 @@ const Footer = () => {
         <p className="text-gray-500 text-sm">
           &quot;Just keep swimming.&quot;
         </p>
-        <p>© {getCurrentYear()}</p>
+        {/* <p>© {getCurrentDateLong()}</p> */}
+        <p>{getCurrentDateLong()}</p>
       </div>
     </footer>
   )

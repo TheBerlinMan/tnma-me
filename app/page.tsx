@@ -65,13 +65,13 @@ export default function Home() {
         <DescDiv>
           <p>
             Exploring the world with{" "}
-            <Link className="font-bold" href="" target="_blank">
+            <Link className="font-bold" href="/photography">
               photography
             </Link>{" "}
             <RedirectIcon />{" "} </p>
           <p>
             Replacing therapy with{" "}
-            <Link className="font-bold" href="" target="_blank">
+            <Link className="font-bold" href="/drawings">
               oil pastels
             </Link>{" "}
             <RedirectIcon />

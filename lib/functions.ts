@@ -4,9 +4,10 @@ export function getCurrentYear(): string {
 
 export function getCurrentDateLong(): string {
   const date = new Date();
-  const month = date.toLocaleString("en-US", { month: "long" });
-  const day = date.getDate();
-  const year = date.getFullYear();
+  const estDate = new Date(date.toLocaleString("en-US", { timeZone: "America/New_York" }));
+  const month = estDate.toLocaleString("en-US", { month: "long" });
+  const day = estDate.getDate();
+  const year = estDate.getFullYear();
 
   return `${month} ${day}, ${year}`;
 }

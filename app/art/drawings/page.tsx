@@ -1,13 +1,27 @@
 import React from 'react'
 import Image from 'next/image'
+import fs from 'fs'
+import path from 'path'
 
-const Drawings = () => {
+async function getDrawings() {
+  const drawingsDir = path.join(process.cwd(), 'public', 'drawings')
+  return fs.readdirSync(drawingsDir)
+}
+
+export default async function Drawings() {
+  const drawingFiles = await getDrawings()
+  
   return (
-    <div>
-      <div>Drawings</div>
-      <Image src="/drawings/Abyss.jpg" alt="Drawing" width={500} height={500} />
+    <div className="flex flex-wrap justify-center gap-4 mt-6">
+      {drawingFiles.map((filename, index) => (
+        <Image 
+          key={index}
+          src={`/drawings/${filename}`} 
+          alt={`Drawing - ${filename}`} 
+          width={300} 
+          height={300}
+        />
+      ))}
     </div>
   )
 }
-
-export default Drawings

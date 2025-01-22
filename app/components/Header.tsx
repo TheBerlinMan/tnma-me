@@ -11,7 +11,6 @@ const navItems = [
 
 const Header = () => {
   const pathname = usePathname();
-  console.log(pathname);
 
   if (pathname === "/") {
     return (

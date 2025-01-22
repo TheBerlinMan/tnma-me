@@ -9,10 +9,8 @@ export default function Home() {
         </div>
         <DescDiv>
           <p>First-generation American-Soviet-Jew</p>
-          <p>Grew up a mostly quiet observer</p>
-          <p>Became a detail-obsessed adult</p>
-          <p>Interested in many things</p>
-          <p>Namely, the human experience</p>
+          <p>Detail-obsessed problem-solver</p>
+          <p>Good with my hands and mind</p>
         </DescDiv>
       </GroupDiv>
       {/* <hr className="border-gray-500 border-1 mb-4"/> */}
@@ -22,7 +20,7 @@ export default function Home() {
         </TitleDiv>
         <DescDiv>
           <p>
-            Full-stack software developer at{" "}
+            Software developer at{" "}
             <Link
               className="font-bold"
               href="https://evernorth.com"
@@ -34,14 +32,14 @@ export default function Home() {
           </p>
           <p>
             Building{" "}
-            <Link className="font-bold" href="" target="_blank">
+            <Link className="font-bold" href="/" target="_blank">
               Artgrp
             </Link>{" "}
             <RedirectIcon />
           </p>
           <p>
             Designing{" "}
-            <Link className="font-bold" href="" target="_blank">
+            <Link className="font-bold" href="/" target="_blank">
               Doma Project
             </Link>{" "}
             <RedirectIcon />
@@ -53,8 +51,8 @@ export default function Home() {
           <h1>History</h1>
         </TitleDiv>
         <DescDiv>
+          <p>General Assembly Software Engineering bootcamp graduate</p>
           <p>Financial analyst working within advertising and banking </p>
-          <p>General Assembly bootcamp graduate</p>
           <p>B.A. in mathematics from Pace University</p>
         </DescDiv>
       </GroupDiv>
@@ -64,11 +62,16 @@ export default function Home() {
         </TitleDiv>
         <DescDiv>
           <p>
-            Exploring the world with{" "}
-            <Link className="font-bold" href="/photography">
-              photography
+            Playing chess{" "}
+            <Link
+              className="font-bold"
+              href="https://chess.com/member/pigeonmania"
+              target="_blank"
+            >
+              @pigeonmania
             </Link>{" "}
-            <RedirectIcon />{" "} </p>
+            <RedirectIcon />
+          </p>
           <p>
             Replacing therapy with{" "}
             <Link className="font-bold" href="/drawings">
@@ -77,16 +80,21 @@ export default function Home() {
             <RedirectIcon />
           </p>
           <p>
-            Musing, and occasionally{" "}
-            <Link className="font-bold" href="https://berlins-blog.vercel.app/" target="_blank">
-              writing
+            Exploring the world with{" "}
+            <Link className="font-bold" href="/photography">
+              photography
             </Link>{" "}
-            <RedirectIcon />
+            <RedirectIcon />{" "}
           </p>
           <p>
-            Playing chess{" "}
-            <Link className="font-bold" href="https://chess.com/member/pigeonmania" target="_blank">
-              @pigeonmania
+            Musing, and occasionally{" "}
+            <Link
+              className="font-bold"
+              href="/"
+              // href="https://berlins-blog.vercel.app/"
+              target="_blank"
+            >
+              writing
             </Link>{" "}
             <RedirectIcon />
           </p>

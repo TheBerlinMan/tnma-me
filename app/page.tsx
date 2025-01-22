@@ -74,14 +74,14 @@ export default function Home() {
           </p>
           <p>
             Replacing therapy with{" "}
-            <Link className="font-bold" href="/drawings">
+            <Link className="font-bold" href="/art/drawings">
               oil pastels
             </Link>{" "}
             <RedirectIcon />
           </p>
           <p>
             Exploring the world with{" "}
-            <Link className="font-bold" href="/photography">
+            <Link className="font-bold" href="/art/photography">
               photography
             </Link>{" "}
             <RedirectIcon />{" "}

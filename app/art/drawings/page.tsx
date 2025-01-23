@@ -18,8 +18,8 @@ export default async function Drawings() {
           key={index}
           src={`/drawings/${filename}`} 
           alt={`Drawing - ${filename}`} 
-          width={300} 
-          height={300}
+          width={250} 
+          height={250}
         />
       ))}
     </div>

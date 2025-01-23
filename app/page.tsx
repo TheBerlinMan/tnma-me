@@ -10,13 +10,13 @@ export default function Home() {
         <DescDiv>
           <p>First-generation American-Soviet-Jew</p>
           <p>Detail-obsessed problem-solver</p>
-          <p>Good with my hands and mind</p>
+          <p>Surviving on my intuition</p>
         </DescDiv>
       </GroupDiv>
       {/* <hr className="border-gray-500 border-1 mb-4"/> */}
       <GroupDiv>
         <TitleDiv>
-          <h1>Current</h1>
+          <h1>Today</h1>
         </TitleDiv>
         <DescDiv>
           <p>
@@ -48,10 +48,10 @@ export default function Home() {
       </GroupDiv>
       <GroupDiv>
         <TitleDiv>
-          <h1>History</h1>
+          <h1>Past</h1>
         </TitleDiv>
         <DescDiv>
-          <p>General Assembly Software Engineering bootcamp graduate</p>
+          <p>General Assembly software engineering bootcamp graduate</p>
           <p>Financial analyst working within advertising and banking </p>
           <p>B.A. in mathematics from Pace University</p>
         </DescDiv>

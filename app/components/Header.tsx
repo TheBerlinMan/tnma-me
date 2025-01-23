@@ -28,7 +28,7 @@ const Header = () => {
   } else {
     return (
       <div>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center max-h-65">
           <Link href="/" className="font-bold text-xl">
             TNMA
           </Link>

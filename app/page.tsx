@@ -1,10 +1,32 @@
+"use client";
+
 import Link from "next/link";
+import { useState, useEffect } from "react";
+
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    // Set initial value
+    handleResize();
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    // Cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return isMobile;
+};
 
 export default function Home() {
+  const isMobile = useIsMobile();
   return (
     <>
       <GroupDiv>
-        <div className="text-xl font-bold" style={{ flex: "0 0 150px" }}>
+        <div className="text-xl font-bold" style={{ flex: isMobile ? "0 0 90px" : "0 0 150px" }}>
           <h1>TNMA</h1>
         </div>
         <DescDiv>
@@ -110,11 +132,10 @@ const GroupDiv = ({ children }: React.HTMLProps<HTMLDivElement>) => {
 };
 
 const TitleDiv = ({ children }: React.HTMLProps<HTMLDivElement>) => {
+  const isMobile = useIsMobile();
+
   return (
-    <div
-      className="text-sm text-gray-500"
-      style={{ flex: "0 0 150px", fontWeight: "500" }}
-    >
+    <div style={{ flex: isMobile ? "0 0 90px" : "0 0 150px" }} className="text-sm text-gray-500">
       {children}
     </div>
   );

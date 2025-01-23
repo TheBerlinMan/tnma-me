@@ -5,7 +5,7 @@ const Contact = () => {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-row gap-2">
-        <Github strokeWidth={3} />
+        <Github strokeWidth={2} />
         <Link href="https://github.com/TheBerlinMan" target="_blank" >
           : @TheBerlinMan
         </Link>

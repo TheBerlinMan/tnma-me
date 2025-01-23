@@ -121,7 +121,7 @@ const TitleDiv = ({ children }: React.HTMLProps<HTMLDivElement>) => {
 };
 
 const DescDiv = ({ children }: React.HTMLProps<HTMLDivElement>) => {
-  return <div className="text-sm flex flex-col gap-1.5">{children}</div>;
+  return <div className="text-sm flex flex-col gap-2">{children}</div>;
 };
 
 //Icon

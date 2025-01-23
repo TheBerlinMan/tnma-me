@@ -1,3 +1,5 @@
+'use client'
+
 import { getCurrentDateLong } from '@/lib/functions'
 import React from 'react'
 

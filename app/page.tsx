@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <>
       <GroupDiv>
-        <div className="text-xl font-bold" style={{ flex: isMobile ? "0 0 90px" : "0 0 150px" }}>
+        <div className="text-xl font-bold" style={{ flex: isMobile ? "0 0 30px" : "0 0 150px", marginBottom: isMobile ? "10px" : "0" }}>
           <h1>TNMA</h1>
         </div>
         <DescDiv>
@@ -129,14 +129,14 @@ export default function Home() {
 
 // Styled Divs
 const GroupDiv = ({ children }: React.HTMLProps<HTMLDivElement>) => {
-  return <div className="flex mb-6">{children}</div>;
+  return <div className="flex mb-6 sm:flex-row flex-col">{children}</div>;
 };
 
 const TitleDiv = ({ children }: React.HTMLProps<HTMLDivElement>) => {
   const isMobile = useIsMobile();
 
   return (
-    <div style={{ flex: isMobile ? "0 0 90px" : "0 0 150px" }} className="text-sm text-gray-500 font-bold">
+    <div style={{ flex: isMobile ? "0 0 30px" : "0 0 150px" }} className="text-sm text-gray-500 font-bold">
       {children}
     </div>
   );

@@ -145,10 +145,3 @@ const TitleDiv = ({ children }: React.HTMLProps<HTMLDivElement>) => {
 const DescDiv = ({ children }: React.HTMLProps<HTMLDivElement>) => {
   return <div className="text-sm flex flex-col gap-2">{children}</div>;
 };
-
-//Icon
-const RedirectIcon = () => {
-  return (
-    <span style={{ fontSize: "0.8em", verticalAlign: "super" }}>&#x2197;</span>
-  );
-};

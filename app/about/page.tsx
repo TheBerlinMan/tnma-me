@@ -16,7 +16,7 @@ const About = () => {
       </div>
       <div className="flex flex-col gap-2">
         <p>
-          My undergruate thesis advisor once called me a polymath and I liked that
+          My undergraduate thesis advisor once called me a polymath and I liked that
           - maybe too much.
         </p>
         <p>

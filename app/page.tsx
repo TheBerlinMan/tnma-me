@@ -135,7 +135,7 @@ const TitleDiv = ({ children }: React.HTMLProps<HTMLDivElement>) => {
   const isMobile = useIsMobile();
 
   return (
-    <div style={{ flex: isMobile ? "0 0 90px" : "0 0 150px" }} className="text-sm text-gray-500">
+    <div style={{ flex: isMobile ? "0 0 90px" : "0 0 150px" }} className="text-sm text-gray-500 font-bold">
       {children}
     </div>
   );

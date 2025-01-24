@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { ExternalLink } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { MoveUpRight } from "lucide-react";
 
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -41,30 +44,30 @@ export default function Home() {
           <h1>Today</h1>
         </TitleDiv>
         <DescDiv>
-          <p>
+          <p className="flex flex-row gap-1">
             Software developer at{" "}
             <Link
-              className="font-bold"
+              className="font-bold ml-1"
               href="https://evernorth.com"
               target="_blank"
             >
               Evernorth
             </Link>{" "}
-            <RedirectIcon />
+            <MoveUpRight size={16} />
           </p>
-          <p>
+          <p className="flex flex-row gap-1">
             Building{" "}
-            <Link className="font-bold" href="/" target="_blank">
+            <Link className="font-bold ml-1" href="/" target="_blank">
               Artgrp
             </Link>{" "}
-            <RedirectIcon />
+            <MoveUpRight size={16} />
           </p>
-          <p>
+          <p className="flex flex-row gap-1">
             Designing{" "}
-            <Link className="font-bold" href="/" target="_blank">
+            <Link className="font-bold ml-1" href="/" target="_blank">
               Doma Project
             </Link>{" "}
-            <RedirectIcon />
+            <MoveUpRight size={16} />
           </p>
         </DescDiv>
       </GroupDiv>
@@ -83,7 +86,7 @@ export default function Home() {
           <h1>Hobbies</h1>
         </TitleDiv>
         <DescDiv>
-          <p>
+          <p className="flex flex-row gap-1">
             Playing chess{" "}
             <Link
               className="font-bold"
@@ -92,33 +95,33 @@ export default function Home() {
             >
               @pigeonmania
             </Link>{" "}
-            <RedirectIcon />
+            <MoveUpRight size={16} />
           </p>
-          <p>
+          <p className="flex flex-row gap-1">
             Replacing therapy with{" "}
-            <Link className="font-bold" href="/art/drawings">
+            <Link className="font-bold ml-1" href="/art/drawings">
               oil pastels
             </Link>{" "}
-            <RedirectIcon />
+            <MoveUpRight size={16} />
           </p>
-          <p>
+          <p className="flex flex-row gap-1"  >
             Exploring the world with{" "}
-            <Link className="font-bold" href="/art/photography">
+            <Link className="font-bold ml-1" href="/art/photography">
               photography
             </Link>{" "}
-            <RedirectIcon />{" "}
+            <MoveUpRight size={16} />
           </p>
-          <p>
+          <p className="flex flex-row gap-1">
             Musing, and occasionally{" "}
             <Link
-              className="font-bold"
+              className="font-bold ml-1"
               href="/"
               // href="https://berlins-blog.vercel.app/"
               target="_blank"
             >
               writing
             </Link>{" "}
-            <RedirectIcon />
+            <MoveUpRight size={16} />
           </p>
         </DescDiv>
       </GroupDiv>

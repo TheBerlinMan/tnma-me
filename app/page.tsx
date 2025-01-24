@@ -54,18 +54,20 @@ export default function Home() {
             <MoveUpRight size={16} />
           </p>
           <p className="flex flex-row gap-1">
-            Building{" "}
+            {/* Building{" "}
             <Link className="font-bold ml-1" href="/" target="_blank">
               Artgrp
             </Link>{" "}
-            <MoveUpRight size={16} />
+            <MoveUpRight size={16} /> */}
+            Building Artgrp
           </p>
           <p className="flex flex-row gap-1">
-            Designing{" "}
+            {/* Designing{" "}
             <Link className="font-bold ml-1" href="/" target="_blank">
               Doma Project
             </Link>{" "}
-            <MoveUpRight size={16} />
+            <MoveUpRight size={16} /> */}
+            Designing Doma Project
           </p>
         </DescDiv>
       </GroupDiv>
@@ -103,14 +105,14 @@ export default function Home() {
             <MoveUpRight size={16} />
           </p>
           <p className="flex flex-row gap-1"  >
-            Exploring the world with{" "}
+            Exploring life with{" "}
             <Link className="font-bold ml-1" href="/art/photography">
               photography
             </Link>{" "}
             <MoveUpRight size={16} />
           </p>
           <p className="flex flex-row gap-1">
-            Musing, and occasionally{" "}
+            {/* Musing, and occasionally{" "}
             <Link
               className="font-bold ml-1"
               href="/"
@@ -119,7 +121,8 @@ export default function Home() {
             >
               writing
             </Link>{" "}
-            <MoveUpRight size={16} />
+            <MoveUpRight size={16} /> */}
+            Musing and occasionally writing
           </p>
         </DescDiv>
       </GroupDiv>

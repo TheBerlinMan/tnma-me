@@ -1,30 +1,34 @@
 import React from "react";
-import { Github, Instagram, Mail, Linkedin } from "lucide-react";
+import { Github, Instagram, Linkedin } from "lucide-react";
 import Link from "next/link";
+import EmailForm from "../components/EmailForm";
 const Contact = () => {
   return (
-    <div className="flex flex-col gap-3">
-      <div className="flex flex-row gap-2">
-        <Github strokeWidth={2} />
-        <Link href="https://github.com/TheBerlinMan" target="_blank" >
-          : @TheBerlinMan
-        </Link>
+    <div className="flex">
+      <div className="flex flex-col gap-3 w-1/2">
+        <h1 className="text-lg font-bold">Get in touch</h1>
+        <EmailForm />
       </div>
-      <div className="flex flex-row gap-2">
-        <Linkedin strokeWidth={3}/>
-        <Link href="https://www.linkedin.com/in/thomas-onik/" target="_blank">
-          : @tommyonik
-        </Link>
-      </div>
-      <div className="flex flex-row gap-2">
-        <Instagram strokeWidth={3} />
-        <Link href="https://www.instagram.com/im.tnma" target="_blank">
-          : @im.tnma
-        </Link>
-      </div>
-      <div className="flex flex-row gap-2">
-        <Mail strokeWidth={3} />
-        <p>: tommyonik@gmail.com</p>
+      <div className="flex flex-col gap-3 w-1/2">
+        <h1 className="text-lg font-bold">Socials</h1>
+        <div className="flex flex-row gap-2">
+          <Github />
+          <Link href="https://github.com/TheBerlinMan" target="_blank">
+            : @theberlinman
+          </Link>
+        </div>
+        <div className="flex flex-row gap-2">
+          <Linkedin />
+          <Link href="https://www.linkedin.com/in/thomas-onik/" target="_blank">
+            : @tommyonik
+          </Link>
+        </div>
+        <div className="flex flex-row gap-2">
+          <Instagram />
+          <Link href="https://www.instagram.com/im.tnma" target="_blank">
+            : @im.tnma
+          </Link>
+        </div>
       </div>
     </div>
   );

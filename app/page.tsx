@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { ExternalLink } from "lucide-react";
-import { ArrowUpRight } from "lucide-react";
 import { MoveUpRight } from "lucide-react";
 
 const useIsMobile = () => {

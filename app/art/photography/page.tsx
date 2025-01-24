@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import Image from "next/image";
 import fs from "fs";
 import path from "path";
 import { Tab } from "@/app/components/Tabs";

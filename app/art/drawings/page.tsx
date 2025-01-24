@@ -1,27 +1,19 @@
-import React from 'react'
-import Image from 'next/image'
-import fs from 'fs'
-import path from 'path'
+import React from "react";
+import fs from "fs";
+import path from "path";
+
+import DrawingCarousel from "@/app/components/DrawingCarousel";
 
 async function getDrawings() {
-  const drawingsDir = path.join(process.cwd(), 'public', 'drawings')
-  return fs.readdirSync(drawingsDir)
+  const drawingsDir = path.join(process.cwd(), "public", "drawings");
+  return fs.readdirSync(drawingsDir).map((file) => `/drawings/${file}`);
 }
 
 export default async function Drawings() {
-  const drawingFiles = await getDrawings()
-  
+  const drawingFiles = await getDrawings();
+  console.log(drawingFiles);
+
   return (
-    <div className="flex flex-wrap justify-center gap-4 mt-6">
-      {drawingFiles.map((filename, index) => (
-        <Image 
-          key={index}
-          src={`/drawings/${filename}`} 
-          alt={`Drawing - ${filename}`} 
-          width={250} 
-          height={250}
-        />
-      ))}
-    </div>
-  )
+   <DrawingCarousel drawingFiles={drawingFiles} />
+  );
 }

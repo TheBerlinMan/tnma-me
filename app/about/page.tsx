@@ -24,7 +24,7 @@ const About = () => {
           I dance, I fight.
         </p>
         <p>
-          Life is just more fun as a generalist, I think.
+          Life is more fun as a generalist, I think.
         </p>
       </div>
       {/* <div className="flex flex-col gap-3">

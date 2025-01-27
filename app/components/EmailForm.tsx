@@ -14,19 +14,19 @@ const EmailForm = () => {
         name="email"
         placeholder="Email"
         required
-        className="w-full bg-transparent border border-black px-4 py-2 rounded"
+        className="w-full bg-transparent border border-black px-2 py-1 rounded text-sm"
       />
       <textarea
         name="message"
         placeholder="Message"
         required
-        className="w-full bg-transparent border border-black px-4 py-2 rounded"
+        className="w-full bg-transparent border border-black px-2 py-1 rounded text-sm"
       />
       <button
         type="submit"
         className="font-bold border border-black px-3 py-1 mt-1 rounded text-black text-sm"
       >
-        Submit
+        Send
       </button>
     </form>
   );

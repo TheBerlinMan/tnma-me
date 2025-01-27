@@ -47,8 +47,10 @@ function DrawingsCarousel({ drawingFiles }: { drawingFiles: string[] }) {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <div className="flex justify-center gap-4 mt-4">
+          <CarouselPrevious />
+          <CarouselNext />
+        </div>
       </Carousel>
 
       <hr className="w-full border-gray-500" />

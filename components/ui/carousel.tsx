@@ -154,15 +154,19 @@ const CarouselContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
+  // Get carousel ref and orientation from context
   const { carouselRef, orientation } = useCarousel()
 
   return (
+    // Outer div with overflow hidden to clip content
     <div ref={carouselRef} className="overflow-hidden">
+      {/* Inner scrollable div that holds the carousel items */}
       <div
         ref={ref}
         className={cn(
-          "flex",
-          orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
+          "flex", // Makes items flow horizontally
+          // If horizontal, add negative margin left, if vertical add negative margin top and flex-col
+          orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col", 
           className
         )}
         {...props}
@@ -176,16 +180,20 @@ const CarouselItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
+  // Get orientation from carousel context to determine layout direction
   const { orientation } = useCarousel()
 
   return (
     <div
       ref={ref}
-      role="group"
-      aria-roledescription="slide"
+      role="group" // Semantic role for accessibility
+      aria-roledescription="slide" // Describes this as a carousel slide
       className={cn(
+        // Base classes to make each item take full width and not grow/shrink
         "min-w-0 shrink-0 grow-0 basis-full",
+        // Add padding left if horizontal, padding top if vertical
         orientation === "horizontal" ? "pl-4" : "pt-4",
+        // Merge in any additional classes passed as props
         className
       )}
       {...props}
@@ -198,26 +206,30 @@ const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
 >(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+  // Get carousel context values for navigation
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
 
   return (
     <Button
       ref={ref}
-      variant={variant}
-      size={size}
+      variant={variant} // Default to outline style
+      size={size} // Default to icon size
       className={cn(
-        "absolute  h-8 w-8 rounded-full",
+        "h-8 w-8 rounded-full", // Base button styles
+        // Position button based on carousel orientation:
+        // If horizontal - place on left side vertically centered
+        // If vertical - place on top horizontally centered and rotated 90deg
         orientation === "horizontal"
           ? "-left-12 top-1/2 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
-      disabled={!canScrollPrev}
-      onClick={scrollPrev}
+      disabled={!canScrollPrev} // Disable button if can't scroll previous
+      onClick={scrollPrev} // Handle click to scroll to previous slide
       {...props}
     >
-      <ArrowLeft className="h-4 w-4" />
-      <span className="sr-only">Previous slide</span>
+      <ArrowLeft className="h-4 w-4" /> {/* Left arrow icon */}
+      <span className="sr-only">Previous slide</span> {/* Screen reader text */}
     </Button>
   )
 })
@@ -235,7 +247,7 @@ const CarouselNext = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute h-8 w-8 rounded-full",
+        "h-8 w-8 rounded-full",
         orientation === "horizontal"
           ? "-right-12 top-1/2 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",

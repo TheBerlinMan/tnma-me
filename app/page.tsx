@@ -76,8 +76,8 @@ export default function Home() {
           <h1>Past</h1>
         </TitleDiv>
         <DescDiv>
-          <p>General Assembly software engineering bootcamp graduate</p>
-          <p>Financial analyst working within advertising and banking </p>
+          <p>G.A. software engineering bootcamp graduate</p>
+          <p>Financial analyst in advertising and banking </p>
           <p>B.A. in mathematics from Pace University</p>
         </DescDiv>
       </GroupDiv>

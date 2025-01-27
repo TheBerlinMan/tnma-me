@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/carousel";
 
 // Client component to handle the interactive carousel
-function DrawingsCarousel({ drawingFiles }: { drawingFiles: string[] }) {
+function DrawingsCarousel({ images }: { images: string[] }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
 
@@ -34,7 +34,7 @@ function DrawingsCarousel({ drawingFiles }: { drawingFiles: string[] }) {
     <div className="flex flex-wrap justify-center gap-4">
       <Carousel className="max-w-xs" setApi={setApi}>
         <CarouselContent>
-          {drawingFiles.map((file, index) => (
+          {images.map((file, index) => (
             <CarouselItem key={index} className="flex items-center justify-center w-full">
               <div className="flex items-center justify-center">
                 <Image
@@ -47,15 +47,15 @@ function DrawingsCarousel({ drawingFiles }: { drawingFiles: string[] }) {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <div className="flex justify-center gap-4 mt-4">
-          <CarouselPrevious />
+        <div className="flex justify-center gap-8 mt-2">
+          <CarouselPrevious  />
           <CarouselNext />
         </div>
       </Carousel>
 
       <hr className="w-full border-gray-500" />
 
-      {drawingFiles.map((filename, index) => (
+      {images.map((filename, index) => (
         <div 
           key={index}
           onClick={() => handleThumbnailClick(index)}

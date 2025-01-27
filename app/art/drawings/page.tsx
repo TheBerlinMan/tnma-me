@@ -2,7 +2,7 @@ import React from "react";
 import fs from "fs";
 import path from "path";
 
-import DrawingCarousel from "@/app/components/DrawingCarousel";
+import CarouselPage from "@/app/components/CarouselPage";
 
 async function getDrawings() {
   const drawingsDir = path.join(process.cwd(), "public", "drawings");
@@ -14,6 +14,6 @@ export default async function Drawings() {
   console.log(drawingFiles);
 
   return (
-   <DrawingCarousel drawingFiles={drawingFiles} />
+   <CarouselPage images={drawingFiles} />
   );
 }

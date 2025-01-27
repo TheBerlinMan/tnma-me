@@ -1,22 +1,22 @@
-'use client'
+"use client";
 
-import { getCurrentYear } from '@/lib/functions'
-import React from 'react'
+import { getCurrentYear } from "@/lib/functions";
+import React from "react";
 
 const Footer = () => {
-//   const currentDate = new Date();
-//   const currentMonth = currentDate.getMonth(); // 0-11 where 0 is January
-  
-//   const getMessage = () => {
-//     if (currentMonth === 0 || currentMonth === 1) { // January or February
-//       return "&quot;Just keep swimming.&quot;";
-//     } else if (currentMonth >= 11 || currentMonth <= 3) { // December to April
-//       return "&quot;Just keep swimming.&quot;";
-//     } else {
-//       return "&quot;Just keep swimming";
-//     }
-//   };
-  
+  //   const currentDate = new Date();
+  //   const currentMonth = currentDate.getMonth(); // 0-11 where 0 is January
+
+  //   const getMessage = () => {
+  //     if (currentMonth === 0 || currentMonth === 1) { // January or February
+  //       return "&quot;Just keep swimming.&quot;";
+  //     } else if (currentMonth >= 11 || currentMonth <= 3) { // December to April
+  //       return "&quot;Just keep swimming.&quot;";
+  //     } else {
+  //       return "&quot;Just keep swimming";
+  //     }
+  //   };
+
   return (
     <footer className="mt-auto text-gray-500 text-sm text-center py-4">
       <hr className="border-gray-500 border-1 mb-4" />
@@ -29,7 +29,7 @@ const Footer = () => {
         <p>Tommy Onik © {getCurrentYear()}</p>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

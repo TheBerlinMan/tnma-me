@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 interface TabProps {
   label: string;
@@ -29,8 +29,8 @@ export const Tabs: React.FC<TabsProps> = ({ children }) => {
               focus:outline-none   
               ${
                 activeTab === index
-                  ? ''
-                  : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? ""
+                  : "text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }
             `}
             onClick={() => setActiveTab(index)}
@@ -39,9 +39,7 @@ export const Tabs: React.FC<TabsProps> = ({ children }) => {
           </button>
         ))}
       </div>
-      <div>
-        {children[activeTab]}
-      </div>
+      <div>{children[activeTab]}</div>
     </div>
   );
 };

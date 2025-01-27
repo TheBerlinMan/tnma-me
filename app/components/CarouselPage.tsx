@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import Image from "next/image";
 import {
@@ -35,7 +35,10 @@ function DrawingsCarousel({ images }: { images: string[] }) {
       <Carousel className="max-w-xs" setApi={setApi}>
         <CarouselContent>
           {images.map((file, index) => (
-            <CarouselItem key={index} className="flex items-center justify-center w-full">
+            <CarouselItem
+              key={index}
+              className="flex items-center justify-center w-full"
+            >
               <div className="flex items-center justify-center">
                 <Image
                   src={file}
@@ -48,7 +51,7 @@ function DrawingsCarousel({ images }: { images: string[] }) {
           ))}
         </CarouselContent>
         <div className="flex justify-center gap-8 mt-2">
-          <CarouselPrevious  />
+          <CarouselPrevious />
           <CarouselNext />
         </div>
       </Carousel>
@@ -56,17 +59,17 @@ function DrawingsCarousel({ images }: { images: string[] }) {
       <hr className="w-full border-gray-500" />
 
       {images.map((filename, index) => (
-        <div 
+        <div
           key={index}
           onClick={() => handleThumbnailClick(index)}
           className={`cursor-pointer transition-opacity ${
-            selectedIndex === index ? 'opacity-100' : 'opacity-50'
+            selectedIndex === index ? "opacity-100" : "opacity-50"
           }`}
         >
-          <Image 
-            src={`${filename}`} 
-            alt={`Drawing - ${filename}`} 
-            width={75} 
+          <Image
+            src={`${filename}`}
+            alt={`Drawing - ${filename}`}
+            width={75}
             height={75}
           />
         </div>

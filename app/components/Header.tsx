@@ -40,7 +40,7 @@ const Header = () => {
             ))}
           </nav>
         </div>
-          <hr className="border-gray-500 border-1 mt-4 mb-6"/>
+        <hr className="border-gray-500 border-1 mt-4 mb-6" />
       </div>
     );
   }

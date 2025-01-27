@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/carousel";
 
 // Client component to handle the interactive carousel
-function DrawingsCarousel({ images }: { images: string[] }) {
+function CarouselPage({ images }: { images: string[] }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
 
@@ -42,7 +42,7 @@ function DrawingsCarousel({ images }: { images: string[] }) {
               <div className="flex items-center justify-center">
                 <Image
                   src={file}
-                  alt={`Drawing - ${index}`}
+                  alt={file}
                   width={300}
                   height={300}
                 />
@@ -67,8 +67,8 @@ function DrawingsCarousel({ images }: { images: string[] }) {
           }`}
         >
           <Image
-            src={`${filename}`}
-            alt={`Drawing - ${filename}`}
+            src={filename}
+            alt={filename}
             width={75}
             height={75}
           />
@@ -78,4 +78,4 @@ function DrawingsCarousel({ images }: { images: string[] }) {
   );
 }
 
-export default DrawingsCarousel;
+export default CarouselPage;

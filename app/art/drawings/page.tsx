@@ -14,6 +14,6 @@ export default async function Drawings() {
   console.log(drawingFiles);
 
   return (
-   <CarouselPage images={drawingFiles} />
+    <CarouselPage images={drawingFiles} />
   );
 }

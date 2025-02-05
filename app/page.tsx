@@ -33,7 +33,7 @@ export default function Home() {
         <DescDiv>
           <p>First-generation American-Soviet-Jew</p>
           <p>Detail-obsessed problem-solver</p>
-          <p>Surviving on my intuition</p>
+          <p>Surviving on intuition</p>
         </DescDiv>
       </GroupDiv>
       {/* <hr className="border-gray-500 border-1 mb-4"/> */}

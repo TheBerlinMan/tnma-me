@@ -17,10 +17,10 @@ const Photography = async () => {
   const { portraitPhotos, landscapePhotos } = await getPhotos();
 
   return (
-    <div>
+    <div className="fade-in">
       <Tabs>
         <Tab label="Portraits">
-          <div className="flex flex-wrap justify-center gap-4 mt-6">
+          <div className="flex flex-wrap justify-center gap-4 mt-6 ">
             <CarouselPage images={portraitPhotos} />
           </div>
         </Tab>

@@ -5,7 +5,7 @@ import EmailForm from "../components/EmailForm";
 
 const Contact = () => {
   return (
-    <div className="flex flex-col sm:flex-row gap-8">
+    <div className="flex flex-col sm:flex-row gap-8 fade-in">
       <div className="flex flex-col gap-3 w-1/2">
         <h1 className="text-md font-bold">Socials</h1>
         <div className="flex flex-row gap-2">

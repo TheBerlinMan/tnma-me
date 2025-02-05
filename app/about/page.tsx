@@ -22,9 +22,9 @@ const useIsMobile = () => {
 const About = () => {
   const isMobile = useIsMobile();
   return (
-    <>
+    <div className="fade-in">
       {isMobile ? <AboutMobile /> : <AboutDesktop />}
-    </>
+    </div>
   );
 };
 
@@ -34,7 +34,7 @@ const AboutMobile = () => {
   return (
     <div className="flex flex-col gap-6 text-sm">
       <div className="flex flex-col gap-2">
-        <p>My name is Tommy David Onik and I&apos;m based in Brooklyn, NY. &apos;TNMA&apos; is my russian name written in
+        <p>&apos;TNMA&apos; is my russian name written in
         english letters. You can just call me Tommy, though.</p>
       </div>
       <div className="flex flex-col gap-2">
@@ -52,7 +52,6 @@ const AboutDesktop = () => {
   return (
     <div className="flex flex-col gap-6 text-sm">
       <div className="flex flex-col gap-2">
-        <p>My name is Tommy David Onik and I&apos;m based in Brooklyn, NY.</p>
         <p>
           &apos;TNMA&apos; is my russian name written in
           english letters.

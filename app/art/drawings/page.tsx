@@ -14,6 +14,8 @@ export default async function Drawings() {
   console.log(drawingFiles);
 
   return (
-    <CarouselPage images={drawingFiles} />
+    <div className="fade-in">
+      <CarouselPage images={drawingFiles} />
+    </div>
   );
 }

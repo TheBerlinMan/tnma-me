@@ -19,12 +19,13 @@ const EmailForm = () => {
       <textarea
         name="message"
         placeholder="Message"
+        rows={4}
         required
         className="w-full bg-transparent border border-black px-2 py-1 rounded text-sm"
       />
       <button
         type="submit"
-        className="font-bold border border-black px-3 py-1 mt-1 rounded text-black text-sm"
+        className="font-bold border border-black px-3 py-1 mt-1 rounded text-gray-600 text-sm"
       >
         Send
       </button>

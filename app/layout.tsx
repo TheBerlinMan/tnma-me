@@ -12,7 +12,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="fade-in m-7">
+      <body>
         <main>{children}</main>
       </body>
     </html>

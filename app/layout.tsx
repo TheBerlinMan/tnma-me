@@ -12,11 +12,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-cover bg-center bg-no-repeat"
-      style={{ 
-        backgroundImage: "url('/drawings/BluePurple.jpg')",
-        backgroundSize: "200%"
-      }}>
+      <body>
         <main>{children}</main>
       </body>
     </html>

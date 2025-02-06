@@ -67,7 +67,6 @@ export default function Home() {
               Doma Project
             </Link>{" "}
             <MoveUpRight size={16} />
-            Designing Doma Project
           </p>
         </DescDiv>
       </GroupDiv>

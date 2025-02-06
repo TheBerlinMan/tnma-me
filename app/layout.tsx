@@ -12,9 +12,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col max-w-6xl mx-auto p-6 sm:p-16">
-        <main className="flex-grow">{children}</main>
+      <body className="bg-cover bg-center bg-no-repeat"
+      style={{ 
+        backgroundImage: "url('/drawings/BluePurple.jpg')",
+        backgroundSize: "200%"
+      }}>
+        <main>{children}</main>
       </body>
     </html>
   );
 }
+
+

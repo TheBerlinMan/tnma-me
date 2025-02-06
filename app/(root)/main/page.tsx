@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 
 const Main = () => {
@@ -36,17 +35,9 @@ const Main = () => {
         </p>
       </div>
       <hr className="border-gray-500 w-4" />
-      <div className="flex flex-col gap-2">
-        <p>
-          I&apos;d love to meet more people, so if you&apos;d like your photo
-          taken, a website built, or just want to grab a coffee, please feel
-          free to get in{" "}
-          <Link className="underline" href="/contact">
-            contact
-          </Link>
-          .
-        </p>
-      </div>
+      <Link className="underline" href="/contact">
+        Contact me
+      </Link>
     </div>
   );
 };

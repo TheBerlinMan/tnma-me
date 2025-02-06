@@ -18,9 +18,9 @@ const Footer = () => {
   //   };
 
   return (
-    <footer className="mt-auto text-gray-500 text-sm text-center py-4">
+    <footer className="mt-auto text-gray-500 text-sm text-center">
       <hr className="border-gray-500 border-1 mb-4" />
-      <div className="flex justify-between flex-col sm:flex-row">
+      <div className="flex justify-between flex-col sm:flex-row m-7">
         <p className="text-gray-500 text-sm">
           {/* {getMessage()} */}
           Just keep swimming.

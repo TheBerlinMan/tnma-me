@@ -62,11 +62,11 @@ export default function Home() {
             Building Artgrp
           </p>
           <p className="flex flex-row gap-1">
-            {/* Designing{" "}
-            <Link className="font-bold ml-1" href="/" target="_blank">
+            Designing{" "}
+            <Link className="font-bold ml-1" href="https://domaproject.vercel.app/" target="_blank">
               Doma Project
             </Link>{" "}
-            <MoveUpRight size={16} /> */}
+            <MoveUpRight size={16} />
             Designing Doma Project
           </p>
         </DescDiv>

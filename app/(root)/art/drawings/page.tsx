@@ -2,7 +2,7 @@ import React from "react";
 import fs from "fs";
 import path from "path";
 
-import CarouselPage from "@/app/components/CarouselPage";
+import CarouselPage from "@/app/(root)/components/CarouselPage";
 
 async function getDrawings() {
   const drawingsDir = path.join(process.cwd(), "public", "drawings");

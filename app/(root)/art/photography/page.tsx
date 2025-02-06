@@ -1,9 +1,9 @@
 import React from "react";
 import fs from "fs";
 import path from "path";
-import { Tab } from "@/app/components/Tabs";
-import { Tabs } from "@/app/components/Tabs";
-import CarouselPage from "@/app/components/CarouselPage";
+import { Tab } from "@/app/(root)/components/Tabs";
+import { Tabs } from "@/app/(root)/components/Tabs";
+import CarouselPage from "@/app/(root)/components/CarouselPage";
 
 async function getPhotos() {
   const portraitsDir = path.join(process.cwd(), "public", "photos", "portraits");

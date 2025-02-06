@@ -9,23 +9,30 @@ const EmailForm = () => {
       method="POST"
       className="flex flex-col gap-2 items-start"
     >
+      <label htmlFor="email" className="text-sm">Email</label>
       <input
         type="email"
         name="email"
-        placeholder="Email"
         required
-        className="w-full bg-transparent border border-black px-2 py-1 rounded text-sm"
+        className="w-full bg-transparent border border-white p-2 rounded text-sm"
       />
+      <label htmlFor="subject" className="text-sm">Subject</label>
+      <input
+        type="subject"
+        name="subject"
+        required
+        className="w-full bg-transparent border border-white p-2 rounded text-sm"
+      />
+      <label htmlFor="message" className="text-sm">Message</label>
       <textarea
         name="message"
-        placeholder="Message"
-        rows={4}
+        rows={6}
         required
-        className="w-full bg-transparent border border-black px-2 py-1 rounded text-sm"
+        className="w-full bg-transparent border border-white p-2 rounded text-sm"
       />
       <button
         type="submit"
-        className="font-bold border border-black px-3 py-1 mt-1 rounded text-gray-600 text-sm"
+        className="font-bold bg-white px-3 py-2 mt-4 rounded text-black text-sm cursor-pointer"
       >
         Send
       </button>

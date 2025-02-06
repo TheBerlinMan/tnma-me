@@ -4,8 +4,8 @@ import React from "react";
 import Link from "next/link";
 
 const navItems = [
-  { name: "Projects", href: "/projects" },
   { name: "Art", href: "/art" },
+  { name: "Projects", href: "/projects" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -16,7 +16,7 @@ const Header = () => {
         <Link href="/main" className="font-bold text-xl">
           TNMA
         </Link>
-        <nav className="flex justify-end gap-4">
+        <nav className="flex justify-end gap-6">
           {navItems.map((item) => (
             <Link href={item.href} key={item.name}>
               {item.name}

@@ -18,7 +18,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-cover bg-center bg-no-repeat relative overflow-hidden"
+    <div className="bg-cover bg-center bg-no-repeat relative overflow-hidden flex items-center justify-center"
     style={{ 
       backgroundImage: "url('/drawings/BluePurple.jpg')",
       backgroundSize: "200%"

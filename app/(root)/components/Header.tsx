@@ -29,7 +29,7 @@ const Header = () => {
     return (
       <div>
         <div className="flex justify-between items-center max-h-65">
-          <Link href="/" className="font-bold text-xl">
+          <Link href="/main" className="font-bold text-xl">
             TNMA
           </Link>
           <nav className="flex justify-end gap-4">

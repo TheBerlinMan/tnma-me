@@ -38,7 +38,7 @@ const Footer = ({ mobile }: FooterProps) => {
           </>
         ) : (
           <>
-            <p>Tommy Onik © {getCurrentDateLong()}</p>
+            <p>Tommy Onik © All Rights Reserved</p>
             <div className="flex gap-3">
               <Link
                 href="https://www.instagram.com/im.tnma"

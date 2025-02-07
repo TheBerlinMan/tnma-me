@@ -31,11 +31,21 @@ export default {
           "50%": { opacity: "0.5" },
           "75%": { opacity: "0.25" },
           "100%": { opacity: "0" }
-        }
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(100%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+        slideDown: {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(100%)' },
+        },
       },
       animation: {
         "circle-expand": "circle-expand 2s ease-in forwards",
-        "fade-out": "fade-out 1s ease-in forwards"
+        "fade-out": "fade-out 1s ease-in forwards",
+        slideUp: 'slideUp 0.3s ease-out',
+        slideDown: 'slideDown 0.3s ease-out',
       }
   	}
   },

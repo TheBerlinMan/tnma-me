@@ -159,7 +159,7 @@ const Header = () => {
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 h-screen w-screen bg-black text-white z-50 flex flex-col">
-          {/* New header for mobile overlay to match where the hamburger was */}
+          {/* Mobile overlay header */}
           <header className="flex justify-between items-center m-7">
             <Link href="/home" className="font-bold text-xl">
               TNMA
@@ -175,7 +175,10 @@ const Header = () => {
               <X />
             </button>
           </header>
-
+          
+          {/* Adding the border to match the main header */}
+          <hr className="border-gray-500 border-1" />
+          
           {/* Navigation content */}
           <div
             className={`flex-1 flex items-center justify-center ${

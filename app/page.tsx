@@ -13,7 +13,7 @@ export default function Home() {
     setIsTransitioning(true);
     // Wait for animation to complete before navigating
     setTimeout(() => {
-      router.push("/main");
+      router.push("/home");
     }, 500); // Match this with CSS transition duration
   };
 
@@ -33,7 +33,7 @@ export default function Home() {
           
           {/* Static text container */}
           <Link 
-            href="/main" 
+            href="/home" 
             onClick={handleClick}
             className="flex items-center justify-center w-32 h-32 rounded-full z-10"
           >

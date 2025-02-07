@@ -2,10 +2,24 @@
 
 import React from "react";
 import Link from "next/link";
+import NavDropdown from "./NavDropdown";
 
 const navItems = [
-  { name: "Art", href: "/art" },
-  { name: "Projects", href: "/projects" },
+  { 
+    name: "Art", 
+    subItems: [
+      { name: "Photography", href: "/art/photography" },
+      { name: "Pastels", href: "/art/pastels" },
+      { name: "Jewelry", href: "/art/jewelry" },
+    ]
+  },
+  { 
+    name: "Code", 
+    subItems: [
+      { name: "Antonia Bara", href: "/code/antoniabara" },
+      { name: "Blackjack", href: "/code/blackjack" },
+    ]
+  },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -13,16 +27,24 @@ const Header = () => {
   return (
     <div>
       <div className="flex justify-between items-center max-h-65 m-7">
-        <Link href="/main" className="font-bold text-xl">
+        <Link href="/home" className="font-bold text-xl">
           TNMA
         </Link>
-        <nav className="flex justify-end gap-6">
+        
+        <div className="flex gap-6">
           {navItems.map((item) => (
-            <Link href={item.href} key={item.name}>
-              {item.name}
-            </Link>
+            <div key={item.name}>
+              <NavDropdown 
+                trigger={item.name}
+                items={item.subItems?.map(subItem => ({
+                  href: subItem.href,
+                  label: subItem.name
+                }))}
+                href={item.href}
+              />
+            </div>
           ))}
-        </nav>
+        </div>
       </div>
       <hr className="border-gray-500 border-1" />
     </div>

@@ -34,10 +34,6 @@ const Main = () => {
           passion for design, logical systems, and the human experience.
         </p>
       </div>
-      <hr className="border-gray-500 w-4" />
-      <Link className="underline" href="/contact">
-        Contact me
-      </Link>
     </div>
   );
 };

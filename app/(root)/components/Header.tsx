@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import NavDropdown from "./NavDropdown";
 import { ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
+import Footer from "./Footer";
 
 const navItems = [
   { 
@@ -158,18 +159,22 @@ const Header = () => {
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 h-screen w-screen bg-black text-white z-50 flex flex-col">
-          {/* X Button for closing the menu */}
-          <div className="absolute top-4 right-4">
+          {/* New header for mobile overlay to match where the hamburger was */}
+          <header className="flex justify-between items-center m-7">
+            <Link href="/home" className="font-bold text-xl">
+              TNMA
+            </Link>
             <button
+              className="md:hidden leading-none relative w-6 h-6 z-[51]"
               onClick={() => {
                 setIsClosing(true);
                 setMobileView('main');
               }}
               aria-label="Close navigation menu"
             >
-              <X className="w-6 h-6" />
+              <X />
             </button>
-          </div>
+          </header>
 
           {/* Navigation content */}
           <div
@@ -184,6 +189,11 @@ const Header = () => {
             }}
           >
             {renderMobileContent()}
+          </div>
+
+          {/* Footer at the bottom of the mobile nav overlay */}
+          <div className="mt-auto p-4">
+            <Footer mobile />
           </div>
         </div>
       )}

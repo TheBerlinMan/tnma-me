@@ -8,7 +8,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="flex-1 m-7">
                 {children}
             </div>
-            <Footer />
+            <div className="hidden md:block">
+                <Footer />
+            </div>
         </div>
     );
 }

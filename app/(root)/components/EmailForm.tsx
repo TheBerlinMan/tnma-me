@@ -32,7 +32,7 @@ const EmailForm = () => {
       />
       <button
         type="submit"
-        className="font-bold bg-white px-3 py-2 mt-4 rounded text-black text-sm cursor-pointer"
+        className="w-full md:w-auto font-bold bg-white px-3 py-2 mt-4 rounded text-black text-sm cursor-pointer"
       >
         Send
       </button>

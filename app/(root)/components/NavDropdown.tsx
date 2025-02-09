@@ -3,13 +3,14 @@
 import React, { useState } from "react";
 import Link from "next/link";
 
-type DropdownProps = {
+interface NavDropdownProps {
   trigger: string;
+  items?: { href: string; label: string; }[];
   href?: string;
-  items?: { href: string; label: string }[];
-};
+  className?: string;
+}
 
-const NavDropdown = ({ trigger, items, href }: DropdownProps) => {
+const NavDropdown = ({ trigger, items, href, className }: NavDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
 
@@ -41,14 +42,14 @@ const NavDropdown = ({ trigger, items, href }: DropdownProps) => {
     >
       {items ? (
         <button 
-          className="cursor-pointer p-2 hover:bg-neutral-800 hover:rounded-sm"
+          className={`${className} cursor-pointer p-2 hover:bg-neutral-800 hover:rounded-sm`}
           onClick={() => setIsOpen(!isOpen)}
         >
           {trigger}
         </button>
       ) : (
         <Link href={href!}>
-          <button className="cursor-pointer p-2 hover:bg-neutral-800 hover:rounded-sm">
+          <button className={`${className} cursor-pointer p-2 hover:bg-neutral-800 hover:rounded-sm`}>
             {trigger}
           </button>
         </Link>

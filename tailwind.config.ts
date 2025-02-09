@@ -50,4 +50,10 @@ export default {
   	}
   },
   plugins: [tailwindcssAnimate],
+  safelist: [
+    {
+      pattern: /bg-(red|blue|green|yellow|purple|pink|orange|teal|indigo|rose)-(100|200)/,
+      variants: ['hover'],
+    },
+  ],
 } satisfies Config;

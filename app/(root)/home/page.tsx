@@ -1,4 +1,41 @@
+"use client"
 import Link from "next/link";
+import { getRandomColor } from "@/lib/functions";
+import { useState } from "react";
+import { useMounted } from "@/lib/hooks/useMounted";
+
+// New HoverLink component that applies a random hover text color to its content
+const HoverLink = ({
+  href,
+  children,
+  ...rest
+}: {
+  href: string;
+  children: React.ReactNode;
+} & React.ComponentPropsWithoutRef<typeof Link>) => {
+  const mounted = useMounted();
+  // Initialize with a random hover text color
+  const [hoverColor, setHoverColor] = useState(getRandomColor());
+
+  const handleMouseEnter = () => {
+    // Update the hover text color ensuring it doesn't match the previous color
+    setHoverColor(getRandomColor(hoverColor));
+  };
+
+  return (
+    <Link
+      href={href}
+      onMouseEnter={handleMouseEnter}
+      {...rest}
+      style={mounted ? { 
+        '--hover-color': `var(--${hoverColor})` 
+      } as React.CSSProperties : {}}
+      className={`underline transition-colors hover-text-custom ${rest.className || ""}`}
+    >
+      {children}
+    </Link>
+  );
+};
 
 const Main = () => {
   return (
@@ -8,46 +45,45 @@ const Main = () => {
           &quot;TNMA&quot; is my Russian name rendered in English letters.
           I&apos;m a first-generation American-Soviet-Jew, and my experiences in
           this world have been primarily shaped by the hybrid nature of my
-          identity- making the moniker a nice summary of who I am. But, you can
+          identity—making the moniker a nice summary of who I am. But, you can
           just call me Tommy.
         </p>
       </div>
       <div className="flex flex-col gap-2">
-        <p>
+        <div>
           Professionally, I&apos;m a{" "}
-          <Link className="underline" href="/projects">
+          <HoverLink href="/projects">
             software developer
-          </Link>{" "}
+          </HoverLink>{" "}
           with a background in mathematics. Casually, I&apos;m an{" "}
-          <Link className="underline" href="/art">
+          <HoverLink href="/art">
             artist and designer
-          </Link>{" "}
+          </HoverLink>{" "}
           with a{" "}
-          <Link
-            className="underline"
+          <HoverLink
             href="https://chess.com/member/pigeonmania"
             target="_blank"
           >
             chess addiction
-          </Link>
+          </HoverLink>
           . Above all, though, I just consider myself a generalist with a
           passion for design, logical systems, and the human experience.
-        </p>
+        </div>
       </div>
       <hr className="w-4" />
       <div className="flex flex-col gap-2">
         <p>
-          In case your curious about my professional history, here&apos;s my{" "}
-          <Link className="underline" href="/resume">
-          resume
-        </Link>
-        .
-      </p>
-      <p>
-        For anything else, just{" "}
-        <Link className="underline" href="/contact">
-          get in touch.
-          </Link>
+          In case you&apos;re curious about my professional history, here&apos;s my{" "}
+          <HoverLink href="/resume">
+            resume
+          </HoverLink>
+          .
+        </p>
+        <p>
+          For anything else, just{" "}
+          <HoverLink href="/contact">
+            get in touch.
+          </HoverLink>
         </p>
       </div>
       <hr className="w-4" />

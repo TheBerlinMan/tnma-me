@@ -1,8 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import { getRandomColor } from "@/lib/functions";
 
 const EmailForm = () => {
+  const [hoverColor, setHoverColor] = useState(getRandomColor());
+
+  const handleMouseEnter = () => {
+    // Update the hover background color while ensuring it is different from the previous one
+    setHoverColor(getRandomColor(hoverColor));
+  };
+
   return (
     <form
       action="https://formsubmit.co/tommyonik@gmail.com"
@@ -32,7 +40,8 @@ const EmailForm = () => {
       />
       <button
         type="submit"
-        className="w-full md:w-auto font-bold bg-white px-3 py-2 mt-4 rounded text-black text-sm cursor-pointer"
+        onMouseEnter={handleMouseEnter}
+        className={`w-full md:w-auto font-bold bg-white hover:bg-${hoverColor} px-3 py-2 mt-4 rounded text-black text-sm cursor-pointer transition-colors`}
       >
         Send
       </button>

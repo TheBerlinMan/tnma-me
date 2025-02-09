@@ -2,46 +2,49 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import NavDropdown from "./NavDropdown";
-import { ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Footer from "./Footer";
+import { getRandomColor } from "@/lib/functions";
+import { useMounted } from "@/lib/hooks/useMounted";
 
 const navItems = [
-  { 
-    name: "Art", 
-    subItems: [
-      { name: "Photography", href: "/art/photography" },
-      { name: "Pastels", href: "/art/pastels" },
-      { name: "Jewelry", href: "/art/jewelry" },
-    ]
-  },
-  { 
-    name: "Code", 
-    subItems: [
-      { name: "Antonia Bara", href: "/code/antoniabara" },
-      { name: "Blackjack", href: "/code/blackjack" },
-    ]
-  },
+  { name: "Art", href: "/art" },
+  { name: "Code", href: "/projects" },
   { name: "Contact", href: "/contact" },
 ];
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [mobileView, setMobileView] = useState<'main' | 'art' | 'code'>('main');
   const [isClosing, setIsClosing] = useState(false);
+  
+  // Initialize with an empty object to avoid non-deterministic SSR values.
+  const [hoverColors, setHoverColors] = useState<Record<string, string>>({});
+
+  const mounted = useMounted();
+
+  // Calculate the hover colors on the client only.
+  useEffect(() => {
+    const colors = ["TNMA", ...navItems.map((item) => item.name)].reduce(
+      (acc, name) => ({
+        ...acc,
+        [name]: getRandomColor(),
+      }),
+      {} as Record<string, string>
+    );
+    setHoverColors(colors);
+  }, []);
+
+  const handleMouseEnter = (itemName: string) => {
+    setHoverColors((prev) => ({
+      ...prev,
+      [itemName]: getRandomColor(prev[itemName]),
+    }));
+  };
 
   // Manage body overflow for no scroll when nav is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
   }, [isMobileMenuOpen]);
-
-  const handleBackToMain = () => {
-    setMobileView('main');
-  };
 
   const handleMobileNavigation = (href: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -50,101 +53,38 @@ const Header = () => {
     }, 100);
   };
 
-  const renderMobileContent = () => {
-    switch (mobileView) {
-      case 'art':
-        return (
-          <div className="flex flex-col items-center gap-3 text-xl">
-            <button 
-              onClick={handleBackToMain}
-              className="mb-4 flex items-center gap-2 pr-5"
-            >
-              <ChevronLeft /> Back
-            </button>
-            {navItems[0].subItems?.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="cursor-pointer"
-                onClick={(e) => handleMobileNavigation(item.href, e)}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        );
-      case 'code':
-        return (
-          <div className="flex flex-col items-center gap-3 text-xl">
-            <button 
-              onClick={handleBackToMain}
-              className="mb-4 flex items-center gap-2 pr-5"
-            >
-              <ChevronLeft /> Back
-            </button>
-            {navItems[1].subItems?.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="cursor-pointer"
-                onClick={(e) => handleMobileNavigation(item.href, e)}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        );
-      default:
-        return (
-          <nav className="flex flex-col items-center gap-3 text-xl z-10">
-            <button 
-              className="cursor-pointer flex items-center gap-2 pl-8"
-              onClick={() => setMobileView('art')}
-            >
-              Art <ChevronRight />
-            </button>
-            <button 
-              className="cursor-pointer flex items-center gap-2 pl-8"
-              onClick={() => setMobileView('code')}
-            >
-              Code <ChevronRight />
-            </button>
-            <Link 
-              href="/contact" 
-              className="cursor-pointer"
-              onClick={(e) => handleMobileNavigation('/contact', e)}
-            >
-              Contact
-            </Link>
-          </nav>
-        );
-    }
-  };
-
   return (
     <div>
       <div className="flex justify-between items-center max-h-65 m-7">
-        <Link href="/home" className="font-bold text-xl">
+        <Link 
+          href="/home" 
+          className="font-bold text-xl transition-colors hover-text-custom"
+          onMouseEnter={() => handleMouseEnter('TNMA')}
+          style={mounted ? { 
+            '--hover-color': `var(--${hoverColors['TNMA'] || 'default-color'})` 
+          } as React.CSSProperties : {}}
+        >
           TNMA
         </Link>
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex gap-6">
           {navItems.map((item) => (
-            <div key={item.name}>
-              <NavDropdown 
-                trigger={item.name}
-                items={item.subItems?.map((subItem) => ({
-                  href: subItem.href,
-                  label: subItem.name,
-                }))}
-                href={item.href}
-              />
-            </div>
+            <Link
+              key={item.name}
+              href={item.href}
+              onMouseEnter={() => handleMouseEnter(item.name)}
+              style={mounted ? { 
+                '--hover-color': `var(--${hoverColors[item.name] || 'default-color'})` 
+              } as React.CSSProperties : {}}
+              className="transition-colors hover-text-custom"
+            >
+              {item.name}
+            </Link>
           ))}
         </div>
 
-        {/* Mobile Hamburger Button (only visible if menu not open) */}
+        {/* Mobile Hamburger Button */}
         {!isMobileMenuOpen && (
           <button 
             className="md:hidden leading-none relative w-6 h-6 z-[51]"
@@ -161,14 +101,20 @@ const Header = () => {
         <div className="fixed inset-0 h-screen w-screen bg-black text-white z-50 flex flex-col">
           {/* Mobile overlay header */}
           <header className="flex justify-between items-center m-7">
-            <Link href="/home" className="font-bold text-xl">
+            <Link 
+              href="/home" 
+              className="font-bold text-xl transition-colors hover-text-custom"
+              onMouseEnter={() => handleMouseEnter('TNMA')}
+              style={mounted ? { 
+                '--hover-color': `var(--${hoverColors['TNMA'] || 'default-color'})` 
+              } as React.CSSProperties : {}}
+            >
               TNMA
             </Link>
             <button
               className="md:hidden leading-none relative w-6 h-6 z-[51]"
               onClick={() => {
                 setIsClosing(true);
-                setMobileView('main');
               }}
               aria-label="Close navigation menu"
             >
@@ -176,7 +122,6 @@ const Header = () => {
             </button>
           </header>
           
-          {/* Adding the border to match the main header */}
           <hr className="border-gray-500 border-1" />
           
           {/* Navigation content */}
@@ -191,10 +136,25 @@ const Header = () => {
               }
             }}
           >
-            {renderMobileContent()}
+            <nav className="flex flex-col items-center gap-3 text-xl z-10">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onMouseEnter={() => handleMouseEnter(item.name)}
+                  style={mounted ? { 
+                    '--hover-color': `var(--${hoverColors[item.name] || 'default-color'})` 
+                  } as React.CSSProperties : {}}
+                  className="cursor-pointer transition-colors hover-text-custom"
+                  onClick={(e) => handleMobileNavigation(item.href, e)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
           </div>
 
-          {/* Footer at the bottom of the mobile nav overlay */}
+          {/* Footer */}
           <div className="mt-auto p-4">
             <Footer mobile />
           </div>

@@ -11,6 +11,16 @@ body {
 @layer base {
   :root {
     --radius: 0.5rem;
+    --red-200: rgb(254 202 202);
+    --blue-200: rgb(191 219 254);
+    --green-200: rgb(187 247 208);
+    --yellow-100: rgb(254 249 195);
+    --purple-200: rgb(233 213 255);
+    --pink-200: rgb(251 207 232);
+    --orange-200: rgb(254 215 170);
+    --teal-200: rgb(153 246 228);
+    --indigo-200: rgb(199 210 254);
+    --rose-200: rgb(254 205 211);
   }
 }
 
@@ -25,4 +35,12 @@ body {
 
 .fade-in {
   animation: fadeIn 1s ease-in;
+}
+
+.hover-text-custom:hover {
+  color: var(--hover-color);
+}
+
+.hover-border-custom:hover {
+  border-color: var(--hover-color);
 }

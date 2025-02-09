@@ -17,18 +17,12 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   
-  // Initialize with an empty object to avoid non-deterministic SSR values.
   const [hoverColors, setHoverColors] = useState<Record<string, string>>({});
-
   const mounted = useMounted();
 
-  // Calculate the hover colors on the client only.
   useEffect(() => {
     const colors = ["TNMA", ...navItems.map((item) => item.name)].reduce(
-      (acc, name) => ({
-        ...acc,
-        [name]: getRandomColor(),
-      }),
+      (acc, name) => ({ ...acc, [name]: getRandomColor() }),
       {} as Record<string, string>
     );
     setHoverColors(colors);

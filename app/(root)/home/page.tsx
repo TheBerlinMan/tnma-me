@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import { getRandomColor } from "@/lib/functions";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMounted } from "@/lib/hooks/useMounted";
 
 // New HoverLink component that applies a random hover text color to its content
@@ -14,22 +14,23 @@ const HoverLink = ({
   children: React.ReactNode;
 } & React.ComponentPropsWithoutRef<typeof Link>) => {
   const mounted = useMounted();
-  // Initialize with a random hover text color
-  const [hoverColor, setHoverColor] = useState(getRandomColor());
+  const [hoverColor, setHoverColor] = useState("");
+
+  useEffect(() => {
+    setHoverColor(getRandomColor());
+  }, []);
 
   const handleMouseEnter = () => {
-    // Update the hover text color ensuring it doesn't match the previous color
-    setHoverColor(getRandomColor(hoverColor));
+    setHoverColor(prev => getRandomColor(prev));
   };
 
   return (
     <Link
       href={href}
       onMouseEnter={handleMouseEnter}
-      {...rest}
-      style={mounted ? { 
+      style={mounted && hoverColor ? { 
         '--hover-color': `var(--${hoverColor})` 
-      } as React.CSSProperties : {}}
+      } : {}}
       className={`underline transition-colors hover-text-custom ${rest.className || ""}`}
     >
       {children}

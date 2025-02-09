@@ -6,16 +6,16 @@ import { getRandomColor } from "@/lib/functions";
 const page = () => {
   return (
     <div className="max-w-lg space-y-6">
-      <Card title="Photography" />
-      <Card title="Drawings" />
-      <Card title="Jewelry" />
+      <Card title="Photography" dateStarted="2024" />
+      <Card title="Drawings" dateStarted="2024" />
+      <Card title="Jewelry" dateStarted="2024" />
     </div>
   );
 };
 
 export default page;
 
-export const Card = ({ title }: { title: string }) => {
+export const Card = ({ title, dateStarted }: { title: string, dateStarted: string }) => {
   const [hoverColor, setHoverColor] = useState(getRandomColor());
 
   const handleMouseEnter = () => {
@@ -40,6 +40,7 @@ export const Card = ({ title }: { title: string }) => {
         <hr className="border-gray-400 my-2" />
         <div className="flex flex-col gap-2">
           <h1 className="text-md">{title}</h1>
+          <p className="text-sm text-gray-400">{dateStarted}</p>
         </div>
       </div>
     </div>

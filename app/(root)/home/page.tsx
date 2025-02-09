@@ -34,6 +34,31 @@ const Main = () => {
           passion for design, logical systems, and the human experience.
         </p>
       </div>
+      <hr className="w-4" />
+      <div className="flex flex-col gap-2">
+        <p>
+          In case your curious about my professional history, here&apos;s my{" "}
+          <Link className="underline" href="/resume">
+          resume
+        </Link>
+        .
+      </p>
+      <p>
+        For anything else, just{" "}
+        <Link className="underline" href="/contact">
+          get in touch.
+          </Link>
+        </p>
+      </div>
+      <hr className="w-4" />
+      <div className="flex flex-col gap-2">
+        <p>
+          Truly, thanks for stopping by.
+        </p>
+        <p>
+          {"<insert photo of stamp style signature>"}
+        </p>
+      </div>
     </div>
   );
 };

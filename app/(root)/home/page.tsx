@@ -30,7 +30,7 @@ const HoverLink = ({
       onMouseEnter={handleMouseEnter}
       style={mounted && hoverColor ? { 
         '--hover-color': `var(--${hoverColor})` 
-      } : {}}
+      } as React.CSSProperties : {}}
       className={`underline transition-colors hover-text-custom ${rest.className || ""}`}
     >
       {children}

@@ -1,15 +1,46 @@
 import React from "react";
 import Card from "../components/Card";
+import Link from "next/link";
+
+const artCards = [
+  {
+    route: "/art/photography",
+    title: "Photography",
+    dateStarted: "2016",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    imagePath: "/photos/landscapes/New York City, Feb 2022-1.jpg"
+  },
+  {
+    route: "/art/drawings",
+    title: "Drawings", 
+    dateStarted: "2022",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    imagePath: "/drawings/PinkSquare.jpg"
+  },
+  { 
+    route: "/art/jewelry",
+    title: "Jewelry",
+    dateStarted: "2021",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    imagePath: "https://picsum.photos/100/100"
+  }
+];
 
 const page = () => {
   return (
-    <div className="max-w-lg space-y-6">
-      <Card title="Photography" dateStarted="2024" />
-      <Card title="Drawings" dateStarted="2024" />
-      <Card title="Jewelry" dateStarted="2024" />
+    <div className="max-w-lg flex flex-col gap-6">
+      {artCards.map((card) => (
+        <Link href={card.route} key={card.title} >
+          <Card
+            title={card.title}
+            dateStarted={card.dateStarted}
+            description={card.description}
+            imagePath={card.imagePath}
+          />
+        </Link>
+      ))}
     </div>
   );
 };
 
 export default page;
-

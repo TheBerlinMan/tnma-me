@@ -45,7 +45,7 @@ export default function Card({
           </div>
           <hr className="border-gray-400 mt-2 mb-4" />
           <div className="flex items-start gap-3 mb-1">
-            <div className="min-w-[100px] min-h-[100px] max-w-[100px] max-h-[100px] overflow-hidden flex items-center justify-center">
+            <div className="min-w-[100px] min-h-[100px] max-w-[100px] max-h-[100px] overflow-hidden flex items-center justify-center rounded-md">
               <Image
                 src={imagePath || `https://picsum.photos/100/100`}
                 width={150}

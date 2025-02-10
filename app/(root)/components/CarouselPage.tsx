@@ -32,29 +32,32 @@ function CarouselPage({ images }: { images: string[] }) {
 
   return (
     <div className="flex flex-wrap justify-center gap-4">
-      <Carousel className="max-w-xs" setApi={setApi}>
-        <CarouselContent>
-          {images.map((file, index) => (
-            <CarouselItem
-              key={index}
-              className="flex items-center justify-center w-full"
-            >
-              <div className="flex items-center justify-center">
-                <Image
-                  src={file}
-                  alt={file}
-                  width={300}
-                  height={300}
-                />
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <div className="flex justify-center gap-8 mt-2">
-          <CarouselPrevious />
-          <CarouselNext />
-        </div>
-      </Carousel>
+      {/* Carousel section with white background */}
+      <div className="bg-white w-full flex justify-center items-center p-4">
+        <Carousel className="max-w-xs" setApi={setApi}>
+          <CarouselContent>
+            {images.map((file, index) => (
+              <CarouselItem
+                key={index}
+                className="flex items-center justify-center w-full"
+              >
+                <div className="flex items-center justify-center">
+                  <Image
+                    src={file}
+                    alt={file}
+                    width={300}
+                    height={300}
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <div className="flex justify-center gap-8 mt-2">
+            <CarouselPrevious />
+            <CarouselNext />
+          </div>
+        </Carousel>
+      </div>
 
       <hr className="w-full border-gray-500" />
 

@@ -7,22 +7,22 @@ const artCards = [
     route: "/art/photography",
     title: "Photography",
     dateStarted: "2016",
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    description: "A collection of my favorite street, portrait, and landscape photos.",
     imagePath: "/photos/landscapes/New York City, Feb 2022-1.jpg"
   },
   {
     route: "/art/drawings",
     title: "Drawings", 
     dateStarted: "2022",
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    description: "A collection of my favorite drawings.",
     imagePath: "/drawings/PinkSquare.jpg"
   },
   { 
     route: "/art/jewelry",
     title: "Jewelry",
     dateStarted: "2021",
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
-    imagePath: "https://picsum.photos/100/100"
+    description: "A collection of prototype pieces.",
+    imagePath: "/jewelry/IMG_4912.JPG"
   }
 ];
 

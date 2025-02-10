@@ -3,17 +3,22 @@
 import { useState, useEffect } from "react";
 import { getRandomColor } from "@/lib/functions";
 import Image from "next/image";
+import { Github, Globe } from "lucide-react";
 
 export default function Card({
     title,
     imagePath,
     dateStarted,
     description,
+    githubLink,
+    websiteLink
   }: {
     title: string;
     imagePath?: string;
-    dateStarted: string;
+    dateStarted?: string;
     description?: string;
+    githubLink?: string;
+    websiteLink?: string;
   }) {
     // Initialize with an empty string so that the initial render is deterministic.
     const [hoverColor, setHoverColor] = useState("");
@@ -40,7 +45,32 @@ export default function Card({
         >
           <div className="flex flex-row space-around justify-between items-end gap-3">
             <h1 className="text-md">{title}</h1>
-            <p className="text-sm text-gray-400">Since {dateStarted}</p>
+            {dateStarted ? (
+              <p className="text-sm text-gray-400">Since {dateStarted}</p>
+            ) : (
+              <div className="flex gap-2">
+                {githubLink && (
+                  <a
+                    href={githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    <Github size={20} />
+                  </a>
+                )}
+                {websiteLink && (
+                  <a
+                    href={websiteLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    <Globe size={20} />
+                  </a>
+                )}
+              </div>
+            )}
           </div>
           <hr className="border-gray-400 mt-2 mb-4" />
           <div className="flex items-start gap-3 mb-1">
@@ -49,7 +79,7 @@ export default function Card({
                 src={imagePath || `https://picsum.photos/100/100`}
                 width={150}
                 height={150}
-                className="object-cover scale-125 translate-y-0.5"
+                className="object-cover scale-125"
                 alt="Photography"
                 style={{
                   objectFit: "cover",

@@ -25,7 +25,7 @@ export const Tabs: React.FC<TabsProps> = ({ children }) => {
           <button
             key={index}
             className={`
-              px-2 text-sm font-medium
+              pr-3 text-sm font-medium
               focus:outline-none   
               ${
                 activeTab === index

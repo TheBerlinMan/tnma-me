@@ -7,14 +7,14 @@ const artCards = [
     route: "/art/photography",
     title: "Photography",
     dateStarted: "2016",
-    description: "A collection of my favorite street, portrait, and landscape photos.",
+    description: "A collection of my street, portrait, and landscape photos.",
     imagePath: "/photos/landscapes/New York City, Feb 2022-1.jpg"
   },
   {
     route: "/art/drawings",
     title: "Drawings", 
     dateStarted: "2022",
-    description: "A collection of my favorite drawings.",
+    description: "A collection of my oil pastel drawings.",
     imagePath: "/drawings/PinkSquare.jpg"
   },
   { 
@@ -28,7 +28,7 @@ const artCards = [
 
 const page = () => {
   return (
-    <div className="max-w-lg flex flex-col gap-6">
+    <div className="max-w-xl flex flex-col gap-6">
       {artCards.map((card) => (
         <Link href={card.route} key={card.title} >
           <Card

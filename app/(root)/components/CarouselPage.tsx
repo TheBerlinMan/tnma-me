@@ -1,82 +1,47 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  type CarouselApi,
-} from "@/components/ui/carousel";
+import Carousel from "./Carousel";
 
-// Client component to handle the interactive carousel
 function CarouselPage({ images }: { images: string[] }) {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [api, setApi] = useState<CarouselApi>();
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Handle thumbnail click
-  const handleThumbnailClick = (index: number) => {
-    setSelectedIndex(index);
-    api?.scrollTo(index);
-  };
-
-  // Handle carousel change
-  React.useEffect(() => {
-    if (!api) return;
-
-    api.on("select", () => {
-      setSelectedIndex(api.selectedScrollSnap());
-    });
-  }, [api]);
+  // Reset index when images change (tab switch)
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [images]);
 
   return (
-    <div className="flex flex-wrap justify-center gap-4">
-      {/* Carousel section with white background */}
-      <div className="bg-white w-full flex justify-center items-center p-4">
-        <Carousel className="max-w-xs" setApi={setApi}>
-          <CarouselContent>
-            {images.map((file, index) => (
-              <CarouselItem
-                key={index}
-                className="flex items-center justify-center w-full"
-              >
-                <div className="flex items-center justify-center">
-                  <Image
-                    src={file}
-                    alt={file}
-                    width={300}
-                    height={300}
-                  />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <div className="flex justify-center gap-8 mt-2">
-            <CarouselPrevious />
-            <CarouselNext />
-          </div>
-        </Carousel>
+    <div className="flex flex-col gap-4 w-full">
+      <div className="w-full">
+        <Carousel 
+          images={images} 
+          currentIndex={currentIndex}
+          onIndexChange={setCurrentIndex}
+        />
       </div>
 
       <hr className="w-full border-gray-500" />
 
-      {images.map((filename, index) => (
-        <div
-          key={index}
-          onClick={() => handleThumbnailClick(index)}
-          className={`cursor-pointer transition-opacity ${
-            selectedIndex === index ? "opacity-100" : "opacity-50"
-          }`}
-        >
-          <Image
-            src={filename}
-            alt={filename}
-            width={75}
-            height={75}
-          />
-        </div>
-      ))}
+      <div className="flex flex-wrap justify-center gap-4">
+        {images.map((filename, index) => (
+          <div 
+            key={index} 
+            className={`cursor-pointer transition-opacity duration-200 h-[75px] ${
+              currentIndex === index ? 'opacity-100' : 'opacity-50'
+            } hover:opacity-100`}
+            onClick={() => setCurrentIndex(index)}
+          >
+            <Image
+              src={filename}
+              alt={filename}
+              width={75}
+              height={75}
+              className="object-cover h-full w-auto"
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

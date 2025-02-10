@@ -3,20 +3,18 @@ import Card from "../components/Card";
 
 const artCards = [
   {
-    route: "/projects/antoniabara",
     title: "Antonia-bara.com",
-    description: "A personal website built with Next.js, Tailwind, and TypeScript.",
+    description: "A personal website for artist Antônia Bara. Built with Next.js, Tailwind, and TypeScript.",
     imagePath: "/projects/Screenshot 2025-02-09 at 11.09.11 PM.png",
-    githubLink: "https://github.com/antoniabara/antonia-bara",
+    githubLink: "https://github.com/TheBerlinMan/antoniabara",
     websiteLink: "https://antonia-bara.com"
   },
   {
-    route: "/projects/blackjack",
     title: "Blackjack", 
     description: "My first coding project. Built with HTML, CSS, and JavaScript.",
     imagePath: "/projects/Screenshot 2025-02-09 at 11.10.10 PM.png",
-    githubLink: "https://github.com/antoniabara/blackjack",
-    websiteLink: "https://antoniabara.github.io/blackjack/"
+    githubLink: "https://github.com/TheBerlinMan/Blackjack",
+    websiteLink: "https://to-blackjack.netlify.app/"
   }
 ];
 

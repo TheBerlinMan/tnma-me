@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "../components/Card";
-import Link from "next/link";
 
 const artCards = [
   {
@@ -23,17 +22,16 @@ const artCards = [
 
 const page = () => {
   return (
-    <div className="max-w-xl flex flex-col gap-6">
+    <div className="max-w-xl flex flex-col gap-6 cursor-default">
       {artCards.map((card) => (
-        <Link href={card.route} key={card.title} >
           <Card
+          key={card.title}
             title={card.title}
             description={card.description}
             imagePath={card.imagePath}
             githubLink={card.githubLink}
             websiteLink={card.websiteLink}
           />
-        </Link>
       ))}
     </div>
   );

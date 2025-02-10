@@ -41,7 +41,7 @@ export default function Card({
               "--hover-color": `var(--${hoverColor})`,
             } as React.CSSProperties
           }
-          className="border rounded-lg border-white py-3 px-4 flex flex-col transition-all cursor-pointer hover-border-custom"
+          className="border rounded-lg border-white py-3 px-4 flex flex-col transition-all hover-border-custom"
         >
           <div className="flex flex-row space-around justify-between items-end gap-3">
             <h1 className="text-md">{title}</h1>

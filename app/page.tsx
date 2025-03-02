@@ -27,7 +27,7 @@ export default function Home() {
         <div className="relative flex items-center justify-center">
           {/* Background circle that expands */}
           <div 
-            className={`absolute w-32 h-32 rounded-full bg-black
+            className={`absolute w-32 h-32 rounded-full bg-white
               ${isTransitioning ? 'animate-circle-expand' : ''}`}
           />
           
@@ -37,7 +37,7 @@ export default function Home() {
             onClick={handleClick}
             className="flex items-center justify-center w-32 h-32 rounded-full z-10"
           >
-            <span className={`text-xl font-bold text-white
+            <span className={`text-xl font-bold text-black
               ${isTransitioning ? 'animate-fade-out' : ''}`}>
               TNMA
             </span>

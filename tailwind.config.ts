@@ -11,6 +11,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-jost)'],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

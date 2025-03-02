@@ -14,14 +14,15 @@ const navItems = [
 ];
 
 const Header = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [isMenuIconAnimating, setIsMenuIconAnimating] = useState(false);
   
   const [hoverColors, setHoverColors] = useState<Record<string, string>>({});
   const mounted = useMounted();
 
   useEffect(() => {
-    const colors = ["TNMA", ...navItems.map((item) => item.name)].reduce(
+    const colors = ["TNMA", "Menu", "Close", ...navItems.map((item) => item.name)].reduce(
       (acc, name) => ({ ...acc, [name]: getRandomColor() }),
       {} as Record<string, string>
     );
@@ -37,14 +38,25 @@ const Header = () => {
 
   // Manage body overflow for no scroll when nav is open
   useEffect(() => {
-    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
-  }, [isMobileMenuOpen]);
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+  }, [isMenuOpen]);
 
-  const handleMobileNavigation = (href: string, e: React.MouseEvent) => {
+  const handleNavigation = (href: string, e: React.MouseEvent) => {
     e.preventDefault();
     setTimeout(() => {
       window.location.href = href;
     }, 100);
+  };
+
+  const handleMenuToggle = () => {
+    setIsMenuIconAnimating(true);
+    if (isMenuOpen) {
+      setIsClosing(true);
+    } else {
+      setTimeout(() => {
+        setIsMenuOpen(true);
+      }, 300); // Match animation duration
+    }
   };
 
   return (
@@ -61,39 +73,36 @@ const Header = () => {
           TNMA
         </Link>
         
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex gap-6">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              onMouseEnter={() => handleMouseEnter(item.name)}
-              style={mounted ? { 
-                '--hover-color': `var(--${hoverColors[item.name] || 'default-color'})` 
-              } as React.CSSProperties : {}}
-              className="transition-colors hover-text-custom"
-            >
-              {item.name}
-            </Link>
-          ))}
-        </div>
-
-        {/* Mobile Hamburger Button */}
-        {!isMobileMenuOpen && (
-          <button 
-            className="md:hidden leading-none relative w-6 h-6 z-[51]"
-            onClick={() => setIsMobileMenuOpen(true)}
-          >
-            <Menu className="absolute inset-0 transition-all duration-300 opacity-100 rotate-0 scale-100" />
-          </button>
-        )}
+        {/* Menu/Close Button - Always visible */}
+        <button 
+          className="leading-none relative w-6 h-6 z-[51] hover-text-custom"
+          onClick={handleMenuToggle}
+          onMouseEnter={() => handleMouseEnter(isMenuOpen ? 'Close' : 'Menu')}
+          style={mounted ? { 
+            '--hover-color': `var(--${hoverColors[isMenuOpen ? 'Close' : 'Menu'] || 'default-color'})` 
+          } as React.CSSProperties : {}}
+          onAnimationEnd={() => {
+            setIsMenuIconAnimating(false);
+          }}
+        >
+          <Menu 
+            className={`absolute inset-0 transition-all duration-300 ${
+              isMenuOpen ? 'opacity-0 scale-0' : 'opacity-100 scale-100'
+            } ${isMenuIconAnimating && !isMenuOpen ? 'animate-xToMenu' : ''}`} 
+          />
+          <X 
+            className={`absolute inset-0 transition-all duration-300 ${
+              isMenuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+            } ${isMenuIconAnimating && isMenuOpen ? 'animate-menuToX' : ''}`} 
+          />
+        </button>
       </div>
       <hr className="border-gray-500 border-1" />
 
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 h-screen w-screen bg-black text-white z-50 flex flex-col">
-          {/* Mobile overlay header */}
+      {/* Menu Overlay */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 h-screen w-screen bg-white text-black z-50 flex flex-col">
+          {/* Overlay header */}
           <header className="flex justify-between items-center m-7">
             <Link 
               href="/home" 
@@ -105,15 +114,7 @@ const Header = () => {
             >
               TNMA
             </Link>
-            <button
-              className="md:hidden leading-none relative w-6 h-6 z-[51]"
-              onClick={() => {
-                setIsClosing(true);
-              }}
-              aria-label="Close navigation menu"
-            >
-              <X />
-            </button>
+            {/* We don't need a separate close button here anymore */}
           </header>
           
           <hr className="border-gray-500 border-1" />
@@ -126,7 +127,7 @@ const Header = () => {
             onAnimationEnd={() => {
               if (isClosing) {
                 setIsClosing(false);
-                setIsMobileMenuOpen(false);
+                setIsMenuOpen(false);
               }
             }}
           >
@@ -140,7 +141,7 @@ const Header = () => {
                     '--hover-color': `var(--${hoverColors[item.name] || 'default-color'})` 
                   } as React.CSSProperties : {}}
                   className="cursor-pointer transition-colors hover-text-custom"
-                  onClick={(e) => handleMobileNavigation(item.href, e)}
+                  onClick={(e) => handleNavigation(item.href, e)}
                 >
                   {item.name}
                 </Link>
@@ -149,7 +150,7 @@ const Header = () => {
           </div>
 
           {/* Footer */}
-          <div className="mt-auto p-4">
+          <div className="mt-auto p-4 md:hidden">
             <Footer mobile />
           </div>
         </div>

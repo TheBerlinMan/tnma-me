@@ -43,12 +43,22 @@ export default {
           '0%': { transform: 'translateY(0)' },
           '100%': { transform: 'translateY(100%)' },
         },
+        menuToX: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(180deg)' },
+        },
+        xToMenu: {
+          '0%': { transform: 'rotate(180deg)' },
+          '100%': { transform: 'rotate(0deg)' },
+        },
       },
       animation: {
         "circle-expand": "circle-expand 2s ease-in forwards",
         "fade-out": "fade-out 1s ease-in forwards",
         slideUp: 'slideUp 0.3s ease-out',
         slideDown: 'slideDown 0.3s ease-out',
+        menuToX: 'menuToX 1s ease-in-out forwards',
+        xToMenu: 'xToMenu 1s ease-in-out forwards',
       }
   	}
   },

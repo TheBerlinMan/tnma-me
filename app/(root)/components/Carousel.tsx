@@ -21,7 +21,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, currentIndex, onIndexChange
 
   return (
     <div className="w-full">
-      <div className="w-full aspect-square relative bg-black flex flex-col px-6 pb-6">
+      <div className="w-full aspect-square relative flex flex-col px-6 pb-6">
         <div id="carousel-container" className="flex-1 relative">
           {images.map((image, index) => (
             <div
@@ -46,18 +46,18 @@ const Carousel: React.FC<CarouselProps> = ({ images, currentIndex, onIndexChange
         <div className="w-full flex justify-between">
           <button
             onClick={goToPrevious}
-            className="flex items-center justify-center p-2 hover:bg-gray-100 hover:text-black rounded-full"
+            className="flex items-center justify-center p-2 hover:bg-gray-100 rounded-full"
             aria-label="Previous slide"
           >
-            <ChevronLeft className="w-6 h-6 text-white hover:text-black" strokeWidth={2} />
+            <ChevronLeft className="w-6 h-6 text-black hover:text-black" strokeWidth={2} />
           </button>
 
           <button
             onClick={goToNext}
-            className="flex items-center justify-center p-2 hover:bg-gray-100 hover:text-black rounded-full"
+            className="flex items-center justify-center p-2 hover:bg-gray-100 rounded-full"
             aria-label="Next slide"
           >
-            <ChevronRight className="w-6 h-6 text-white hover:text-black" strokeWidth={2} />
+            <ChevronRight className="w-6 h-6 text-black hover:text-black" strokeWidth={2} />
           </button>
         </div>
       </div>

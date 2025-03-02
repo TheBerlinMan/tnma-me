@@ -1,5 +1,5 @@
 
-const Main = () => {
+const Home = () => {
   return (
     <div className="flex flex-col gap-6 text-sm max-w-xl fade-in">
       <div className="flex flex-col gap-2">
@@ -23,4 +23,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Home;

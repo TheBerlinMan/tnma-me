@@ -8,7 +8,15 @@ import { getRandomColor } from "@/lib/functions";
 import { useMounted } from "@/lib/hooks/useMounted";
 
 const navItems = [
-  { name: "Art", href: "/art" },
+  { 
+    name: "Art", 
+    href: "/art",
+    sublinks: [
+      { name: "Drawings", href: "/art/drawings" },
+      { name: "Photography", href: "/art/photography" },
+      { name: "Jewelry", href: "/art/jewelry" }
+    ]
+  },
   { name: "Code", href: "/projects" },
   { name: "Contact", href: "/contact" },
 ];
@@ -17,12 +25,24 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [isMenuIconAnimating, setIsMenuIconAnimating] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [showArtSublinks, setShowArtSublinks] = useState(false);
   
   const [hoverColors, setHoverColors] = useState<Record<string, string>>({});
   const mounted = useMounted();
 
   useEffect(() => {
-    const colors = ["TNMA", "Menu", "Close", ...navItems.map((item) => item.name)].reduce(
+    const allItems = ["TNMA", "Menu", "Close", ...navItems.map(item => item.name)];
+    // Add sublink names
+    navItems.forEach(item => {
+      if (item.sublinks) {
+        item.sublinks.forEach(sublink => {
+          allItems.push(sublink.name);
+        });
+      }
+    });
+    
+    const colors = allItems.reduce(
       (acc, name) => ({ ...acc, [name]: getRandomColor() }),
       {} as Record<string, string>
     );
@@ -121,7 +141,7 @@ const Header = () => {
           
           {/* Navigation content */}
           <div
-            className={`flex-1 flex items-center justify-center ${
+            className={`flex-1 flex items-start justify-start pl-7 pt-10 ${
               isClosing ? "animate-slideDown" : "animate-slideUp"
             }`}
             onAnimationEnd={() => {
@@ -131,20 +151,71 @@ const Header = () => {
               }
             }}
           >
-            <nav className="flex flex-col items-center gap-3 text-xl z-10">
+            <nav className="flex flex-col items-start gap-3 text-xl z-10 w-full pr-7">
               {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onMouseEnter={() => handleMouseEnter(item.name)}
-                  style={mounted ? { 
-                    '--hover-color': `var(--${hoverColors[item.name] || 'default-color'})` 
-                  } as React.CSSProperties : {}}
-                  className="cursor-pointer transition-colors hover-text-custom"
-                  onClick={(e) => handleNavigation(item.href, e)}
-                >
-                  {item.name}
-                </Link>
+                <React.Fragment key={item.name}>
+                  <div 
+                    className="w-full border-b border-dashed border-black pb-1"
+                    onMouseEnter={() => {
+                      setHoveredItem(item.name);
+                      if (item.name === "Art") {
+                        setShowArtSublinks(true);
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      setHoveredItem(null);
+                    }}
+                  >
+                    {item.name === "Art" ? (
+                      <span
+                        onMouseEnter={() => handleMouseEnter(item.name)}
+                        style={mounted ? { 
+                          '--hover-color': `var(--${hoverColors[item.name] || 'default-color'})` 
+                        } as React.CSSProperties : {}}
+                        className="cursor-default transition-colors hover-text-custom"
+                      >
+                        {item.name}
+                      </span>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        onMouseEnter={() => handleMouseEnter(item.name)}
+                        style={mounted ? { 
+                          '--hover-color': `var(--${hoverColors[item.name] || 'default-color'})` 
+                        } as React.CSSProperties : {}}
+                        className="cursor-pointer transition-colors hover-text-custom"
+                        onClick={(e) => handleNavigation(item.href, e)}
+                      >
+                        {item.name}
+                      </Link>
+                    )}
+                  </div>
+                  
+                  {/* Sublinks for Art */}
+                  {item.name === "Art" && showArtSublinks && item.sublinks && (
+                    <div 
+                      className="pl-4 w-full"
+                      onMouseEnter={() => setShowArtSublinks(true)}
+                      onMouseLeave={() => setShowArtSublinks(false)}
+                    >
+                      {item.sublinks.map((sublink) => (
+                        <div key={sublink.name} className="w-full border-b border-dashed border-black pb-1 mt-2">
+                          <Link
+                            href={sublink.href}
+                            onMouseEnter={() => handleMouseEnter(sublink.name)}
+                            style={mounted ? { 
+                              '--hover-color': `var(--${hoverColors[sublink.name] || 'default-color'})` 
+                            } as React.CSSProperties : {}}
+                            className="cursor-pointer transition-colors hover-text-custom text-base"
+                            onClick={(e) => handleNavigation(sublink.href, e)}
+                          >
+                            {sublink.name}
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </React.Fragment>
               ))}
             </nav>
           </div>

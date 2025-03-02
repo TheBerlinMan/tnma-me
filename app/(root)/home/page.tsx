@@ -42,57 +42,62 @@ const Home = () => {
           passion for design, logical systems, and the human experience.
         </div>
       </div>
-      <div className="flex flex-col gap-2 mt-4">
-        <ul className="flex flex-col gap-3">
-          <li className="marker:text-foreground before:content-['■'] before:mr-2 flex items-center">
-            <Link
-              href="/art"
-              onMouseEnter={() => handleMouseEnter('Art')}
-              style={mounted ? { 
-                '--hover-color': `var(--${hoverColors['Art'] || 'default-color'})` 
-              } as React.CSSProperties : {}}
-              className="cursor-pointer transition-colors hover-text-custom"
-            >
-              Art
-            </Link>
-          </li>
-          <li className="pl-4 marker:text-foreground before:content-['▪️'] before:mr-2 before:text-xs flex items-center">
-            <Link
-              href="/art/drawings"
-              onMouseEnter={() => handleMouseEnter('Drawings')}
-              style={mounted ? { 
-                '--hover-color': `var(--${hoverColors['Drawings'] || 'default-color'})` 
-              } as React.CSSProperties : {}}
-              className="cursor-pointer transition-colors hover-text-custom"
-            >
-              Drawings
-            </Link>
-          </li>
-          <li className="pl-4 marker:text-foreground before:content-['▪️'] before:mr-2 before:text-xs flex items-center">
-            <Link
-              href="/art/photography"
-              onMouseEnter={() => handleMouseEnter('Photography')}
-              style={mounted ? { 
-                '--hover-color': `var(--${hoverColors['Photography'] || 'default-color'})` 
-              } as React.CSSProperties : {}}
-              className="cursor-pointer transition-colors hover-text-custom"
-            >
-              Photography
-            </Link>
-          </li>
-          <li className="pl-4 marker:text-foreground before:content-['▪️'] before:mr-2 before:text-xs flex items-center">
-            <Link
-              href="/art/jewelry"
-              onMouseEnter={() => handleMouseEnter('Jewelry')}
-              style={mounted ? { 
-                '--hover-color': `var(--${hoverColors['Jewelry'] || 'default-color'})` 
-              } as React.CSSProperties : {}}
-              className="cursor-pointer transition-colors hover-text-custom"
-            >
-              Jewelry
-            </Link>
-          </li>
-          <li className="marker:text-foreground before:content-['■'] before:mr-2 flex items-center">
+      <div className="flex flex-col gap-1">
+        
+          <div className="relative group">
+            <div className="flex items-center">
+              <Link
+                href="/art"
+                onMouseEnter={() => handleMouseEnter('Art')}
+                style={mounted ? { 
+                  '--hover-color': `var(--${hoverColors['Art'] || 'default-color'})` 
+                } as React.CSSProperties : {}}
+                className="cursor-pointer transition-colors hover-text-custom"
+              >
+                -- Art
+              </Link>
+              <span className="hidden group-hover:inline-block mx-2">:</span>
+              <ul className="hidden group-hover:flex gap-3">
+                <li>
+                  <Link
+                    href="/art/drawings"
+                    onMouseEnter={() => handleMouseEnter('Drawings')}
+                    style={mounted ? { 
+                      '--hover-color': `var(--${hoverColors['Drawings'] || 'default-color'})` 
+                    } as React.CSSProperties : {}}
+                    className="cursor-pointer transition-colors hover-text-custom"
+                  >
+                    Drawings
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/art/photography"
+                    onMouseEnter={() => handleMouseEnter('Photography')}
+                    style={mounted ? { 
+                      '--hover-color': `var(--${hoverColors['Photography'] || 'default-color'})` 
+                    } as React.CSSProperties : {}}
+                    className="cursor-pointer transition-colors hover-text-custom"
+                  >
+                    Photography
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/art/jewelry"
+                    onMouseEnter={() => handleMouseEnter('Jewelry')}
+                    style={mounted ? { 
+                      '--hover-color': `var(--${hoverColors['Jewelry'] || 'default-color'})` 
+                    } as React.CSSProperties : {}}
+                    className="cursor-pointer transition-colors hover-text-custom"
+                  >
+                    Jewelry
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div>
             <Link
               href="/projects"
               onMouseEnter={() => handleMouseEnter('Code')}
@@ -101,10 +106,10 @@ const Home = () => {
               } as React.CSSProperties : {}}
               className="cursor-pointer transition-colors hover-text-custom"
             >
-              Code
+              -- Code
             </Link>
-          </li>
-          <li className="marker:text-foreground before:content-['■'] before:mr-2 flex items-center">
+          </div>
+          <div>
             <Link
               href="/resume"
               onMouseEnter={() => handleMouseEnter('Resume')}
@@ -113,10 +118,9 @@ const Home = () => {
               } as React.CSSProperties : {}}
               className="cursor-pointer transition-colors hover-text-custom"
             >
-              Resume
+              -- Resume
             </Link>
-          </li>
-        </ul>
+          </div>
       </div>
     </div>
   );

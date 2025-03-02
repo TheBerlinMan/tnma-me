@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import Footer from "./Footer";
 import { getRandomColor } from "@/lib/functions";
 import { useMounted } from "@/lib/hooks/useMounted";
 
@@ -94,7 +93,7 @@ const Header = () => {
         </Link>
         
         {/* Menu/Close Button - Always visible */}
-        <button 
+        {/* <button 
           className="leading-none relative w-6 h-6 z-[51] hover-text-custom"
           onClick={handleMenuToggle}
           onMouseEnter={() => handleMouseEnter(isMenuOpen ? 'Close' : 'Menu')}
@@ -115,9 +114,9 @@ const Header = () => {
               isMenuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
             } ${isMenuIconAnimating && isMenuOpen ? 'animate-menuToX' : ''}`} 
           />
-        </button>
+        </button> */}
       </div>
-      <hr className="border-gray-500 border-1" />
+      {/* <hr className="border-gray-500 border-1" /> */}
 
       {/* Menu Overlay */}
       {isMenuOpen && (
@@ -220,10 +219,7 @@ const Header = () => {
             </nav>
           </div>
 
-          {/* Footer */}
-          <div className="mt-auto p-4 md:hidden">
-            <Footer mobile />
-          </div>
+  
         </div>
       )}
     </div>

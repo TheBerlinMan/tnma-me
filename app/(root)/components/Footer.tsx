@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Github, Instagram, Linkedin } from "lucide-react";
+import { Github, Instagram, Mail } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { getRandomColor } from "@/lib/functions";
@@ -19,7 +19,7 @@ const Footer = ({ mobile }: FooterProps) => {
     setHoverColors({
       instagram: getRandomColor(),
       github: getRandomColor(),
-      linkedin: getRandomColor(),
+      mail: getRandomColor(),   
     });
   }, []);
 
@@ -32,7 +32,7 @@ const Footer = ({ mobile }: FooterProps) => {
 
   return (
     <footer className="text-sm text-gray-500 text-center">
-      {!mobile && <hr className="border-gray-500 border-1 mb-4" />}
+      {/* {!mobile && <hr className="border-gray-500 border-1 mb-4" />} */}
       <div
         className={
           mobile
@@ -65,23 +65,22 @@ const Footer = ({ mobile }: FooterProps) => {
                   } as React.CSSProperties}
                 />
               </Link>
-              <Link href="https://www.linkedin.com/in/thomas-onik/" target="_blank">
-                <Linkedin
+              <Link href="mailto:tommyonik@gmail.com" target="_blank">
+                <Mail
                   size={20}
                   strokeWidth={1}
                   className="transition-colors hover-text-custom"
-                  onMouseEnter={() => handleMouseEnter("linkedin")}
+                  onMouseEnter={() => handleMouseEnter("mail")}
                   style={{
-                    "--hover-color": `var(--${hoverColors["linkedin"] || "blue-200"})`,
+                    "--hover-color": `var(--${hoverColors["mail"] || "blue-200"})`,
                   } as React.CSSProperties}
                 />
               </Link>
             </div>
-            <p>Tommy Onik © All Rights Reserved</p>
           </>
         ) : (
           <>
-            <p>Tommy Onik © All Rights Reserved</p>
+            <p></p>
             <div className="flex gap-3">
               <Link href="https://www.instagram.com/im.tnma" target="_blank" className="text-sm">
                 <Instagram
@@ -103,13 +102,13 @@ const Footer = ({ mobile }: FooterProps) => {
                   } as React.CSSProperties}
                 />
               </Link>
-              <Link href="https://www.linkedin.com/in/thomas-onik/" target="_blank" className="text-sm">
-                <Linkedin
+              <Link href="mailto:tommyonik@gmail.com" target="_blank" className="text-sm">
+                <Mail
                   size={20}
                   className="transition-colors hover-text-custom"
-                  onMouseEnter={() => handleMouseEnter("linkedin")}
+                  onMouseEnter={() => handleMouseEnter("mail")}
                   style={{
-                    "--hover-color": `var(--${hoverColors["linkedin"] || "blue-200"})`,
+                    "--hover-color": `var(--${hoverColors["mail"] || "blue-200"})`,
                   } as React.CSSProperties}
                 />
               </Link>

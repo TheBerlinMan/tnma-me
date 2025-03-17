@@ -13,7 +13,7 @@ async function getJewelry() {
 const page = async () => {
   const jewelryFiles = await getJewelry();
   return (
-    <div className="fade-in max-w-xl">
+    <div className="fade-in max-w-xl mx-auto">
       <CarouselPage images={jewelryFiles} />
     </div>
   )

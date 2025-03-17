@@ -20,20 +20,20 @@ const Photography = async () => {
   const { portraitPhotos, landscapePhotos, streetPhotos } = await getPhotos();
 
   return (
-    <div className="fade-in max-w-xl">
+    <div className="fade-in max-w-xl mx-auto">
       <Tabs>
       <Tab label="Street">
-          <div className="flex flex-wrap justify-center gap-4 mt-6">
+          <div className="flex flex-wrap justify-center gap-4 mt-6 fade-in">
             <CarouselPage images={streetPhotos} />
           </div>
         </Tab>
         <Tab label="Portrait">
-          <div className="flex flex-wrap justify-center gap-4 mt-6 ">
+          <div className="flex flex-wrap justify-center gap-4 mt-6 fade-in">
             <CarouselPage images={portraitPhotos} />
           </div>
         </Tab>
         <Tab label="Landscape">
-          <div className="flex flex-wrap justify-center gap-4 mt-6">
+          <div className="flex flex-wrap justify-center gap-4 mt-6 fade-in">
             <CarouselPage images={landscapePhotos} />
           </div>
         </Tab>

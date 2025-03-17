@@ -14,7 +14,7 @@ export default async function Drawings() {
   console.log(drawingFiles);
 
   return (
-    <div className="fade-in max-w-xl">
+    <div className="fade-in max-w-xl mx-auto">
       <CarouselPage images={drawingFiles} />
     </div>
   );

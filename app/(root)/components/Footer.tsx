@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Github, Instagram, Mail } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import { getRandomColor } from "@/lib/functions";
+import { getRandomColor, getCurrentDateLong } from "@/lib/functions";
 
 const Footer = () => {
   // Start with an empty object so that SSR always renders a stable value.
@@ -28,7 +28,7 @@ const Footer = () => {
 
   return (
     <footer className="text-sm text-gray-500">
-      <div className="flex justify-start items-center gap-3 m-7">
+      <div className="flex justify-between items-center gap-3 m-7">
         <div className="flex gap-3">
           <Link href="https://www.instagram.com/im.tnma" target="_blank">
             <Instagram
@@ -64,6 +64,7 @@ const Footer = () => {
             />
           </Link>
         </div>
+        <div>{getCurrentDateLong()}</div>
       </div>
     </footer>
   );

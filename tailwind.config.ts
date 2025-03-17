@@ -51,6 +51,28 @@ export default {
           '0%': { transform: 'rotate(180deg)' },
           '100%': { transform: 'rotate(0deg)' },
         },
+        fadeInSlideRight: {
+          '0%': { opacity: '0', transform: 'translateX(-10px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' }
+        },
+        sequentialAppear: {
+          '0%': { opacity: '0', visibility: 'hidden' },
+          '99%': { opacity: '0', visibility: 'hidden' },
+          '100%': { opacity: '1', visibility: 'visible' }
+        },
+        sequentialFadeIn: {
+          '0%': { opacity: '0', visibility: 'hidden', transform: 'translateX(-10px)' },
+          '99%': { opacity: '0', visibility: 'hidden', transform: 'translateX(-10px)' },
+          '100%': { opacity: '0', visibility: 'visible', transform: 'translateX(-10px)' }
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
+        },
+        fadeInSlide: {
+          '0%': { opacity: '0', transform: 'translateX(-10px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' }
+        }
       },
       animation: {
         "circle-expand": "circle-expand 2s ease-in forwards",
@@ -59,6 +81,9 @@ export default {
         slideDown: 'slideDown 0.3s ease-out',
         menuToX: 'menuToX 1s ease-in-out forwards',
         xToMenu: 'xToMenu 1s ease-in-out forwards',
+        fadeInSlideRight: 'fadeInSlideRight 0.3s ease-out forwards',
+        sequentialAppear: 'sequentialAppear 0.3s ease-out forwards',
+        sequentialFadeIn: 'sequentialFadeIn 0.01s ease-out forwards, fadeInSlide 0.3s ease-out 0.01s forwards'
       }
   	}
   },

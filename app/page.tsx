@@ -27,8 +27,15 @@ export default function Home() {
         <div className="relative flex items-center justify-center">
           {/* Background circle that expands */}
           <div 
-            className={`absolute w-32 h-32 rounded-full bg-white
+            className={`absolute w-32 h-32 rounded-full
               ${isTransitioning ? 'animate-circle-expand' : ''}`}
+            style={{
+              backgroundImage: "url('/drawings/BlueRedPurple.jpg')",
+              backgroundSize: "400%",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              opacity: "0.8"
+            }}
           />
           
           {/* Static text container */}
@@ -37,7 +44,7 @@ export default function Home() {
             onClick={handleClick}
             className="flex items-center justify-center w-32 h-32 rounded-full z-10"
           >
-            <span className={`text-xl font-bold text-black
+            <span className={`text-xl font-bold text-gray-300
               ${isTransitioning ? 'animate-fade-out' : ''}`}>
               TNMA
             </span>

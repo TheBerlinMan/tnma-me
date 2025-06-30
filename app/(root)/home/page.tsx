@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getRandomColor } from "@/lib/functions";
 import { useMounted } from "@/lib/hooks/useMounted";
+import { getChessStats, ChessStats } from "@/lib/chess-api";
 
 const Home = () => {
   const [hoverColors, setHoverColors] = useState<Record<string, string>>({
@@ -14,7 +15,24 @@ const Home = () => {
     Code: getRandomColor(),
     Resume: getRandomColor(),
   });
+  const [chessStats, setChessStats] = useState<ChessStats | null>(null);
+  const [loading, setLoading] = useState(true);
   const mounted = useMounted();
+
+  useEffect(() => {
+    const fetchChessStats = async () => {
+      try {
+        const stats = await getChessStats();
+        setChessStats(stats);
+      } catch (error) {
+        console.error('Failed to fetch chess stats:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchChessStats();
+  }, []);
 
   const handleMouseEnter = (itemName: string) => {
     setHoverColors((prev) => ({
@@ -40,6 +58,40 @@ const Home = () => {
           passion for design, logical systems, and the human experience.
         </div>
       </div>
+
+      {/* Chess Ratings Section */}
+      <div className="space-y-2">
+        <div className="text-gray-600 font-light">
+          Chess Ratings (Chess.com):
+        </div>
+        {loading ? (
+          <div className="text-gray-500 text-xs">Loading chess stats...</div>
+        ) : chessStats ? (
+          <div className="grid grid-cols-2 gap-4 text-xs">
+            <div className="space-y-1">
+              <div className="font-medium text-gray-700">Rapid</div>
+              <div className="text-gray-600">
+                Current: {chessStats.chess_rapid?.last.rating || 'N/A'}
+              </div>
+              <div className="text-gray-600">
+                Best: {chessStats.chess_rapid?.best.rating || 'N/A'}
+              </div>
+            </div>
+            <div className="space-y-1">
+              <div className="font-medium text-gray-700">Blitz</div>
+              <div className="text-gray-600">
+                Current: {chessStats.chess_blitz?.last.rating || 'N/A'}
+              </div>
+              <div className="text-gray-600">
+                Best: {chessStats.chess_blitz?.best.rating || 'N/A'}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="text-gray-500 text-xs">Failed to load chess stats</div>
+        )}
+      </div>
+
       <div className="flex flex-col gap-1">
         <div className="relative group">
           <div className="flex items-center">

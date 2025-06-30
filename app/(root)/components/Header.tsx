@@ -24,7 +24,7 @@ const Header = () => {
     <header className="m-7">
       <Link 
         href="/home" 
-        className="font-bold text-xl transition-colors hover-text-custom"
+        className="font-bold text-2xl transition-colors hover-text-custom"
         onMouseEnter={handleMouseEnter}
         style={mounted ? { 
           '--hover-color': `var(--${hoverColors['TNMA'] || 'default-color'})` 

@@ -43,32 +43,42 @@ const Home = () => {
 
   return (
     <div className="flex flex-col gap-6 fade-in">
-      <div className="text-gray-600 mt-2 font-light">
-        <p>First-generation American-Soviet-Jew</p>
-        <p>Detail-obsessed artist, designer, and problem-solver</p>
-        <p>Generalist in love with theory crafting</p>
+      <div className="text-sm text-gray-500 -mt-8">
+        {/* <p>based in NYC</p> */}
+        <p>b. 03131996</p>
       </div>
+      <div className="font-light mt-2 font-light">
+        <p>First-generation American-Soviet-Jew</p>
+        {/* <p>Artist & Designer</p> */}
+        {/* <p>Detail-obsessed generalist</p> */}
+        <p>Detail-Obsessed Generalist</p>
+        {/* <p>Generalist in love with theory crafting</p> */}
+        <p>Based in NYC</p>
+      </div>
+  
 
-      <div className="text-gray-600 mt-4 font-light">
+      <div className=" mt-4 font-light">
         <div className="flex gap-16">
           <div className="flex flex-col">
-            <div className="text-sm font-light mb-4">Work</div>
-            <div>Software developer at Evernorth</div>
-            <div>Building Doma</div>
+            <div className="text-sm font-light mb-4 text-gray-500">Work</div>
+            <div>Software Engineer @ Evernorth</div>
+            <div>Founder @ Doma</div>
+            <div className="text-sm font-light my-4 text-gray-500">Past Work</div>
+            <div>Financial Analyst @ MediaMath</div>
+            <div>FP&A + PPNR Modeler @ UBS</div>
           </div>
           <div className="flex flex-col">
-            <div className="text-sm font-light mb-4">Hobbies</div>
+            <div className="text-sm font-light mb-4 text-gray-500">Hobbies</div>
             <div>Photography</div>
             <div>Drawing</div>
-            <div>Making things</div>
-            <div>Playing chess</div>
+            <div>Making Things</div>
+            <div>Playing Chess</div>
           </div>
           <div className="flex flex-col">
-            <div className="text-sm font-light mb-4">Past</div>
-            <div>Software engineering bootcamp @ G.A.</div>
-            <div>M.arch @ The Pratt Institute <span className="inline">(inc)</span></div>
-            <div>Financial analyst in advertising and banking
-            </div>
+            <div className="text-sm font-light mb-4 text-gray-500">Education</div>
+            <div>Software Engineering Bootcamp @ General Assembly</div>
+            <div>M.Arch @ The Pratt Institute <span className="text-sm text-gray-500 italic">(inc)</span></div>
+            <div>Graphic Design + Color Theory @ SVA Continuing Education</div>
             <div>B.A. in Mathematics @ Pace University</div>
           </div>
         </div>

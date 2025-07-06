@@ -37,7 +37,7 @@ export default function Home() {
             onClick={handleClick}
             className="flex items-center justify-center w-32 h-32 rounded-full z-10"
           >
-            <span className={`text-xl font-bold text-black
+            <span className={`text-xl font-bold text-white
               ${isTransitioning ? 'animate-fade-out' : ''}`}>
               TNMA
             </span>

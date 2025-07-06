@@ -27,7 +27,7 @@ export default function Home() {
         <div className="relative flex items-center justify-center">
           {/* Background circle that expands */}
           <div 
-            className={`absolute w-32 h-32 rounded-full bg-white
+            className={`absolute w-32 h-32 rounded-full bg-white/30
               ${isTransitioning ? 'animate-circle-expand' : ''}`}
           />
           

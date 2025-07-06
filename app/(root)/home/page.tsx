@@ -51,7 +51,7 @@ const Home = () => {
             </Link>
 
             <Link
-              href="/art/drawings"
+              href="/drawings"
               className="underline"
             >
               Drawing

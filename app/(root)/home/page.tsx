@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { getRandomColor } from "@/lib/functions";
 import { useMounted } from "@/lib/hooks/useMounted";
 import { getChessStats, ChessStats } from "@/lib/chess-api";
+import { ArrowUpRight } from "lucide-react";
 
 const Home = () => {
   const [hoverColors, setHoverColors] = useState<Record<string, string>>({
@@ -55,29 +56,70 @@ const Home = () => {
         {/* <p>Generalist in love with theory crafting</p> */}
         <p>Based in NYC</p>
       </div>
-  
 
       <div className=" mt-4 font-light">
         <div className="flex gap-16">
           <div className="flex flex-col">
             <div className="text-sm font-light mb-4 text-gray-500">Work</div>
             <div>Software Engineer @ Evernorth</div>
-            <div>Founder @ Doma</div>
-            <div className="text-sm font-light my-4 text-gray-500">Past Work</div>
+            <div className="flex items-center gap-1">
+              Founder @
+              <Link
+                href="https://domaproject.vercel.app/"
+                className="underline"
+              >
+                Doma
+              </Link>
+              <ArrowUpRight strokeWidth="1px" size={"16px"} />
+            </div>
+            <div className="text-sm font-light my-4 text-gray-500">
+              Past Work
+            </div>
             <div>Financial Analyst @ MediaMath</div>
             <div>FP&A + PPNR Modeler @ UBS</div>
           </div>
           <div className="flex flex-col">
             <div className="text-sm font-light mb-4 text-gray-500">Hobbies</div>
-            <div>Photography</div>
-            <div>Drawing</div>
-            <div>Making Things</div>
-            <div>Playing Chess</div>
+            <Link
+              href="/art/photography"
+              className="underline"
+            >
+              Photography
+            </Link>
+
+            <Link
+              href="/art/drawings"
+              className="underline"
+            >
+              Drawing
+            </Link>
+
+            <Link
+              href="/projects"
+              className="underline"
+            >
+              Making Things
+            </Link>
+
+            <div className="flex items-center gap-1">
+              <Link
+                href="https://www.chess.com/member/pigeonmania"
+                className="underline"
+              >
+                Playing Chess
+              </Link>
+              <ArrowUpRight strokeWidth="1px" size={"16px"} />
+            </div>
           </div>
           <div className="flex flex-col">
-            <div className="text-sm font-light mb-4 text-gray-500">Education</div>
+            <div className="text-sm font-light mb-4 text-gray-500">
+              Education
+            </div>
             <div>Software Engineering Bootcamp @ General Assembly</div>
-            <div>M.Arch @ The Pratt Institute <span className="text-sm text-gray-500 italic">(inc)</span></div>
+            <div>
+              M.Arch @ The Pratt Institute{" "}
+              <span className="text-xs text-gray-500 italic">(inc)</span>
+            </div>
             <div>Graphic Design + Color Theory @ SVA Continuing Education</div>
             <div>B.A. in Mathematics @ Pace University</div>
           </div>

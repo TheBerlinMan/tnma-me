@@ -1,46 +1,9 @@
-"use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { getRandomColor } from "@/lib/functions";
-import { useMounted } from "@/lib/hooks/useMounted";
-import { getChessStats, ChessStats } from "@/lib/chess-api";
 import { ArrowUpRight } from "lucide-react";
 
 const Home = () => {
-  const [hoverColors, setHoverColors] = useState<Record<string, string>>({
-    Art: getRandomColor(),
-    Drawings: getRandomColor(),
-    Photography: getRandomColor(),
-    Jewelry: getRandomColor(),
-    Code: getRandomColor(),
-    Resume: getRandomColor(),
-  });
-  const [chessStats, setChessStats] = useState<ChessStats | null>(null);
-  const [loading, setLoading] = useState(true);
-  const mounted = useMounted();
 
-  useEffect(() => {
-    const fetchChessStats = async () => {
-      try {
-        const stats = await getChessStats();
-        setChessStats(stats);
-      } catch (error) {
-        console.error("Failed to fetch chess stats:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchChessStats();
-  }, []);
-
-  const handleMouseEnter = (itemName: string) => {
-    setHoverColors((prev) => ({
-      ...prev,
-      [itemName]: getRandomColor(prev[itemName]),
-    }));
-  };
 
   return (
     <div className="flex flex-col gap-6 fade-in">

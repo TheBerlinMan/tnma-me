@@ -1,0 +1,38 @@
+'use client'
+
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Undo2 } from 'lucide-react';
+
+import React from 'react'
+
+const BackRedirect = () => {
+  const pathname = usePathname()
+  const pathSegments = pathname.split('/').filter(Boolean)
+
+  if (pathSegments.length === 0) {
+    return null
+  }
+
+  const parentPathSegments = pathSegments.slice(0, -1)
+  const parentPath = `/${parentPathSegments.join('/')}`
+
+  let label
+  if (parentPathSegments.length > 0) {
+    const lastSegment = parentPathSegments[parentPathSegments.length - 1]
+    label = lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1)
+  } else {
+    label = 'Home'
+  }
+
+  return (
+    <div className="text-xs text-gray-500 mb-4">
+      <Link href={parentPath} className="flex items-center gap-1">
+        <Undo2 size={16} strokeWidth={1} />
+        {`Return to ${label}`}
+      </Link>
+    </div>
+  )
+}
+
+export default BackRedirect

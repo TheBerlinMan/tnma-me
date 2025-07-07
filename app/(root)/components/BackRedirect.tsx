@@ -14,7 +14,11 @@ const BackRedirect = () => {
     return null
   }
 
-  const parentPathSegments = pathSegments.slice(0, -1)
+  let parentPathSegments = pathSegments.slice(0, -1)
+  const seriesIndex = pathSegments.indexOf('series')
+  if (seriesIndex !== -1) {
+    parentPathSegments = pathSegments.slice(0, seriesIndex)
+  }
   const parentPath = `/${parentPathSegments.join('/')}`
 
   let label
@@ -26,7 +30,7 @@ const BackRedirect = () => {
   }
 
   return (
-    <div className="text-xs text-gray-500 mb-4">
+    <div className="text-xs font-light text-gray-500 mb-6">
       <Link href={parentPath} className="flex items-center gap-1">
         <Undo2 size={16} strokeWidth={1} />
         {`Return to ${label}`}

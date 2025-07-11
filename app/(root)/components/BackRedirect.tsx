@@ -1,10 +1,10 @@
 'use client'
 
+import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Undo2 } from 'lucide-react';
 
-import React from 'react'
 
 const BackRedirect = () => {
   const pathname = usePathname()
@@ -19,7 +19,7 @@ const BackRedirect = () => {
   if (seriesIndex !== -1) {
     parentPathSegments = pathSegments.slice(0, seriesIndex)
   }
-  const parentPath = `/${parentPathSegments.join('/')}`
+  let parentPath = `/${parentPathSegments.join('/')}`
 
   let label
   if (parentPathSegments.length > 0) {
@@ -27,6 +27,7 @@ const BackRedirect = () => {
     label = lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1)
   } else {
     label = 'Home'
+    parentPath = '/home'
   }
 
   return (

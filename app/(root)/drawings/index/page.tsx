@@ -1,8 +1,14 @@
 import React from 'react'
+import BackRedirect from '@/app/(root)/components/BackRedirect'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div>
+      <BackRedirect />
+      <div>
+        Index Page
+      </div>
+    </div>
   )
 }
 

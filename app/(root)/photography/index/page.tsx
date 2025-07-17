@@ -48,13 +48,16 @@ const IndexPage = () => {
         A collection of my favorite photos. From 2016 until today. 
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="flex flex-wrap gap-2">
         {images.map((imageKey, index) => (
-          <div key={index} className="aspect-square bg-gray-100 rounded-lg overflow-hidden relative">
+          <div key={index} className="bg-gray-100 rounded-sm overflow-hidden relative h-[235px] w-[167px]">
             <Image
               src={getImageUrl(imageKey)}
               alt={`Photo ${index + 1}`}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              // width={167}
+              // height={235}
               className="object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
               onError={() => console.error('Failed to load image:', imageKey)}
             />

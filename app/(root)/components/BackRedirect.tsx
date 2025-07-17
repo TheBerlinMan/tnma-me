@@ -3,7 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Undo2 } from 'lucide-react';
+import { MoveLeft } from 'lucide-react';
 
 
 const BackRedirect = () => {
@@ -32,8 +32,8 @@ const BackRedirect = () => {
 
   return (
     <div className="text-xs font-light text-gray-500 mb-6">
-      <Link href={parentPath} className="flex items-center gap-1">
-        <Undo2 size={16} strokeWidth={1} />
+      <Link href={parentPath} className="flex items-center gap-3">
+        <MoveLeft size={16} strokeWidth={1} />
         {`Return to ${label}`}
       </Link>
     </div>

@@ -2,12 +2,16 @@
 
 TODO
 
-- [] finalize code card design
-- [] add resume pdf to link
-- [] add resume pdf to contact page
-- [] add stamp logo to home page
-- [] add info tabs to art pages 
-- [] connect a store (shopify?)
+- [] set up landing page for design
+- [] upload design images to cloudflare
+- [] upload photo images to cloudflare
+- [] add metadata to drawings 
+- [] add metadata to photography
+- [] add metadata to design
+- [] make drawings clickable to larger image
+- [] make photography clickable to larger image
+- [] make design clickable to larger image
+
  
 
 

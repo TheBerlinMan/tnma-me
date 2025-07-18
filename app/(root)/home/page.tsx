@@ -7,14 +7,14 @@ const Home = () => {
       <div className="text-sm text-gray-500 -mt-8">
         <p>b. 03131996</p>
       </div>
-      <div className="font-light mt-2 font-light">
+      <div className="font-light mt-6 font-light">
         <p>First-generation American-Soviet-Jew</p>
         <p>Detail-Obsessed Generalist</p>
         <p>Artist, Designer, & Programmer</p>
         <p>Based in NYC</p>
       </div>
 
-      <div className=" mt-4 font-light">
+      <div className=" mt-12 font-light">
         <div className="flex gap-16">
           <div className="flex flex-col">
             <div className="text-sm font-light mb-2 text-gray-500">Work</div>
@@ -33,7 +33,7 @@ const Home = () => {
               Past Work
             </div>
             <div>Financial Analyst @ MediaMath</div>
-            <div>FP&A + PPNR Modeler @ UBS</div>
+            <div>PPNR Modeler @ UBS</div>
           </div>
           <div className="flex flex-col">
             <div className="text-sm font-light mb-2 text-gray-500">Hobbies</div>
@@ -46,7 +46,7 @@ const Home = () => {
             </Link>
 
             <Link href="/projects" className="underline">
-              Making Things
+              Design
             </Link>
 
             <div className="flex items-center gap-1">
@@ -54,7 +54,7 @@ const Home = () => {
                 href="https://www.chess.com/member/pigeonmania"
                 className="underline"
               >
-                Playing Chess
+                Chess
               </Link>
               <ArrowUpRight strokeWidth="1px" size={"16px"} />
             </div>
@@ -68,7 +68,7 @@ const Home = () => {
               M.Arch @ The Pratt Institute{" "}
               <span className="text-xs text-gray-500 italic">(inc)</span>
             </div>
-            <div>Graphic Design + Color Theory @ SVA Continuing Education</div>
+            <div>Graphic Design + Color Theory @ SVA</div>
             <div>B.A. in Mathematics @ Pace University</div>
           </div>
         </div>

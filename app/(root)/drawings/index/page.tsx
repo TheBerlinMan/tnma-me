@@ -41,10 +41,11 @@ const IndexPage = () => {
   }
 
   return (
-    <div>
+    <>
       <BackRedirect />
-      <div className="text-sm max-w-lg mb-6">
-        A collection of my favorite drawings. From 2022 until today. 
+    <div className="">
+      <div className="font-light max-w-prose mb-6">
+        From 2022 until today. 
       </div>
       
       <div className="flex flex-wrap gap-2">
@@ -59,7 +60,7 @@ const IndexPage = () => {
               // height={235}
               className="object-cover transition-transform duration-300 cursor-pointer"
               onError={() => console.error('Failed to load image:', imageKey)}
-            />
+              />
           </div>
         ))}
       </div>
@@ -70,6 +71,7 @@ const IndexPage = () => {
         </div>
       )}
     </div>
+      </>
   );
 };
 

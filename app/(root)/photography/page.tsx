@@ -1,20 +1,16 @@
 import React from "react";
 import Link from "next/link";
-import BackRedirect from "../components/BackRedirect";
 
 export default function Photography() {
   return (
     <div className="">
-      
-      
-      <div className="mb-16">
-        <BackRedirect />
-      </div>
-      <div className="flex flex-col gap-1">
+      <div className="mb-8"></div>
+      <div className="space-y-4">
         <div>
           {/* Title + Description */}
-          <div className="mt text-lg font-medium">Photography</div>
+          <div className="mb-4 text-lg font-medium">Photography</div>
           <div className="font-light max-w-prose">
+            Moments, emotions, and perspectives caught on analog film.
             A collection of photographs capturing moments, emotions, and 
             perspectives from 2016 until today. Through portraiture, landscapes, 
             and street photography, I explore the intimate connections between 
@@ -25,15 +21,15 @@ export default function Photography() {
 
         
 
-        <div className="mt-6 font-medium">Series</div>
-        <div className="ml-4 text-sm font-light">
+        <div className="my-4 font-medium">Series</div>
+        <div className="ml-3 text-sm font-light">
           <table className="border-collapse">
             <tbody>
               <tr className="h-8">
-                <td className="pr-8 mb-2 font-medium text-left align-top">
+                <td className="pr-8 font-medium text-left align-top">
                   ...
                 </td>
-                <td className="pr-8 text-left align-top">
+                <td className="pr-8 text-left ">
                   <Link
                     href="/photography/series/publicintimacy"
                     className=""
@@ -41,28 +37,28 @@ export default function Photography() {
                     Public Intimacy
                   </Link>
                 </td>
-                <td className="text-xs text-gray-500 text-left align-top">
+                <td className="text-xs text-gray-500 text-left ">
                   In Progress
                 </td>
               </tr>
               <tr className="h-8">
-                <td className="pr-3 mb-1 font-medium text-left align-top">
+                <td className="pr-3 font-medium text-left align-top">
                   ...
                 </td>
-                <td className="pr-3 text-left align-top">
+                <td className="pr-3 text-left">
                   <Link href="/photography/series/nape" className="">
                     The Nape
                   </Link>
                 </td>
-                <td className="text-xs text-gray-500 text-left align-top">
+                <td className="text-xs text-gray-500 text-left">
                   In Progress
                 </td>
               </tr>
               <tr className="h-8">
-                <td className="pr-3 mb-1 font-medium text-left align-top">
+                <td className="pr-3 font-medium text-left align-top">
                   ...
                 </td>
-                <td className="pr-3 text-left align-top">
+                <td className="pr-3 text-left">
                   <Link
                     href="/photography/series/portals"
                     className=""
@@ -70,15 +66,15 @@ export default function Photography() {
                     Portals
                   </Link>
                 </td>
-                <td className="text-xs text-gray-500 text-left align-top">
+                <td className="text-xs text-gray-500 text-left">
                   In Progress
                 </td>
               </tr>
               <tr className="h-8">
-                <td className="pr-3 mb-1 font-medium text-left align-top">
+                <td className="pr-3 font-medium text-left align-top">
                   ...
                 </td>
-                <td className="pr-3 text-left align-top">
+                <td className="pr-3 text-left">
                   <Link
                     href="/photography/series/nyc"
                     className=""
@@ -86,15 +82,15 @@ export default function Photography() {
                     NYC
                   </Link>
                 </td>
-                <td className="text-xs text-gray-500 text-left align-top">
+                <td className="text-xs text-gray-500 text-left">
                   In Progress
                 </td>
               </tr>
               <tr className="h-8">
-                <td className="pr-3 mb-1 font-medium text-left align-top">
+                <td className="pr-3 font-medium text-left align-top">
                   ...
                 </td>
-                <td className="pr-3 text-left align-top">
+                <td className="pr-3 text-left">
                   <Link
                     href="/photography/series/nyc"
                     className=""
@@ -102,7 +98,7 @@ export default function Photography() {
                     Abstraction
                   </Link>
                 </td>
-                <td className="text-xs text-gray-500 text-left align-top">
+                <td className="text-xs text-gray-500 text-left">
                   In Progress
                 </td>
               </tr>

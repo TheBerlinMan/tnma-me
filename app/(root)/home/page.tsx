@@ -4,17 +4,14 @@ import { ArrowUpRight } from "lucide-react";
 const Home = () => {
   return (
     <div className="flex flex-col gap-6 fade-in">
-      <div className="text-sm text-gray-500 -mt-8">
-        <p>b. 03131996</p>
-      </div>
-      <div className="font-light mt-6 font-light">
+      <div className="font-light font-light">
         <p>First-generation American-Soviet-Jew</p>
         <p>Detail-Obsessed Generalist</p>
         <p>Artist, Designer, & Programmer</p>
         <p>Based in NYC</p>
       </div>
 
-      <div className=" mt-12 font-light">
+      <div className=" mt-4 font-light">
         <div className="flex gap-16">
           <div className="flex flex-col">
             <div className="text-sm font-light mb-2 text-gray-500">Work</div>

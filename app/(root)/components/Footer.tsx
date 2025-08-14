@@ -4,7 +4,10 @@ import { useState, useEffect } from "react";
 import { Github, Instagram, Mail } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import { getRandomColor, getCurrentDateLong } from "@/lib/functions";
+import { 
+  getRandomColor, 
+  // getCurrentDateLong 
+} from "@/lib/functions";
 
 const Footer = () => {
   // Start with an empty object so that SSR always renders a stable value.
@@ -15,7 +18,7 @@ const Footer = () => {
     setHoverColors({
       instagram: getRandomColor(),
       github: getRandomColor(),
-      mail: getRandomColor(),   
+      mail: getRandomColor(),
     });
   }, []);
 
@@ -36,9 +39,13 @@ const Footer = () => {
               strokeWidth={2}
               className="transition-colors hover-text-custom"
               onMouseEnter={() => handleMouseEnter("instagram")}
-              style={{
-                "--hover-color": `var(--${hoverColors["instagram"] || "blue-200"})`,
-              } as React.CSSProperties}
+              style={
+                {
+                  "--hover-color": `var(--${
+                    hoverColors["instagram"] || "blue-200"
+                  })`,
+                } as React.CSSProperties
+              }
             />
           </Link>
           <Link href="https://github.com/TheBerlinMan" target="_blank">
@@ -47,9 +54,13 @@ const Footer = () => {
               strokeWidth={2}
               className="transition-colors hover-text-custom"
               onMouseEnter={() => handleMouseEnter("github")}
-              style={{
-                "--hover-color": `var(--${hoverColors["github"] || "blue-200"})`,
-              } as React.CSSProperties}
+              style={
+                {
+                  "--hover-color": `var(--${
+                    hoverColors["github"] || "blue-200"
+                  })`,
+                } as React.CSSProperties
+              }
             />
           </Link>
           <Link href="mailto:tommyonik@gmail.com" target="_blank">
@@ -58,13 +69,17 @@ const Footer = () => {
               strokeWidth={2}
               className="transition-colors hover-text-custom"
               onMouseEnter={() => handleMouseEnter("mail")}
-              style={{
-                "--hover-color": `var(--${hoverColors["mail"] || "blue-200"})`,
-              } as React.CSSProperties}
+              style={
+                {
+                  "--hover-color": `var(--${
+                    hoverColors["mail"] || "blue-200"
+                  })`,
+                } as React.CSSProperties
+              }
             />
           </Link>
         </div>
-        <div>{getCurrentDateLong()}</div>
+        {/* <div>{getCurrentDateLong()}</div> */}
       </div>
     </footer>
   );

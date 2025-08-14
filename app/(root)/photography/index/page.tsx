@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import BackRedirect from "@/app/(root)/components/BackRedirect";
 import { useEffect, useState } from "react";
 
 const IndexPage = () => {
@@ -17,7 +16,7 @@ const IndexPage = () => {
         const files: string[] = await res.json();
         setImages(files);
       } catch (error) {
-        console.error('Error loading images:', error);
+        console.error("Error loading images:", error);
       } finally {
         setLoading(false);
       }
@@ -33,24 +32,24 @@ const IndexPage = () => {
   if (loading) {
     return (
       <div>
-        <BackRedirect />
-        <div className="text-sm max-w-lg">
-          Loading photos...
-        </div>
+        <div className="text-sm max-w-lg">Loading photos...</div>
       </div>
     );
   }
 
   return (
     <div>
-      <BackRedirect />
-      <div className="text-sm max-w-lg mb-6">
-        A collection of my favorite photos. From 2016 until today. 
+      <div className="max-w-lg mb-6">
+        <div className="font-medium">Index</div>
+        <div className="font-light">A collection of my favorite drawings. From 2016 until today.</div>
       </div>
-      
+
       <div className="flex flex-wrap gap-2">
         {images.map((imageKey, index) => (
-          <div key={index} className="bg-gray-100 rounded-sm overflow-hidden relative h-[235px] w-[167px]">
+          <div
+            key={index}
+            className="bg-gray-100 rounded-sm overflow-hidden relative h-[235px] w-[167px]"
+          >
             <Image
               src={getImageUrl(imageKey)}
               alt={`Photo ${index + 1}`}
@@ -59,12 +58,12 @@ const IndexPage = () => {
               // width={167}
               // height={235}
               className="object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
-              onError={() => console.error('Failed to load image:', imageKey)}
+              onError={() => console.error("Failed to load image:", imageKey)}
             />
           </div>
         ))}
       </div>
-      
+
       {images.length === 0 && (
         <div className="text-gray-500 text-sm">
           No images found in the Index folder.

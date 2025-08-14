@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <header className="m-7">
       <Link
-        href="/home"
+        href="/"
         className="font-bold text-2xl transition-colors hover-text-custom"
         onMouseEnter={handleMouseEnter}
         style={
@@ -42,7 +42,7 @@ const Header = () => {
         TNMA
       </Link>
 
-      {pathname !== "/home" ? (
+      {pathname !== "/" ? (
         <BackRedirect />
       ) : (
         <div className="text-sm text-gray-500">

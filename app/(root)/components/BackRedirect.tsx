@@ -29,7 +29,7 @@ const BackRedirect = () => {
     displayText = `Return to ${label}`
   } else {
     label = 'Home'
-    parentPath = '/home'
+    parentPath = '/'
     displayText = 'Return Home'
   }
 

@@ -1,49 +1,87 @@
-"use client"
-
 import Link from "next/link";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { ArrowUpRight } from "lucide-react";
+import Header from "@/app/(root)/components/Header";
+import Footer from "@/app/(root)/components/Footer";
 
-export default function Home() {
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const router = useRouter();
-
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsTransitioning(true);
-    // Wait for animation to complete before navigating
-    setTimeout(() => {
-      router.push("/home");
-    }, 500); // Match this with CSS transition duration
-  };
-
+const Home = () => {
   return (
-    <div className="bg-cover bg-center bg-no-repeat relative overflow-hidden flex items-center justify-center"
-    style={{ 
-      backgroundImage: "url('/drawings/BluePurple.jpg')",
-      backgroundSize: "200%"
-    }}>
-      <div className="h-screen w-screen flex items-center justify-center">
-        <div className="relative flex items-center justify-center">
-          {/* Background circle that expands */}
-          <div 
-            className={`absolute w-32 h-32 rounded-full bg-white/30
-              ${isTransitioning ? 'animate-circle-expand' : ''}`}
-          />
-          
-          {/* Static text container */}
-          <Link 
-            href="/home" 
-            onClick={handleClick}
-            className="flex items-center justify-center w-32 h-32 rounded-full z-10"
-          >
-            <span className={`text-xl font-bold text-white
-              ${isTransitioning ? 'animate-fade-out' : ''}`}>
-              TNMA
-            </span>
-          </Link>
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <div className="flex-1 mx-7">
+        <div className="flex flex-col gap-6 fade-in">
+          <div className="font-light font-light">
+            <p>First-generation American-Soviet-Jew</p>
+            <p>Detail-Obsessed Generalist</p>
+            <p>Artist, Designer, & Programmer</p>
+            <p>Based in NYC</p>
+          </div>
+
+          <div className=" mt-4 font-light">
+            <div className="flex gap-16">
+              <div className="flex flex-col">
+                <div className="text-sm font-light mb-2 text-gray-500">Work</div>
+                <div>Software Engineer @ Evernorth</div>
+                <div className="flex items-center gap-1">
+                  Founder @
+                  <Link
+                    href="https://domaproject.vercel.app/"
+                    className="underline"
+                  >
+                    Doma
+                  </Link>
+                  <ArrowUpRight strokeWidth="1px" size={"16px"} />
+                </div>
+                <div className="text-sm font-light mt-6 mb-2 text-gray-500">
+                  Past Work
+                </div>
+                <div>Financial Analyst @ MediaMath</div>
+                <div>PPNR Modeler @ UBS</div>
+              </div>
+              <div className="flex flex-col">
+                <div className="text-sm font-light mb-2 text-gray-500">Hobbies</div>
+                <Link href="/photography" className="underline">
+                  Photography
+                </Link>
+
+                <Link href="/drawings" className="underline">
+                  Drawing
+                </Link>
+
+                <Link href="/projects" className="underline">
+                  Design
+                </Link>
+
+                <div className="flex items-center gap-1">
+                  <Link
+                    href="https://www.chess.com/member/pigeonmania"
+                    className="underline"
+                  >
+                    Chess
+                  </Link>
+                  <ArrowUpRight strokeWidth="1px" size={"16px"} />
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <div className="text-sm font-light mb-2 text-gray-500">
+                  Education
+                </div>
+                <div>Software Engineering Bootcamp @ General Assembly</div>
+                <div>
+                  M.Arch @ The Pratt Institute{" "}
+                  <span className="text-xs text-gray-500 italic">(inc)</span>
+                </div>
+                <div>Graphic Design + Color Theory @ SVA</div>
+                <div>B.A. in Mathematics @ Pace University</div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );
-}
+};
+
+export default Home;

@@ -39,9 +39,12 @@ const IndexPage = () => {
 
   return (
     <div>
-      <div className="max-w-lg mb-6">
+
+      <div className="max-w-lg mb-4">
         <div className="font-medium">Index</div>
-        <div className="font-light">A collection of my favorite drawings. From 2016 until today.</div>
+        <div className="font-light">
+          A collection of my favorite drawings. From 2016 until today.
+        </div>
       </div>
 
       <div className="flex flex-wrap gap-2">

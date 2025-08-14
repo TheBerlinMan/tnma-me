@@ -24,7 +24,7 @@ const Header = () => {
   };
 
   return (
-    <header className="m-7">
+    <header className="p-8 mb-8">
       <Link
         href="/"
         className="font-bold text-2xl transition-colors hover-text-custom"

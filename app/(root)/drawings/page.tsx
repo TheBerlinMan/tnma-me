@@ -3,8 +3,7 @@ import Link from "next/link";
 
 export default function Drawings() {
   return (
-    <div className="">
-      <div className="mb-8"></div>
+    <div>
       <div className="space-y-4">
         <div>
           {/* Title + Description */}

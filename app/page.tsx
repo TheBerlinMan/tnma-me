@@ -48,7 +48,7 @@ const Home = () => {
                 </Link>
 
                 <Link href="/projects" className="underline">
-                  Design
+                  Projects
                 </Link>
 
                 <div className="flex items-center gap-1">

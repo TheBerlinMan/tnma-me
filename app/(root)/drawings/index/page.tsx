@@ -26,9 +26,8 @@ const IndexPage = () => {
     loadFiles();
   }, []);
 
-  // Function to get the image URL via our proxy endpoint
   const getImageUrl = (key: string) => {
-    return `/api/image?key=${encodeURIComponent(key)}`;
+    return `/api/image?key=${encodeURIComponent(key)}&bucket=${encodeURIComponent(BUCKET)}`;
   };
 
   if (loading) {
@@ -40,8 +39,7 @@ const IndexPage = () => {
   }
 
   return (
-    <>
-      <div className="">
+    <div>
         <div className="mb-6 flex gap-2">
           <div className="text-md font-medium">Index</div>
 
@@ -61,8 +59,6 @@ const IndexPage = () => {
                 alt={`Photo ${index + 1}`}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                // width={167}
-                // height={235}
                 className="object-cover transition-transform duration-300 cursor-pointer"
                 onError={() => console.error("Failed to load image:", imageKey)}
               />
@@ -76,7 +72,6 @@ const IndexPage = () => {
           </div>
         )}
       </div>
-    </>
   );
 };
 

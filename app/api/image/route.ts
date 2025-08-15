@@ -6,15 +6,20 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const key = searchParams.get('key');
+    const bucket = searchParams.get('bucket');
     
     if (!key) {
       return NextResponse.json({ error: 'Image key is required' }, { status: 400 });
     }
 
-    console.log('Fetching image:', key);
+    if (!bucket) {
+      return NextResponse.json({ error: 'Bucket parameter is required' }, { status: 400 });
+    }
+
+    console.log('Fetching image:', key, 'from bucket:', bucket);
 
     const command = new GetObjectCommand({
-      Bucket: process.env.R2_BUCKET_NAME!,
+      Bucket: bucket,
       Key: key,
     });
     

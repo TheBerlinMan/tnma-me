@@ -9,7 +9,7 @@ const IndexPage = () => {
   const [loading, setLoading] = useState(true);
 
   const BUCKET = "mydrawings";
-  const FOLDER = "InitialDrawings";
+  const FOLDER = "AnxietySeries";
 
   useEffect(() => {
     async function loadFiles() {
@@ -44,39 +44,37 @@ const IndexPage = () => {
 
   return (
     <div>
-      <div className="">
-        <div className="mb-6 flex gap-2">
-          <div className="text-md font-medium">Initial Color Exploration</div>
+      <div className="mb-6 flex gap-2">
+        <div className="text-md font-medium">Anxiety Series</div>
 
-          {/* <div className="font-light max-w-prose text-gray-500">
+        {/* <div className="font-light max-w-prose text-gray-500">
             favorites since 2022
           </div> */}
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          {images.map((imageKey, index) => (
-            <div
-              key={index}
-              className="bg-gray-100 rounded-sm overflow-hidden relative h-[235px] w-[167px]"
-            >
-              <Image
-                src={getImageUrl(imageKey)}
-                alt={`Photo ${index + 1}`}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover transition-transform duration-300 cursor-pointer"
-                onError={() => console.error("Failed to load image:", imageKey)}
-              />
-            </div>
-          ))}
-        </div>
-
-        {images.length === 0 && (
-          <div className="text-gray-500 text-sm">
-            No images found in the CangalhaSeries folder.
-          </div>
-        )}
       </div>
+
+      <div className="flex flex-wrap gap-2">
+        {images.map((imageKey, index) => (
+          <div
+            key={index}
+            className="bg-gray-100 rounded-sm overflow-hidden relative h-[235px] w-[167px]"
+          >
+            <Image
+              src={getImageUrl(imageKey)}
+              alt={`Photo ${index + 1}`}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover transition-transform duration-300 cursor-pointer"
+              onError={() => console.error("Failed to load image:", imageKey)}
+            />
+          </div>
+        ))}
+      </div>
+
+      {images.length === 0 && (
+        <div className="text-gray-500 text-sm">
+          No images found in the CangalhaSeries folder.
+        </div>
+      )}
     </div>
   );
 };

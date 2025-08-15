@@ -8,10 +8,13 @@ const IndexPage = () => {
   const [images, setImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const BUCKET = "mydrawings"
+  const FOLDER = "Index"
+
   useEffect(() => {
     async function loadFiles() {
       try {
-        const res = await fetch(`/api/r2storage?folder=Index`);
+        const res = await fetch(`/api/r2storage?bucket=${BUCKET}&folder=${FOLDER}`);
         const files: string[] = await res.json();
         setImages(files);
       } catch (error) {
@@ -38,10 +41,9 @@ const IndexPage = () => {
 
   return (
     <>
-      
       <div className="">
-        <div className="mb-6 flex   gap-2">
-          <div className="text-md font-medium ">Index</div>
+        <div className="mb-6 flex gap-2">
+          <div className="text-md font-medium">Index</div>
 
           {/* <div className="font-light max-w-prose text-gray-500">
             favorites since 2022

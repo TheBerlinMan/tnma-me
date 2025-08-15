@@ -5,15 +5,19 @@ import { s3 } from "@/lib/utils";
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
+    const bucket = searchParams.get('bucket');
     const folder = searchParams.get('folder');
     
-    if (!folder) {
-      return NextResponse.json({ error: 'Folder parameter is required' }, { status: 400 });
+    if (!bucket) {
+      return NextResponse.json({ error: 'bucket parameter is required' }, { status: 400 });
     }
 
+    // Build the prefix - if folder is provided, use folder/, otherwise list all files in the bucket
+    const prefix = folder ? `${folder}/` : '';
+
     const command = new ListObjectsV2Command({
-      Bucket: process.env.R2_BUCKET_NAME!,
-      Prefix: `${folder}/`,
+      Bucket: bucket,
+      Prefix: prefix,
     });
     
     const data = await s3.send(command);

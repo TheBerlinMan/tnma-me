@@ -9,7 +9,7 @@ const IndexPage = () => {
   const [loading, setLoading] = useState(true);
 
   const BUCKET = "mydesigns";
-  const FOLDER = "Bluebook";
+  const FOLDER = "Jewelry";
 
   useEffect(() => {
     async function loadFiles() {
@@ -45,7 +45,7 @@ const IndexPage = () => {
   return (
     <div>
       <div className="mb-6 flex gap-2">
-        <div className="text-md font-medium">Blue Book</div>
+        <div className="text-md font-medium">Jewelry</div>
 
         {/* <div className="font-light max-w-prose text-gray-500">
             favorites since 2022
@@ -72,7 +72,7 @@ const IndexPage = () => {
 
       {images.length === 0 && (
         <div className="text-gray-500 text-sm">
-          No images found in the Blue Book folder.
+          No images found in the Jewelry folder.
         </div>
       )}
     </div>

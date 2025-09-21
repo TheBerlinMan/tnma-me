@@ -8,19 +8,19 @@ export default function Photography() {
         <div>
           {/* Title + Description */}
           <div className="mb-4 text-lg font-medium">Photography</div>
-          <div className="font-light max-w-prose">
+          {/* <div className="font-light max-w-prose">
             Moments, emotions, and perspectives caught on analog film.
             A collection of photographs capturing moments, emotions, and 
             perspectives from 2016 until today. Through portraiture, landscapes, 
             and street photography, I explore the intimate connections between 
             people and places, seeking to document both the extraordinary in the 
             ordinary and the quiet poetry of everyday life.
-          </div>
+          </div> */}
         </div>
 
         
 
-        <div className="my-4 font-medium">Series</div>
+        {/* <div className="my-4 font-medium">Series</div>
         <div className="ml-3 text-sm font-light">
           <table className="border-collapse">
             <tbody>
@@ -103,7 +103,7 @@ export default function Photography() {
               </tr>
             </tbody>
           </table>
-        </div>
+        </div> */}
         <div className="font-medium mt-6 ">
           <Link href="/photography/index" className="">
             Index

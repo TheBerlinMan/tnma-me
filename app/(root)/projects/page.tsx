@@ -8,8 +8,7 @@ export default function Projects() {
         <div>
           <div className="text-lg font-medium mb-4">Projects</div>
           <div className="font-light max-w-prose text-gray-500">
-            A collection of creative and technical projects spanning art,
-            design, and research, consisting of a variety of different mediums
+            A collection of creative and technical projects consisting of a variety of different mediums
             and materials.
           </div>
         </div>
@@ -54,6 +53,14 @@ export default function Projects() {
               <td className="pr-8 font-medium text-left align-top">...</td>
               <td className="pr-8 text-left">
                 <Link href="/projects/bluebook">Blue Book</Link>
+              </td>
+              <td className=" text-gray-500 text-left">2025</td>
+            </tr>
+            
+            <tr className="h-8">
+              <td className="pr-8 font-medium text-left align-top">...</td>
+              <td className="pr-8 text-left">
+                <Link href="/projects/sewing">Sewing</Link>
               </td>
               <td className=" text-gray-500 text-left">2025</td>
             </tr>

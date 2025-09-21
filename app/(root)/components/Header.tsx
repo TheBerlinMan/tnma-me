@@ -40,6 +40,7 @@ const Header = () => {
         }
       >
         TNMA
+        <span className="text-xs text-gray-500 font-light italic ml-2">(under construction)</span>
       </Link>
 
       {pathname !== "/" ? (

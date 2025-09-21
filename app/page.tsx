@@ -11,8 +11,7 @@ const Home = () => {
         <div className="flex flex-col gap-6 fade-in">
           <div className="font-light font-light">
             <p>First-generation American-Soviet-Jew</p>
-            <p>Detail-Obsessed Generalist</p>
-            <p>Artist, Designer, & Programmer</p>
+            <p>Detail-Obsessed Artist, Designer, & Programmer</p>
             <p>Based in NYC</p>
           </div>
 

@@ -7,7 +7,7 @@ export default function Drawings() {
       <div className="space-y-4">
         <div>
           <div className="text-lg font-medium mb-4">Drawings</div>
-          <div className="font-light max-w-prose text-gray-500">
+          {/* <div className="font-light max-w-prose text-gray-500">
             I use color to describe complex emotions that I would fail to
             describe in words. Color has an infinite depth that measurable
             diction cannot begin match. Inspired by Albers and Rothko, I became
@@ -18,7 +18,7 @@ export default function Drawings() {
             grief. that words often failed to capture. Unlike color, words can
             fail when describing complex emotions, like love, fear, or grief. in
             the way that
-          </div>
+          </div> */}
         </div>
 
         <div>

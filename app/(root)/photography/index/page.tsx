@@ -52,7 +52,7 @@ const IndexPage = () => {
       <div className="max-w-lg mb-4">
         <div className="font-medium">Index</div>
         <div className="font-light">
-          Archive of my favorite photos - unedited.
+          Archive of my favorite photos, in chronological order and unedited.
         </div>
       </div>
 

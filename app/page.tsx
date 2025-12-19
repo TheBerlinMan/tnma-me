@@ -7,10 +7,10 @@ const Home = () => (
   <div className="min-h-screen flex flex-col">
     <Header />
     <div className="flex-1 mx-7">
-      <div className="flex flex-col gap-6 fade-in">
+      <div className="flex flex-col gap-8 fade-in">
         <div className="font-light font-light">
-          <p>First-generation American-Soviet-Jew</p>
-          <p>Detail-Obsessed Artist, Designer, & Programmer</p>
+          <p>American-Soviet-Jew</p>
+          <p>Artist, Designer, & Programmer</p>
           <p>Based in NYC</p>
         </div>
 
@@ -43,14 +43,15 @@ const Home = () => (
                 Photography
               </Link>
 
+              <Link href="/projects" className="underline">
+                Sewing
+              </Link>
+
               <Link href="/drawings" className="underline">
                 Drawing
               </Link>
 
-              <Link href="/projects" className="underline">
-                Making Things
-              </Link>
-
+              
               <div className="flex items-center gap-1">
                 <Link
                   href="https://www.chess.com/member/pigeonmania"
@@ -65,6 +66,7 @@ const Home = () => (
               <div className="text-sm font-light mb-2 text-gray-500">
                 Education
               </div>
+              <div>Intro to Tailoring & Alterations @ FIT</div>
               <div>Software Engineering Bootcamp @ General Assembly</div>
               <div>
                 M.Arch @ The Pratt Institute{" "}
@@ -80,6 +82,10 @@ const Home = () => (
             </div>
           </div>
         </div>
+          {/* <div className="font-light mt-4 flex items-center gap-1">
+            Visit my <Link href="/projects" className="underline">store</Link>
+            <ArrowUpRight strokeWidth="1px" size={"16px"} />
+          </div> */}
       </div>
     </div>
     <div>

@@ -3,18 +3,24 @@
 import React from "react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Lightbox from "../../components/Lightbox";
+import ScrollToTop from "../../components/ScrollToTop";
 
 const IndexPage = () => {
   const [images, setImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const BUCKET = "mydrawings"
-  const FOLDER = "Index"
+  const BUCKET = "mydrawings";
+  const FOLDER = "Index";
 
   useEffect(() => {
     async function loadFiles() {
       try {
-        const res = await fetch(`/api/r2storage?bucket=${BUCKET}&folder=${FOLDER}`);
+        const res = await fetch(
+          `/api/r2storage?bucket=${BUCKET}&folder=${FOLDER}`
+        );
         const files: string[] = await res.json();
         setImages(files);
       } catch (error) {
@@ -27,51 +33,90 @@ const IndexPage = () => {
   }, []);
 
   const getImageUrl = (key: string) => {
-    return `/api/image?key=${encodeURIComponent(key)}&bucket=${encodeURIComponent(BUCKET)}`;
+    return `/api/image?key=${encodeURIComponent(
+      key
+    )}&bucket=${encodeURIComponent(BUCKET)}`;
+  };
+
+  const handleImageLoad = (index: number) => {
+    setLoadedImages((prev) => new Set([...prev, index]));
+  };
+
+  const openLightbox = (index: number) => {
+    setSelectedIndex(index);
+  };
+
+  const closeLightbox = () => {
+    setSelectedIndex(null);
   };
 
   if (loading) {
     return (
       <div>
-        <div className="text-sm max-w-lg">Loading drawings...</div>
+        <div className="mb-6 flex gap-2">
+          <div className="text-md font-medium">Index</div>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {[...Array(8)].map((_, i) => (
+            <div
+              key={i}
+              className="h-[235px] w-[167px] bg-gray-200 animate-pulse rounded-sm"
+            />
+          ))}
+        </div>
       </div>
     );
   }
 
   return (
     <div>
-        <div className="mb-6 flex gap-2">
-          <div className="text-md font-medium">Index</div>
-
-          {/* <div className="font-light max-w-prose text-gray-500">
-            favorites since 2022
-          </div> */}
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          {images.map((imageKey, index) => (
-            <div
-              key={index}
-              className="bg-gray-100 rounded-sm overflow-hidden relative h-[235px] w-[167px]"
-            >
-              <Image
-                src={getImageUrl(imageKey)}
-                alt={`Photo ${index + 1}`}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover transition-transform duration-300 cursor-pointer"
-                onError={() => console.error("Failed to load image:", imageKey)}
-              />
-            </div>
-          ))}
-        </div>
-
-        {images.length === 0 && (
-          <div className="text-gray-500 text-sm">
-            No images found in the Index folder.
-          </div>
-        )}
+      <div className="mb-6">
+        <div className="text-md font-medium">Index</div>
       </div>
+
+      {/* Grid */}
+      <div className="flex flex-wrap gap-2">
+        {images.map((imageKey, index) => (
+          <div
+            key={index}
+            onClick={() => openLightbox(index)}
+            className="bg-gray-100 rounded-sm overflow-hidden relative h-[235px] w-[167px] cursor-pointer group"
+          >
+            <Image
+              src={getImageUrl(imageKey)}
+              alt={`Drawing ${index + 1}`}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className={`object-cover transition-transform duration-300 group-hover:scale-105 ${
+                loadedImages.has(index) ? "opacity-100" : "opacity-0"
+              }`}
+              onLoad={() => handleImageLoad(index)}
+            />
+            {!loadedImages.has(index) && (
+              <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+            )}
+          </div>
+        ))}
+      </div>
+
+      {images.length === 0 && (
+        <div className="text-gray-500 text-sm">
+          No images found in the Index folder.
+        </div>
+      )}
+
+      {/* Lightbox */}
+      <Lightbox
+        images={images}
+        selectedIndex={selectedIndex}
+        onClose={closeLightbox}
+        onNavigate={setSelectedIndex}
+        getImageUrl={getImageUrl}
+      />
+
+      {/* Scroll to top */}
+      <ScrollToTop />
+    </div>
   );
 };
 

@@ -3,10 +3,14 @@
 import React from "react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Lightbox from "../../components/Lightbox";
+import ScrollToTop from "../../components/ScrollToTop";
 
 const IndexPage = () => {
   const [images, setImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const BUCKET = "mydesigns";
   const FOLDER = "Jewelry";
@@ -34,38 +38,63 @@ const IndexPage = () => {
     )}&bucket=${encodeURIComponent(BUCKET)}`;
   };
 
+  const handleImageLoad = (index: number) => {
+    setLoadedImages((prev) => new Set([...prev, index]));
+  };
+
+  const openLightbox = (index: number) => {
+    setSelectedIndex(index);
+  };
+
+  const closeLightbox = () => {
+    setSelectedIndex(null);
+  };
+
   if (loading) {
     return (
       <div>
-        <div className="text-sm max-w-lg">Loading drawings...</div>
+        <div className="mb-6 flex gap-2">
+          <div className="text-md font-medium">Jewelry</div>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {[...Array(6)].map((_, i) => (
+            <div
+              key={i}
+              className="h-[235px] w-[235px] bg-gray-200 animate-pulse rounded-sm"
+            />
+          ))}
+        </div>
       </div>
     );
   }
 
   return (
     <div>
-      <div className="mb-6 flex gap-2">
+      <div className="mb-6">
         <div className="text-md font-medium">Jewelry</div>
-
-        {/* <div className="font-light max-w-prose text-gray-500">
-            favorites since 2022
-          </div> */}
       </div>
 
+      {/* Grid */}
       <div className="flex flex-wrap gap-2">
         {images.map((imageKey, index) => (
           <div
             key={index}
-            className="bg-gray-100 rounded-sm overflow-hidden relative h-[235px] w-[235px]"
+            onClick={() => openLightbox(index)}
+            className="bg-gray-100 rounded-sm overflow-hidden relative h-[235px] w-[235px] cursor-pointer group"
           >
             <Image
               src={getImageUrl(imageKey)}
-              alt={`Photo ${index + 1}`}
+              alt={`Jewelry ${index + 1}`}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
-              className="object-cover transition-transform duration-300 cursor-pointer"
-              onError={() => console.error("Failed to load image:", imageKey)}
+              className={`object-cover transition-transform duration-300 group-hover:scale-105 ${
+                loadedImages.has(index) ? "opacity-100" : "opacity-0"
+              }`}
+              onLoad={() => handleImageLoad(index)}
             />
+            {!loadedImages.has(index) && (
+              <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+            )}
           </div>
         ))}
       </div>
@@ -75,6 +104,18 @@ const IndexPage = () => {
           No images found in the Jewelry folder.
         </div>
       )}
+
+      {/* Lightbox */}
+      <Lightbox
+        images={images}
+        selectedIndex={selectedIndex}
+        onClose={closeLightbox}
+        onNavigate={setSelectedIndex}
+        getImageUrl={getImageUrl}
+      />
+
+      {/* Scroll to top */}
+      <ScrollToTop />
     </div>
   );
 };

@@ -37,7 +37,7 @@ const IndexPage = () => {
   if (loading) {
     return (
       <div>
-        <div className="text-sm max-w-lg">Loading drawings...</div>
+        <div className="text-sm max-w-lg">Loading items...</div>
       </div>
     );
   }

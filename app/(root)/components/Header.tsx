@@ -1,46 +1,25 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { getRandomColor } from "@/lib/functions";
-import { useMounted } from "@/lib/hooks/useMounted";
 import BackRedirect from "./BackRedirect";
 
 const Header = () => {
-  const [hoverColors, setHoverColors] = useState<Record<string, string>>({});
-  const mounted = useMounted();
   const pathname = usePathname();
-
-  useEffect(() => {
-    setHoverColors({ TNMA: getRandomColor() });
-  }, []);
-
-  const handleMouseEnter = () => {
-    setHoverColors((prev) => ({
-      ...prev,
-      TNMA: getRandomColor(prev["TNMA"]),
-    }));
-  };
 
   return (
     <header className="p-8 mb-8">
-      <Link
-        href="/"
-        className="font-bold text-2xl transition-colors hover-text-custom"
-        onMouseEnter={handleMouseEnter}
-        style={
-          mounted
-            ? ({
-                "--hover-color": `var(--${
-                  hoverColors["TNMA"] || "default-color"
-                })`,
-              } as React.CSSProperties)
-            : {}
-        }
-      >
-        TNMA
-        <span className="text-xs text-gray-500 font-light italic ml-2">(under construction)</span>
+      <Link href="/">
+        <Image
+          src="/tnma.svg"
+          alt="TNMA"
+          width={80}
+          height={26}
+          className="-ml-1"
+          priority
+        />
       </Link>
 
       {pathname !== "/" ? (

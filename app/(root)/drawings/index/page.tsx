@@ -33,9 +33,7 @@ const IndexPage = () => {
   }, []);
 
   const getImageUrl = (key: string) => {
-    return `/api/image?key=${encodeURIComponent(
-      key
-    )}&bucket=${encodeURIComponent(BUCKET)}`;
+    return `/api/image?key=${encodeURIComponent(key)}&bucket=${encodeURIComponent(BUCKET)}`;
   };
 
   const handleImageLoad = (index: number) => {
@@ -86,7 +84,8 @@ const IndexPage = () => {
               src={getImageUrl(imageKey)}
               alt={`Drawing ${index + 1}`}
               fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="167px"
+              priority={index < 6}
               className={`object-cover transition-transform duration-300 group-hover:scale-105 ${
                 loadedImages.has(index) ? "opacity-100" : "opacity-0"
               }`}

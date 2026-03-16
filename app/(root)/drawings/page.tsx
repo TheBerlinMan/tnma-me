@@ -9,8 +9,8 @@ import ScrollToTop from "../components/ScrollToTop";
 const BUCKET = "mydrawings";
 
 const series = [
-  { title: "Anxiety Series", date: "October 2024", folder: "AnxietySeries" },
-  { title: "Cangalha Series", date: "June 2023", folder: "CangalhaSeries" },
+  { title: "On Anxiety", date: "October 2024", folder: "AnxietySeries" },
+  { title: "On Cangalha", date: "June 2023", folder: "CangalhaSeries" },
 ];
 
 const DrawingsPage = () => {

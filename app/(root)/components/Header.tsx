@@ -1,12 +1,16 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import BackRedirect from "./BackRedirect";
 
 const randomHue = () => Math.floor(Math.random() * 360);
+const differentHue = (from: number) => {
+  const offset = 90 + Math.floor(Math.random() * 180);
+  return (from + offset) % 360;
+};
 
 const pageDescriptions: Record<string, string> = {
   "/photography": "Archive of my favorite photos. Unedited, in chronological order.",
@@ -16,42 +20,64 @@ const pageDescriptions: Record<string, string> = {
 
 const Header = () => {
   const pathname = usePathname();
-  const [hoverHue, setHoverHue] = useState<number | null>(null);
+  const [logoHue, setLogoHue] = useState(0);
+  const [titleHue, setTitleHue] = useState(180);
+  const [mounted, setMounted] = useState(false);
 
-  const handleMouseEnter = useCallback(() => {
-    setHoverHue(randomHue());
+  useEffect(() => {
+    const hue = randomHue();
+    setLogoHue(hue);
+    setTitleHue(differentHue(hue));
+    setMounted(true);
   }, []);
 
-  const handleMouseLeave = useCallback(() => {
-    setHoverHue(null);
+  const handleBlockEnter = useCallback(() => {
+    const hue = randomHue();
+    setLogoHue(hue);
+    setTitleHue(differentHue(hue));
   }, []);
+
+  const handleLogoEnter = useCallback(() => {
+    setLogoHue(differentHue(titleHue));
+  }, [titleHue]);
+
+  const handleTitleEnter = useCallback(() => {
+    setTitleHue(differentHue(logoHue));
+  }, [logoHue]);
 
   return (
     <header className="mb-8">
       <div
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        className="inline-block"
+        onMouseEnter={handleBlockEnter}
+        className="inline-block cursor-pointer"
       >
-        <Link href="/">
+        <Link href="/" onMouseEnter={handleLogoEnter}>
           <Image
             src="/tnma.svg"
             alt="TNMA"
             width={80}
             height={26}
             className="-ml-1 transition-[filter] duration-200"
-            style={hoverHue !== null ? {
-              filter: `invert(50%) sepia(100%) saturate(500%) hue-rotate(${hoverHue}deg)`,
+            style={mounted ? {
+              filter: `invert(50%) sepia(100%) saturate(500%) hue-rotate(${logoHue}deg)`,
             } : undefined}
             priority
           />
         </Link>
         {pathname !== "/" ? (
-          <div className="text-sm text-gray-500">
+          <div
+            className="text-sm transition-colors duration-200"
+            style={{ color: mounted ? `hsl(${titleHue}, 70%, 50%)` : undefined }}
+            onMouseEnter={handleTitleEnter}
+          >
             <BackRedirect />
           </div>
         ) : (
-          <div className="text-sm text-gray-500">
+          <div
+            className="text-sm transition-colors duration-200"
+            style={{ color: mounted ? `hsl(${titleHue}, 70%, 50%)` : undefined }}
+            onMouseEnter={handleTitleEnter}
+          >
             <p>b. 03131996</p>
           </div>
         )}
@@ -61,7 +87,7 @@ const Header = () => {
           <p className="font-light text-black text-base mt-4">{pageDescriptions[pathname]}</p>
         )
       ) : (
-        <p className="font-light text-black text-base mt-4">American-Soviet-Jew. Artist, designer, & programmer. Maker of things.</p>
+        <p className="font-light text-black text-base mt-4">American-Soviet-Jew. Artist, designer, & programmer. Based in NYC.</p>
       )}
     </header>
   );

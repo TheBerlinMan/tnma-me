@@ -53,14 +53,11 @@ const SewingPage = () => {
   if (loading) {
     return (
       <div>
-        <div className="mb-6 flex gap-2">
-          <div className="text-md font-medium">Sewing</div>
-        </div>
         <div className="flex flex-wrap gap-2">
           {[...Array(6)].map((_, i) => (
             <div
               key={i}
-              className="h-[300px] w-[200px] bg-gray-200 animate-pulse rounded-sm"
+              className="h-[338px] w-[225px] bg-gray-200 animate-pulse rounded-sm"
             />
           ))}
         </div>
@@ -70,17 +67,13 @@ const SewingPage = () => {
 
   return (
     <div>
-      <div className="mb-6">
-        <div className="text-md font-medium">Sewing</div>
-      </div>
-
       {/* Grid */}
       <div className="flex flex-wrap gap-2">
         {images.map((imageKey, index) => (
           <div
             key={index}
             onClick={() => openLightbox(index)}
-            className="bg-gray-100 rounded-sm overflow-hidden relative h-[300px] w-[200px] cursor-pointer group"
+            className="bg-gray-100 rounded-sm overflow-hidden relative h-[338px] w-[225px] cursor-pointer group"
           >
             <Image
               src={getImageUrl(imageKey)}

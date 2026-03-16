@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import Lightbox from "../components/Lightbox";
 import ScrollToTop from "../components/ScrollToTop";
 
-// Component for lazy-loaded image that only renders when near viewport
 const LazyImage = ({
   imageKey,
   index,
@@ -28,7 +27,7 @@ const LazyImage = ({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isPriority) return; // Priority images are always visible
+    if (isPriority) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -38,7 +37,7 @@ const LazyImage = ({
         }
       },
       {
-        rootMargin: "200px", // Start loading when 200px away from viewport
+        rootMargin: "200px",
         threshold: 0,
       }
     );
@@ -54,17 +53,18 @@ const LazyImage = ({
     <div
       ref={ref}
       onClick={onClick}
-      className="bg-gray-100 rounded-sm overflow-hidden relative h-[235px] w-[167px] cursor-pointer group"
+      className="bg-gray-100 rounded-sm overflow-hidden relative cursor-pointer group mb-2 break-inside-avoid"
     >
       {isVisible ? (
         <>
           <Image
             src={getImageUrl(imageKey)}
             alt={`Photo ${index + 1}`}
-            fill
-            sizes="167px"
+            width={400}
+            height={600}
+            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
             priority={isPriority}
-            className={`object-cover transition-transform duration-300 group-hover:scale-105 ${
+            className={`w-full h-auto transition-transform duration-300 group-hover:scale-105 ${
               isLoaded ? "opacity-100" : "opacity-0"
             }`}
             onLoad={() => onLoad(index)}
@@ -74,7 +74,7 @@ const LazyImage = ({
           )}
         </>
       ) : (
-        <div className="absolute inset-0 bg-gray-200" />
+        <div className="w-full aspect-[2/3] bg-gray-200" />
       )}
     </div>
   );
@@ -91,7 +91,6 @@ const PhotographyPage = () => {
   useEffect(() => {
     async function loadFiles() {
       try {
-        // Fetch from all folders in parallel instead of sequentially
         const folderPromises = [1, 2, 3, 4].map((i) =>
           fetch(`/api/r2storage?bucket=${BUCKET}&folder=ilike${i}`).then(
             (res) => res.json()
@@ -113,11 +112,9 @@ const PhotographyPage = () => {
 
   const getImageUrl = useCallback(
     (key: string) => {
-      return `/api/image?key=${encodeURIComponent(
-        key
-      )}&bucket=${encodeURIComponent(BUCKET)}`;
+      return `/api/image?key=${encodeURIComponent(key)}&bucket=${encodeURIComponent(BUCKET)}`;
     },
-    [BUCKET]
+    []
   );
 
   const handleImageLoad = useCallback((index: number) => {
@@ -134,36 +131,20 @@ const PhotographyPage = () => {
 
   if (loading) {
     return (
-      <div>
-        <div className="mb-4">
-          <div className="font-medium">Photography</div>
-          <div className="font-light">
-            Archive of my favorite photos, unedited, in chronological order.
-          </div>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {[...Array(12)].map((_, i) => (
-            <div
-              key={i}
-              className="h-[235px] w-[167px] bg-gray-200 animate-pulse rounded-sm"
-            />
-          ))}
-        </div>
+      <div className="columns-2 md:columns-3 gap-2">
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={i}
+            className="aspect-[2/3] bg-gray-200 animate-pulse rounded-sm mb-2 break-inside-avoid"
+          />
+        ))}
       </div>
     );
   }
 
   return (
     <div>
-      <div className="max-w-lg mb-4">
-        <div className="font-medium">Photography</div>
-        <div className="font-light">
-          Archive of my favorite photos, unedited, in chronological order.
-        </div>
-      </div>
-
-      {/* Grid */}
-      <div className="flex flex-wrap gap-2">
+      <div className="columns-2 md:columns-3 gap-2">
         {images.map((imageKey, index) => (
           <LazyImage
             key={imageKey}
@@ -173,7 +154,7 @@ const PhotographyPage = () => {
             onLoad={handleImageLoad}
             isLoaded={loadedImages.has(index)}
             onClick={() => openLightbox(index)}
-            isPriority={index < 12} // Prioritize first 12 images (roughly 2 rows)
+            isPriority={index < 12}
           />
         ))}
       </div>
@@ -184,7 +165,6 @@ const PhotographyPage = () => {
         </div>
       )}
 
-      {/* Lightbox */}
       <Lightbox
         images={images}
         selectedIndex={selectedIndex}
@@ -193,7 +173,6 @@ const PhotographyPage = () => {
         getImageUrl={getImageUrl}
       />
 
-      {/* Scroll to top */}
       <ScrollToTop />
     </div>
   );

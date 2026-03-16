@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={jost.variable}>
       <body className={`min-h-screen font-sans ${jost.className}`}>
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen max-w-[1200px] mx-auto w-full">{children}</main>
       </body>
     </html>
   );

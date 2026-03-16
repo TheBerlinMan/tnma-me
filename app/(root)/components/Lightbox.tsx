@@ -36,34 +36,22 @@ const Lightbox = ({
     }
   }, [selectedIndex, images.length, onNavigate]);
 
-  // Get adjacent indices for preloading
+  // Get adjacent indices for preloading (3 ahead, 2 behind)
   const getAdjacentIndices = useCallback(
     (index: number) => {
-      const prev = index === 0 ? images.length - 1 : index - 1;
-      const next = (index + 1) % images.length;
-      // Preload 2 images ahead and 1 behind
-      const next2 = (index + 2) % images.length;
-      return [prev, next, next2];
+      if (images.length === 0) return [];
+      const indices: number[] = [];
+      for (let i = -2; i <= 3; i++) {
+        if (i === 0) continue;
+        const idx = (index + i + images.length) % images.length;
+        indices.push(idx);
+      }
+      return indices;
     },
     [images.length]
   );
 
-  // Preload adjacent images when current image changes
-  useEffect(() => {
-    if (selectedIndex === null || images.length === 0) return;
-
-    const adjacentIndices = getAdjacentIndices(selectedIndex);
-
-    adjacentIndices.forEach((idx) => {
-      if (!loadedImages.has(idx)) {
-        const img = new window.Image();
-        img.src = getImageUrl(images[idx]);
-        img.onload = () => {
-          setLoadedImages((prev) => new Set([...prev, idx]));
-        };
-      }
-    });
-  }, [selectedIndex, images, getImageUrl, getAdjacentIndices, loadedImages]);
+  const adjacentIndices = selectedIndex !== null ? getAdjacentIndices(selectedIndex) : [];
 
   // Reset loaded state when opening lightbox on a new image
   useEffect(() => {
@@ -161,6 +149,22 @@ const Lightbox = ({
         <p className="absolute bottom-0 left-0 right-0 text-center text-white/50 text-sm py-4">
           {selectedIndex + 1} / {images.length}
         </p>
+      </div>
+
+      {/* Preload adjacent images using off-screen Next.js Image components */}
+      <div className="absolute -left-[9999px] w-0 h-0 overflow-hidden" aria-hidden="true">
+        {adjacentIndices.map((idx) => (
+          <Image
+            key={idx}
+            src={getImageUrl(images[idx])}
+            alt=""
+            width={1200}
+            height={1600}
+            onLoad={() => {
+              setLoadedImages((prev) => new Set([...prev, idx]));
+            }}
+          />
+        ))}
       </div>
     </div>
   );

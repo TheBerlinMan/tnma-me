@@ -1,5 +1,4 @@
 import Header from "@/app/(root)/components/Header";
-import Footer from "@/app/(root)/components/Footer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (

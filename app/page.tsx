@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowUpRight, ChevronDown, X } from "lucide-react";
 import { useState } from "react";
 import Header from "@/app/(root)/components/Header";
-import Footer from "@/app/(root)/components/Footer";
 import CoursesDropdown from "@/app/(root)/components/CoursesDropdown";
 import ArtCarousel from "@/app/(root)/components/ArtCarousel";
 

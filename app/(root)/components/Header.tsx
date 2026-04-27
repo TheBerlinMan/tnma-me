@@ -7,10 +7,6 @@ import { usePathname } from "next/navigation";
 import BackRedirect from "./BackRedirect";
 
 const randomHue = () => Math.floor(Math.random() * 360);
-const differentHue = (from: number) => {
-  const offset = 90 + Math.floor(Math.random() * 180);
-  return (from + offset) % 360;
-};
 
 const pageDescriptions: Record<string, string> = {
   "/photography": "Archive of my favorite photos. Unedited, in chronological order.",

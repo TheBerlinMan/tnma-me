@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowUpRight, ChevronDown, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/app/(root)/components/Header";
 import CoursesDropdown from "@/app/(root)/components/CoursesDropdown";
 import ArtCarousel from "@/app/(root)/components/ArtCarousel";
@@ -153,6 +153,10 @@ const ContactModal = ({ open, onClose }: { open: boolean; onClose: () => void })
 
 const PastWorkDropdown = () => {
   const [isOpen, setIsOpen] = useState(true);
+
+  useEffect(() => {
+    if (window.innerWidth < 768) setIsOpen(false);
+  }, []);
 
   return (
     <div className="flex flex-col mt-6">

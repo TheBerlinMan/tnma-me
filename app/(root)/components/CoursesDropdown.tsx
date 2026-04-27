@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 
 const courseItems = [
@@ -29,6 +29,10 @@ const CourseItem = ({ item }: { item: { label: string; info: string } }) => {
 
 const CoursesDropdown = () => {
   const [isOpen, setIsOpen] = useState(true);
+
+  useEffect(() => {
+    if (window.innerWidth < 768) setIsOpen(false);
+  }, []);
 
   return (
     <div className="flex flex-col mt-6">

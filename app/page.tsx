@@ -8,13 +8,14 @@ import CoursesDropdown from "@/app/(root)/components/CoursesDropdown";
 import ArtCarousel from "@/app/(root)/components/ArtCarousel";
 
 const workItems = [
-  { label: "Software Engineer", info: "Evernorth · 2023 – Present · New York, NY" },
-  { label: "Founder of Doma", info: "2022 – Present · New York, NY" },
+  { label: "Doma", info: "Founder · 2025 – Present · Cangalha, MG, BR" },
+  { label: "Candles by Studio Bara", info: "Operations · 2025 – Present · New York, NY" },
 ];
 
 const pastWorkItems = [
-  { label: "Financial Analyst", info: "MediaMath · 2019 – 2021 · New York, NY" },
-  { label: "PPNR Modeler", info: "UBS · 2017 – 2019 · Weehawken, NJ" },
+  { label: "Cigna / Evernorth", info: "Software Engineer · 2024 – 2026 · Morris Plains, NJ" },
+  { label: "MediaMath", info: "Financial Analyst · 2019 – 2021 · New York, NY" },
+  { label: "UBS", info: "PPNR Modeler · 2017 – 2019 · New York, NY" },
 ];
 
 const websiteItems = [
@@ -24,8 +25,8 @@ const websiteItems = [
 ];
 
 const degreeItems = [
-  { label: "M.Arch", info: "The Pratt Institute · 2020 · Brooklyn, NY", suffix: "(inc)" },
-  { label: "B.A. in Mathematics", info: "Pace University · 2017 · New York, NY" },
+  { label: "M.Arch", info: "The Pratt Institute · 2022 · Brooklyn, NY", suffix: "(inc)" },
+  { label: "B.A. in Mathematics", info: "Pace University · 2018 · New York, NY" },
 ];
 
 type HoverItemData = { label: string; info: string; href?: string; hrefLabel?: string; suffix?: string };
@@ -90,6 +91,15 @@ const ContactModal = ({ open, onClose }: { open: boolean; onClose: () => void })
     onClose();
     setSent(false);
   };
+
+  useEffect(() => {
+    if (!open) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [open]);
 
   if (!open) return null;
 
@@ -209,14 +219,14 @@ const Home = () => {
                 Sewing
               </Link>
             </div>
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <div className="text-[0.95rem] font-medium mb-2">Websites</div>
               {websiteItems.map((item) => (
                 <Link key={item.label} href={item.href} className="hover:underline group">
                   <span className="hidden group-hover:inline text-gray-500 text-xs">https://www.</span>{item.label}
                 </Link>
               ))}
-            </div>
+            </div> */}
             <div className="flex flex-col">
               <div className="text-[0.95rem] font-medium mb-2">Work</div>
               {workItems.map((item) => (
@@ -226,7 +236,7 @@ const Home = () => {
             </div>
             <div className="flex flex-col">
               <div className="text-[0.95rem] font-medium mb-2">
-                Degrees
+                Education
               </div>
               {degreeItems.map((item) => (
                 <HoverItem key={item.label} item={item} />
@@ -235,7 +245,7 @@ const Home = () => {
             </div>
             </div>
             <div className="flex flex-col text-sm text-right">
-              <Link href="https://tnma.studio" className="hover:underline">View my store</Link>
+              {/* <Link href="https://tnma.studio" className="hover:underline">View my store</Link> */}
               <button onClick={() => setContactOpen(true)} className="hover:underline text-right cursor-pointer">Contact me</button>
               <Link href="/about" className="hover:underline">About me</Link>
             </div>

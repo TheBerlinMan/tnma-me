@@ -8,12 +8,6 @@ import BackRedirect from "./BackRedirect";
 
 const randomHue = () => Math.floor(Math.random() * 360);
 
-const pageDescriptions: Record<string, string> = {
-  "/photography": "Archive of my favorite photos. Unedited, in chronological order.",
-  "/projects": "Chronological archive of my pieces.",
-  "/drawings": "Oil pastels on cotton used to depict emotion through color and form.",
-};
-
 const Header = () => {
   const pathname = usePathname();
   const [logoHue, setLogoHue] = useState(0);
@@ -79,13 +73,6 @@ const Header = () => {
           </div>
         )}
       </div>
-      {pathname !== "/" ? (
-        pageDescriptions[pathname] && (
-          <p className="font-light text-black text-base mt-4">{pageDescriptions[pathname]}</p>
-        )
-      ) : (
-        <p className="font-light text-black text-base mt-4">American-Soviet-Jew. Artist, designer, & programmer. Based in NYC.</p>
-      )}
     </header>
   );
 };

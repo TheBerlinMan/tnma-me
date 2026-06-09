@@ -1,16 +1,60 @@
 "use client";
 
 import { useEffect, useState, useCallback, useRef } from "react";
-import Image from "next/image";
+
+const FRAME_HEIGHT = 300;
+const SCROLL_SPEED = 90; // pixels per second
+const SEPARATOR_WIDTH = 18;
+const SEPARATOR_OVERFLOW = 14;
+const SEPARATOR_HEIGHT = FRAME_HEIGHT + SEPARATOR_OVERFLOW * 2;
+
+const SQUIGGLE_PATHS = [
+  "M8 -8 C5 -2, 12 2, 9 6 C4 38, 14 72, 8 108 C2 142, 15 176, 9 210 C3 244, 14 272, 9 294 C4 300, 13 306, 8 308",
+  "M10 -6 C14 0, 4 4, 9 8 C14 42, 3 78, 10 114 C15 148, 4 184, 9 218 C3 252, 13 280, 8 292 C3 298, 12 304, 9 308",
+  "M7 -10 C11 -4, 4 2, 8 10 C12 48, 5 86, 11 122 C6 158, 14 194, 7 230 C3 264, 12 286, 9 294 C14 300, 5 306, 8 308",
+  "M9 -8 C6 -2, 14 2, 10 6 C5 44, 13 80, 7 116 C2 152, 14 188, 9 224 C4 258, 12 284, 8 294 C3 300, 11 306, 9 308",
+  "M7 -6 C4 0, 13 4, 8 8 C3 52, 15 90, 9 126 C4 162, 13 198, 7 234 C2 268, 14 288, 9 294 C3 300, 12 306, 8 308",
+  "M10 -8 C13 -2, 5 4, 9 10 C14 54, 4 92, 11 128 C5 164, 15 200, 8 236 C3 270, 12 286, 9 292 C14 298, 6 304, 9 308",
+];
 
 const artSources = [
   { bucket: "myphotos", folder: "ilike1" },
   { bucket: "myphotos", folder: "ilike2" },
   { bucket: "myphotos", folder: "ilike3" },
   { bucket: "myphotos", folder: "ilike4" },
-  { bucket: "mydrawings", folder: "AnxietySeries" },
-  { bucket: "mydrawings", folder: "CangalhaSeries" },
 ];
+
+type CarouselImage = {
+  key: string;
+  bucket: string;
+  displayWidth: number;
+};
+
+function FrameSeparator({ variant }: { variant: number }) {
+  return (
+    <div
+      className="shrink-0 self-center flex items-center justify-center text-black"
+      style={{ width: SEPARATOR_WIDTH, height: SEPARATOR_HEIGHT }}
+      aria-hidden="true"
+    >
+      <svg
+        width={SEPARATOR_WIDTH}
+        height={SEPARATOR_HEIGHT}
+        viewBox={`0 ${-SEPARATOR_OVERFLOW} ${SEPARATOR_WIDTH} ${SEPARATOR_HEIGHT}`}
+        fill="none"
+        className="h-full w-full"
+      >
+        <path
+          d={SQUIGGLE_PATHS[variant % SQUIGGLE_PATHS.length]}
+          stroke="currentColor"
+          strokeWidth="1"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </div>
+  );
+}
 
 function shuffle<T>(arr: T[]): T[] {
   const shuffled = [...arr];
@@ -22,15 +66,26 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 const ArtCarousel = () => {
-  const [images, setImages] = useState<{ key: string; bucket: string }[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [nextIndex, setNextIndex] = useState<number | null>(null);
-  const [nextLoaded, setNextLoaded] = useState(false);
+  const [images, setImages] = useState<CarouselImage[]>([]);
+  const [ready, setReady] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [expandedIndex, setExpandedIndex] = useState(0);
   const [scrolledAway, setScrolledAway] = useState(false);
 
+  const trackRef = useRef<HTMLDivElement>(null);
+  const stripRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef(0);
+  const rafRef = useRef<number>(0);
+  const pausedRef = useRef(false);
+  const stripWidthRef = useRef(0);
+
+  const getImageUrl = useCallback((key: string, bucket: string) => {
+    return `/api/image?key=${encodeURIComponent(key)}&bucket=${encodeURIComponent(bucket)}`;
+  }, []);
+
   useEffect(() => {
+    let cancelled = false;
+
     async function loadAll() {
       try {
         const results = await Promise.all(
@@ -42,34 +97,39 @@ const ArtCarousel = () => {
             return files.map((key) => ({ key, bucket: source.bucket }));
           })
         );
-        const all = shuffle(results.flat());
-        setImages(all);
+        const shuffled = shuffle(results.flat());
+
+        const loaded = await Promise.all(
+          shuffled.map(
+            (img) =>
+              new Promise<CarouselImage | null>((resolve) => {
+                const el = new window.Image();
+                el.onload = () => {
+                  const displayWidth = Math.round(
+                    (el.naturalWidth / el.naturalHeight) * FRAME_HEIGHT
+                  );
+                  resolve({ ...img, displayWidth });
+                };
+                el.onerror = () => resolve(null);
+                el.src = getImageUrl(img.key, img.bucket);
+              })
+          )
+        );
+
+        if (!cancelled) {
+          setImages(loaded.filter((img): img is CarouselImage => img !== null));
+          setReady(true);
+        }
       } catch (error) {
         console.error("Error loading carousel images:", error);
       }
     }
+
     loadAll();
-  }, []);
-
-  useEffect(() => {
-    if (images.length === 0 || expanded) return;
-    const interval = setInterval(() => {
-      setNextLoaded(false);
-      setNextIndex((currentIndex + 1) % images.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [images.length, currentIndex, expanded]);
-
-  useEffect(() => {
-    if (nextLoaded && nextIndex !== null) {
-      const timeout = setTimeout(() => {
-        setCurrentIndex(nextIndex);
-        setNextIndex(null);
-        setNextLoaded(false);
-      }, 1000);
-      return () => clearTimeout(timeout);
-    }
-  }, [nextLoaded, nextIndex]);
+    return () => {
+      cancelled = true;
+    };
+  }, [getImageUrl]);
 
   const goNext = useCallback(() => {
     if (images.length === 0) return;
@@ -99,7 +159,6 @@ const ArtCarousel = () => {
     };
   }, [expanded, goNext, goPrev]);
 
-  // Swipe / drag handling for expanded overlay
   const dragStart = useRef<{ x: number; y: number } | null>(null);
   const dragging = useRef(false);
 
@@ -128,61 +187,110 @@ const ArtCarousel = () => {
     [goNext, goPrev]
   );
 
-  const getImageUrl = useCallback((key: string, bucket: string) => {
-    return `/api/image?key=${encodeURIComponent(key)}&bucket=${encodeURIComponent(bucket)}`;
-  }, []);
+  useEffect(() => {
+    if (!ready || !stripRef.current) return;
 
-  if (images.length === 0) {
+    const measure = () => {
+      if (stripRef.current) {
+        stripWidthRef.current = stripRef.current.offsetWidth;
+      }
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(stripRef.current);
+    return () => observer.disconnect();
+  }, [ready, images]);
+
+  useEffect(() => {
+    if (!ready || expanded) return;
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (reducedMotion) return;
+
+    let lastTime = performance.now();
+
+    const tick = (now: number) => {
+      const dt = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
+
+      const stripWidth = stripWidthRef.current;
+      if (!pausedRef.current && trackRef.current && stripWidth > 0) {
+        offsetRef.current -= SCROLL_SPEED * dt;
+        if (offsetRef.current <= -stripWidth) {
+          offsetRef.current += stripWidth;
+        }
+        trackRef.current.style.transform = `translate3d(${offsetRef.current}px, 0, 0)`;
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [ready, expanded]);
+
+  const renderStrip = (stripKey: string) =>
+    images.flatMap((img, i) => {
+      const frame = (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          key={`${stripKey}-${img.key}-${i}`}
+          src={getImageUrl(img.key, img.bucket)}
+          alt=""
+          width={img.displayWidth}
+          height={FRAME_HEIGHT}
+          className="h-[300px] w-auto shrink-0 cursor-pointer block"
+          draggable={false}
+          onClick={() => {
+            setExpandedIndex(i);
+            setScrolledAway(false);
+            setExpanded(true);
+          }}
+        />
+      );
+
+      if (i === 0) return [frame];
+
+      return [
+        <FrameSeparator key={`${stripKey}-sep-${i}`} variant={i - 1} />,
+        frame,
+      ];
+    });
+
+  if (!ready || images.length === 0) {
     return (
-      <div className="w-full h-[300px] bg-gray-100 animate-pulse" />
+      <div
+        className="w-full animate-pulse"
+        style={{ height: SEPARATOR_HEIGHT }}
+      />
     );
   }
 
-  const current = images[currentIndex];
-  const next = nextIndex !== null ? images[nextIndex] : null;
-  const preloadIndex = (nextIndex ?? currentIndex + 1) % images.length;
-  const preload = images[preloadIndex];
-
   return (
     <div
-      className="relative w-full h-[300px] overflow-hidden bg-gray-100 cursor-pointer"
-      onClick={() => {
-        if (!expanded) {
-          setExpandedIndex(currentIndex);
-          setScrolledAway(false);
-          setExpanded(true);
-        }
+      className="relative w-full overflow-x-hidden"
+      style={{ height: SEPARATOR_HEIGHT }}
+      onMouseEnter={() => {
+        pausedRef.current = true;
+      }}
+      onMouseLeave={() => {
+        pausedRef.current = false;
       }}
     >
-      <Image
-        key={current.key}
-        src={getImageUrl(current.key, current.bucket)}
-        alt=""
-        fill
-        sizes="100vw"
-        className="object-cover"
-      />
-      {next && (
-        <Image
-          key={next.key}
-          src={getImageUrl(next.key, next.bucket)}
-          alt=""
-          fill
-          sizes="100vw"
-          className={`object-cover transition-opacity duration-1000 ${
-            nextLoaded ? "opacity-100" : "opacity-0"
-          }`}
-          onLoad={() => setNextLoaded(true)}
-        />
-      )}
-      {/* Preload upcoming image */}
-      <div className="absolute -left-[9999px] w-0 h-0 overflow-hidden" aria-hidden="true">
-        <Image
-          src={getImageUrl(preload.key, preload.bucket)}
-          alt=""
-          width={1}
-          height={1}
-        />
+      <div
+        ref={trackRef}
+        className="flex h-full items-center will-change-transform"
+        style={{ transform: "translate3d(0, 0, 0)" }}
+      >
+        <div ref={stripRef} className="flex h-full shrink-0 items-center">
+          {renderStrip("a")}
+        </div>
+        <div className="flex h-full shrink-0 items-center" aria-hidden="true">
+          {renderStrip("b")}
+        </div>
       </div>
       {expanded && (
         <div
@@ -195,7 +303,7 @@ const ArtCarousel = () => {
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
         >
-          <div className="relative inline-flex">
+          <div className="flex flex-col items-center gap-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={getImageUrl(images[expandedIndex].key, images[expandedIndex].bucket)}
@@ -203,7 +311,7 @@ const ArtCarousel = () => {
               className={`object-contain pointer-events-none max-w-[60vw] max-h-[60vh] md:max-w-[65vw] md:max-h-[65vh] transition-opacity duration-300 ${scrolledAway ? "opacity-40" : "opacity-100"}`}
               draggable={false}
             />
-            <div className="absolute bottom-3 right-3 flex gap-1 z-10">
+            <div className="flex items-center justify-center gap-1">
               <button
                 className="text-white/50 hover:text-white transition-colors text-2xl leading-none px-1"
                 onClick={(e) => {

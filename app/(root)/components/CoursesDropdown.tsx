@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 
 const courseItems = [
-  { label: "Intro to Tailoring & Alterations", info: "FIT · 2022 · New York, NY" },
-  { label: "Software Engineering Bootcamp", info: "General Assembly · 2021 · Remote" },
-  { label: "Graphic Design + Color Theory", info: "SVA · 2018 · New York, NY" },
+  { label: "Intro to Tailoring & Alterations", info: "Fashion Institute of Technology · 2026 · New York, NY" },
+  { label: "Software Engineering Bootcamp", info: "General Assembly · 2025 · Remote" },
+  { label: "Graphic Design", info: "School of Visual Arts · 2020 · New York, NY" },
+  { label: "Color Theory", info: "School of Visual Arts · 2020 · New York, NY" },
 ];
 
 const CourseItem = ({ item }: { item: { label: string; info: string } }) => {
@@ -49,7 +50,7 @@ const CoursesDropdown = () => {
       </button>
       <div
         className={`overflow-hidden transition-all duration-200 ${
-          isOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+          isOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         {courseItems.map((item) => (

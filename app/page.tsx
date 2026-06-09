@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowUpRight, ChevronDown, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Header from "@/app/(root)/components/Header";
 import CoursesDropdown from "@/app/(root)/components/CoursesDropdown";
 import ArtCarousel from "@/app/(root)/components/ArtCarousel";
@@ -18,11 +18,11 @@ const pastWorkItems = [
   { label: "UBS", info: "PPNR Modeler · 2017 – 2019 · New York, NY" },
 ];
 
-const websiteItems = [
-  { label: "tnma.me", href: "https://tnma.me" },
-  { label: "tnma.studio", href: "https://tnma.studio" },
-  { label: "doma.studio", href: "https://doma.studio" },
-];
+// const websiteItems = [
+//   { label: "tnma.me", href: "https://tnma.me" },
+//   { label: "tnma.studio", href: "https://tnma.studio" },
+//   { label: "doma.studio", href: "https://doma.studio" },
+// ];
 
 const degreeItems = [
   { label: "M.Arch", info: "The Pratt Institute · 2022 · Brooklyn, NY", suffix: "(inc)" },
@@ -87,10 +87,10 @@ const ContactModal = ({ open, onClose }: { open: boolean; onClose: () => void })
     setSent(true);
   };
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     onClose();
     setSent(false);
-  };
+  }, [onClose]);
 
   useEffect(() => {
     if (!open) return;
@@ -99,7 +99,7 @@ const ContactModal = ({ open, onClose }: { open: boolean; onClose: () => void })
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [open]);
+  }, [open, handleClose]);
 
   if (!open) return null;
 

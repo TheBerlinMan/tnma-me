@@ -25,8 +25,8 @@ const websiteItems = [
 ];
 
 const degreeItems = [
-  { label: "M.Arch", info: "The Pratt Institute · 2020 · Brooklyn, NY", suffix: "(inc)" },
-  { label: "B.A. in Mathematics", info: "Pace University · 2017 · New York, NY" },
+  { label: "M.Arch", info: "The Pratt Institute · 2022 · Brooklyn, NY", suffix: "(inc)" },
+  { label: "B.A. in Mathematics", info: "Pace University · 2018 · New York, NY" },
 ];
 
 type HoverItemData = { label: string; info: string; href?: string; hrefLabel?: string; suffix?: string };
@@ -91,6 +91,15 @@ const ContactModal = ({ open, onClose }: { open: boolean; onClose: () => void })
     onClose();
     setSent(false);
   };
+
+  useEffect(() => {
+    if (!open) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [open]);
 
   if (!open) return null;
 

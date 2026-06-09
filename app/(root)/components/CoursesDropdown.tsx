@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 
 const courseItems = [
-  { label: "Intro to Tailoring & Alterations", info: "FIT · 2022 · New York, NY" },
+  { label: "Intro to Tailoring & Alterations", info: "Fashion Institute of Technology · 2022 · New York, NY" },
   { label: "Software Engineering Bootcamp", info: "General Assembly · 2021 · Remote" },
-  { label: "Graphic Design + Color Theory", info: "SVA · 2018 · New York, NY" },
+  { label: "Graphic Design + Color Theory", info: "School of Visual Arts · 2018 · New York, NY" },
 ];
 
 const CourseItem = ({ item }: { item: { label: string; info: string } }) => {

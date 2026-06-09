@@ -8,8 +8,6 @@ const artSources = [
   { bucket: "myphotos", folder: "ilike2" },
   { bucket: "myphotos", folder: "ilike3" },
   { bucket: "myphotos", folder: "ilike4" },
-  { bucket: "mydrawings", folder: "AnxietySeries" },
-  { bucket: "mydrawings", folder: "CangalhaSeries" },
 ];
 
 function shuffle<T>(arr: T[]): T[] {
@@ -195,7 +193,7 @@ const ArtCarousel = () => {
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
         >
-          <div className="relative inline-flex">
+          <div className="flex flex-col items-center gap-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={getImageUrl(images[expandedIndex].key, images[expandedIndex].bucket)}
@@ -203,7 +201,7 @@ const ArtCarousel = () => {
               className={`object-contain pointer-events-none max-w-[60vw] max-h-[60vh] md:max-w-[65vw] md:max-h-[65vh] transition-opacity duration-300 ${scrolledAway ? "opacity-40" : "opacity-100"}`}
               draggable={false}
             />
-            <div className="absolute bottom-3 right-3 flex gap-1 z-10">
+            <div className="flex items-center justify-center gap-1">
               <button
                 className="text-white/50 hover:text-white transition-colors text-2xl leading-none px-1"
                 onClick={(e) => {

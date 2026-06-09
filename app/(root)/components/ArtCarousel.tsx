@@ -7,6 +7,10 @@ const SCROLL_SPEED = 90; // pixels per second
 const SEPARATOR_WIDTH = 18;
 const SEPARATOR_OVERFLOW = 14;
 const SEPARATOR_HEIGHT = FRAME_HEIGHT + SEPARATOR_OVERFLOW * 2;
+const THUMBNAIL_HEIGHT = 600;
+const PLACEHOLDER_WIDTH = 280;
+const MAX_CAROUSEL_IMAGES = 40;
+const EAGER_IMAGE_COUNT = 6;
 
 const SQUIGGLE_PATHS = [
   "M8 -8 C5 -2, 12 2, 9 6 C4 38, 14 72, 8 108 C2 142, 15 176, 9 210 C3 244, 14 272, 9 294 C4 300, 13 306, 8 308",
@@ -79,14 +83,34 @@ const ArtCarousel = () => {
   const pausedRef = useRef(false);
   const stripWidthRef = useRef(0);
 
-  const getImageUrl = useCallback((key: string, bucket: string) => {
+  const getThumbnailUrl = useCallback((key: string, bucket: string) => {
+    return `/api/image?key=${encodeURIComponent(key)}&bucket=${encodeURIComponent(bucket)}&h=${THUMBNAIL_HEIGHT}&q=75`;
+  }, []);
+
+  const getFullImageUrl = useCallback((key: string, bucket: string) => {
     return `/api/image?key=${encodeURIComponent(key)}&bucket=${encodeURIComponent(bucket)}`;
   }, []);
+
+  const handleImageLoad = useCallback(
+    (key: string, naturalWidth: number, naturalHeight: number) => {
+      const displayWidth = Math.round(
+        (naturalWidth / naturalHeight) * FRAME_HEIGHT
+      );
+      setImages((prev) =>
+        prev.map((img) =>
+          img.key === key && img.displayWidth !== displayWidth
+            ? { ...img, displayWidth }
+            : img
+        )
+      );
+    },
+    []
+  );
 
   useEffect(() => {
     let cancelled = false;
 
-    async function loadAll() {
+    async function loadImageList() {
       try {
         const results = await Promise.all(
           artSources.map(async (source) => {
@@ -97,27 +121,15 @@ const ArtCarousel = () => {
             return files.map((key) => ({ key, bucket: source.bucket }));
           })
         );
-        const shuffled = shuffle(results.flat());
-
-        const loaded = await Promise.all(
-          shuffled.map(
-            (img) =>
-              new Promise<CarouselImage | null>((resolve) => {
-                const el = new window.Image();
-                el.onload = () => {
-                  const displayWidth = Math.round(
-                    (el.naturalWidth / el.naturalHeight) * FRAME_HEIGHT
-                  );
-                  resolve({ ...img, displayWidth });
-                };
-                el.onerror = () => resolve(null);
-                el.src = getImageUrl(img.key, img.bucket);
-              })
-          )
-        );
+        const shuffled = shuffle(results.flat()).slice(0, MAX_CAROUSEL_IMAGES);
 
         if (!cancelled) {
-          setImages(loaded.filter((img): img is CarouselImage => img !== null));
+          setImages(
+            shuffled.map((img) => ({
+              ...img,
+              displayWidth: PLACEHOLDER_WIDTH,
+            }))
+          );
           setReady(true);
         }
       } catch (error) {
@@ -125,11 +137,11 @@ const ArtCarousel = () => {
       }
     }
 
-    loadAll();
+    loadImageList();
     return () => {
       cancelled = true;
     };
-  }, [getImageUrl]);
+  }, []);
 
   const goNext = useCallback(() => {
     if (images.length === 0) return;
@@ -238,12 +250,22 @@ const ArtCarousel = () => {
         // eslint-disable-next-line @next/next/no-img-element
         <img
           key={`${stripKey}-${img.key}-${i}`}
-          src={getImageUrl(img.key, img.bucket)}
+          src={getThumbnailUrl(img.key, img.bucket)}
           alt=""
           width={img.displayWidth}
           height={FRAME_HEIGHT}
           className="h-[300px] w-auto shrink-0 cursor-pointer block"
           draggable={false}
+          loading={i < EAGER_IMAGE_COUNT ? "eager" : "lazy"}
+          decoding="async"
+          fetchPriority={i < EAGER_IMAGE_COUNT ? "high" : "auto"}
+          onLoad={(e) =>
+            handleImageLoad(
+              img.key,
+              e.currentTarget.naturalWidth,
+              e.currentTarget.naturalHeight
+            )
+          }
           onClick={() => {
             setExpandedIndex(i);
             setScrolledAway(false);
@@ -306,7 +328,7 @@ const ArtCarousel = () => {
           <div className="flex flex-col items-center gap-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={getImageUrl(images[expandedIndex].key, images[expandedIndex].bucket)}
+              src={getFullImageUrl(images[expandedIndex].key, images[expandedIndex].bucket)}
               alt=""
               className={`object-contain pointer-events-none max-w-[60vw] max-h-[60vh] md:max-w-[65vw] md:max-h-[65vh] transition-opacity duration-300 ${scrolledAway ? "opacity-40" : "opacity-100"}`}
               draggable={false}

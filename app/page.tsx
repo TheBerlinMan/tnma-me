@@ -10,7 +10,7 @@ import ContactModal from "@/app/(root)/components/ContactModal";
 
 const workItems = [
   { label: "Doma", info: "Founder · 2025 – Present · Cangalha, MG, BR" },
-  { label: "Candles by Studio Bara", info: "Operations · 2025 – Present · New York, NY" },
+  { label: "Candles by Studio Bara", info: "Production · 2025 – Present · New York, NY" },
 ];
 
 const pastWorkItems = [

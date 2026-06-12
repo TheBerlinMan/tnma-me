@@ -7,6 +7,7 @@ import HoverItem from "@/app/(root)/components/HoverItem";
 import CollapsibleList from "@/app/(root)/components/CollapsibleList";
 import ArtCarousel, { type CarouselSource } from "@/app/(root)/components/ArtCarousel";
 import ContactModal from "@/app/(root)/components/ContactModal";
+import Icons from "@/app/(root)/components/Icons";
 
 const workItems = [
   { label: "Doma", info: "Founder · 2025 – Present · Cangalha, MG, BR" },
@@ -91,6 +92,7 @@ const HomeContent = ({ carouselImages }: { carouselImages: CarouselSource[] }) =
               {/* <Link href="https://tnma.studio" className="hover:underline">View my store</Link> */}
               <button onClick={() => setContactOpen(true)} className="hover:underline text-right cursor-pointer">Contact me</button>
               <Link href="/about" className="hover:underline">About me</Link>
+              <Icons />
             </div>
           </div>
         </div>

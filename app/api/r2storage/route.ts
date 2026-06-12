@@ -23,7 +23,11 @@ export async function GET(request: NextRequest) {
     const data = await s3.send(command);
     const fileKeys = data.Contents?.map((obj) => obj.Key) || [];
     
-    return NextResponse.json(fileKeys);
+    return NextResponse.json(fileKeys, {
+      headers: {
+        "Cache-Control": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
+      },
+    });
   } catch (error) {
     console.error('Error fetching from R2:', error);
     return NextResponse.json({ 

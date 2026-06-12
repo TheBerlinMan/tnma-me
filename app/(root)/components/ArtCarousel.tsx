@@ -9,7 +9,6 @@ const SEPARATOR_OVERFLOW = 14;
 const SEPARATOR_HEIGHT = FRAME_HEIGHT + SEPARATOR_OVERFLOW * 2;
 const THUMBNAIL_HEIGHT = 600;
 const PLACEHOLDER_WIDTH = 280;
-const MAX_CAROUSEL_IMAGES = 40;
 const EAGER_IMAGE_COUNT = 6;
 
 const SQUIGGLE_PATHS = [
@@ -21,16 +20,12 @@ const SQUIGGLE_PATHS = [
   "M10 -8 C13 -2, 5 4, 9 10 C14 54, 4 92, 11 128 C5 164, 15 200, 8 236 C3 270, 12 286, 9 292 C14 298, 6 304, 9 308",
 ];
 
-const artSources = [
-  { bucket: "myphotos", folder: "ilike1" },
-  { bucket: "myphotos", folder: "ilike2" },
-  { bucket: "myphotos", folder: "ilike3" },
-  { bucket: "myphotos", folder: "ilike4" },
-];
-
-type CarouselImage = {
+export type CarouselSource = {
   key: string;
   bucket: string;
+};
+
+type CarouselImage = CarouselSource & {
   displayWidth: number;
 };
 
@@ -60,18 +55,10 @@ function FrameSeparator({ variant }: { variant: number }) {
   );
 }
 
-function shuffle<T>(arr: T[]): T[] {
-  const shuffled = [...arr];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
-
-const ArtCarousel = () => {
-  const [images, setImages] = useState<CarouselImage[]>([]);
-  const [ready, setReady] = useState(false);
+const ArtCarousel = ({ images: sources }: { images: CarouselSource[] }) => {
+  const [images, setImages] = useState<CarouselImage[]>(() =>
+    sources.map((img) => ({ ...img, displayWidth: PLACEHOLDER_WIDTH }))
+  );
   const [expanded, setExpanded] = useState(false);
   const [expandedIndex, setExpandedIndex] = useState(0);
   const [scrolledAway, setScrolledAway] = useState(false);
@@ -106,42 +93,6 @@ const ArtCarousel = () => {
     },
     []
   );
-
-  useEffect(() => {
-    let cancelled = false;
-
-    async function loadImageList() {
-      try {
-        const results = await Promise.all(
-          artSources.map(async (source) => {
-            const res = await fetch(
-              `/api/r2storage?bucket=${source.bucket}&folder=${source.folder}`
-            );
-            const files: string[] = await res.json();
-            return files.map((key) => ({ key, bucket: source.bucket }));
-          })
-        );
-        const shuffled = shuffle(results.flat()).slice(0, MAX_CAROUSEL_IMAGES);
-
-        if (!cancelled) {
-          setImages(
-            shuffled.map((img) => ({
-              ...img,
-              displayWidth: PLACEHOLDER_WIDTH,
-            }))
-          );
-          setReady(true);
-        }
-      } catch (error) {
-        console.error("Error loading carousel images:", error);
-      }
-    }
-
-    loadImageList();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   const goNext = useCallback(() => {
     if (images.length === 0) return;
@@ -200,7 +151,7 @@ const ArtCarousel = () => {
   );
 
   useEffect(() => {
-    if (!ready || !stripRef.current) return;
+    if (!stripRef.current) return;
 
     const measure = () => {
       if (stripRef.current) {
@@ -212,10 +163,10 @@ const ArtCarousel = () => {
     const observer = new ResizeObserver(measure);
     observer.observe(stripRef.current);
     return () => observer.disconnect();
-  }, [ready, images]);
+  }, [images]);
 
   useEffect(() => {
-    if (!ready || expanded) return;
+    if (expanded || images.length === 0) return;
 
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -242,7 +193,7 @@ const ArtCarousel = () => {
 
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [ready, expanded]);
+  }, [expanded, images.length]);
 
   const renderStrip = (stripKey: string) =>
     images.flatMap((img, i) => {
@@ -282,7 +233,7 @@ const ArtCarousel = () => {
       ];
     });
 
-  if (!ready || images.length === 0) {
+  if (images.length === 0) {
     return (
       <div
         className="w-full animate-pulse"

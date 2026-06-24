@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Jost } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 // Load Jost font with all available weights
@@ -23,6 +25,8 @@ export default function RootLayout({
     <html lang="en" className={jost.variable}>
       <body className={`min-h-screen font-sans ${jost.className}`}>
         <main className="min-h-screen max-w-[1200px] mx-auto w-full">{children}</main>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

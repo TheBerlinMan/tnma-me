@@ -35,8 +35,8 @@ const AboutPage = () => {
             }`}
           >
             <p>
-              Really though, I&apos;m just some dude who is above average at
-              some things and wants to garner support in the form of
+              Really though, I&apos;m just some dude who enjoys a lot of
+              different things and wants to garner support in the form of
               attention, so that I can feel like I&apos;m toiling away in the
               direction of something meaningful.
             </p>
@@ -54,7 +54,7 @@ const AboutPage = () => {
             </p>
             <p>
               All these things are individually meaningless, but they are
-              the sum total of who I am. I think about that every day.
+              the sum total of who I am and I think about that every day.
             </p>
           </div>
         </div>

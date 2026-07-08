@@ -64,7 +64,7 @@ const Header = () => {
           </div>
         ) : (
           <div
-            className="text-sm transition-colors duration-200"
+            className="text-sm text-gray-500 transition-colors duration-200"
             style={{ color: titleHovered ? `hsl(${titleHue}, 70%, 50%)` : undefined }}
             onMouseEnter={handleTitleEnter}
             onMouseLeave={handleTitleLeave}

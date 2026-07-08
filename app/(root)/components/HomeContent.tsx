@@ -20,11 +20,11 @@ const pastWorkItems = [
   { label: "UBS", info: "PPNR Modeler · 2017 – 2019 · New York, NY" },
 ];
 
-// const websiteItems = [
-//   { label: "tnma.me", href: "https://tnma.me" },
-//   { label: "tnma.studio", href: "https://tnma.studio" },
-//   { label: "doma.studio", href: "https://doma.studio" },
-// ];
+const websiteItems = [
+  { label: "tnma.me", href: "https://tnma.me" },
+  { label: "tnma.studio", href: "https://tnma.studio" },
+  { label: "doma.studio", href: "https://doma.studio" },
+];
 
 const degreeItems = [
   { label: "M.Arch", info: "The Pratt Institute · 2022 · Brooklyn, NY", suffix: "(inc)" },
@@ -63,14 +63,17 @@ const HomeContent = ({ carouselImages }: { carouselImages: CarouselSource[] }) =
                 Sewing
               </Link>
             </div>
-            {/* <div className="flex flex-col">
-              <div className="text-[0.95rem] font-medium mb-2">Websites</div>
-              {websiteItems.map((item) => (
+            <div className="flex flex-col">
+              <div className="text-[0.95rem] font-medium mb-2">Software</div>
+              {/* {websiteItems.map((item) => (
                 <Link key={item.label} href={item.href} className="hover:underline group">
                   <span className="hidden group-hover:inline text-gray-500 text-xs">https://www.</span>{item.label}
                 </Link>
-              ))}
-            </div> */}
+              ))} */}
+              <Link href="https://software.tnma.me" className="hover:underline">
+                View Portfolio
+              </Link>
+            </div>
             <div className="flex flex-col">
               <div className="text-[0.95rem] font-medium mb-2">Work</div>
               {workItems.map((item) => (
@@ -90,8 +93,8 @@ const HomeContent = ({ carouselImages }: { carouselImages: CarouselSource[] }) =
             </div>
             <div className="flex flex-col text-sm text-right">
               {/* <Link href="https://tnma.studio" className="hover:underline">View my store</Link> */}
-              <button onClick={() => setContactOpen(true)} className="hover:underline text-right cursor-pointer">Contact me</button>
               <Link href="/about" className="hover:underline">About me</Link>
+              <button onClick={() => setContactOpen(true)} className="hover:underline text-right cursor-pointer">Contact me</button>
               <Icons />
             </div>
           </div>

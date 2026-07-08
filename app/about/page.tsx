@@ -38,7 +38,8 @@ const AboutPage = () => {
               Really though, I&apos;m just some dude who enjoys doing a lot
               of different things and is trying to find support and
               attention for them, so I can feel a little less alone while I
-              toil away in the direction of connection and meaning.
+              toil away in the direction of connection, meaning, and
+              recognition.
             </p>
             <p>
               I was born in New Jersey, which is where I grew up. Then I

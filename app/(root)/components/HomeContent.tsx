@@ -20,11 +20,11 @@ const pastWorkItems = [
   { label: "UBS", info: "PPNR Modeler · 2017 – 2019 · New York, NY" },
 ];
 
-const websiteItems = [
-  { label: "tnma.me", href: "https://tnma.me" },
-  { label: "tnma.studio", href: "https://tnma.studio" },
-  { label: "doma.studio", href: "https://doma.studio" },
-];
+// const websiteItems = [
+//   { label: "tnma.me", href: "https://tnma.me" },
+//   { label: "tnma.studio", href: "https://tnma.studio" },
+//   { label: "doma.studio", href: "https://doma.studio" },
+// ];
 
 const degreeItems = [
   { label: "M.Arch", info: "The Pratt Institute · 2022 · Brooklyn, NY", suffix: "(inc)" },

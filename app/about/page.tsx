@@ -35,10 +35,10 @@ const AboutPage = () => {
             }`}
           >
             <p>
-              Really though, I&apos;m just some dude who enjoys a lot of
-              different things and wants to garner support in the form of
-              attention, so that I can feel like I&apos;m toiling away in the
-              direction of something meaningful.
+              Really though, I&apos;m just some dude who enjoys doing a lot
+              of different things and is trying to find support and
+              attention for them, so I can feel a little less alone while I
+              toil away in the direction of connection and meaning.
             </p>
             <p>
               I was born in New Jersey, which is where I grew up. Then I

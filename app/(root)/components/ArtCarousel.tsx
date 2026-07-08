@@ -4,21 +4,10 @@ import { useEffect, useState, useCallback, useRef } from "react";
 
 const FRAME_HEIGHT = 300;
 const SCROLL_SPEED = 90; // pixels per second
-const SEPARATOR_WIDTH = 18;
-const SEPARATOR_OVERFLOW = 14;
-const SEPARATOR_HEIGHT = FRAME_HEIGHT + SEPARATOR_OVERFLOW * 2;
+const FRAME_GAP = 18;
 const THUMBNAIL_HEIGHT = 600;
 const PLACEHOLDER_WIDTH = 280;
 const EAGER_IMAGE_COUNT = 6;
-
-const SQUIGGLE_PATHS = [
-  "M8 -8 C5 -2, 12 2, 9 6 C4 38, 14 72, 8 108 C2 142, 15 176, 9 210 C3 244, 14 272, 9 294 C4 300, 13 306, 8 308",
-  "M10 -6 C14 0, 4 4, 9 8 C14 42, 3 78, 10 114 C15 148, 4 184, 9 218 C3 252, 13 280, 8 292 C3 298, 12 304, 9 308",
-  "M7 -10 C11 -4, 4 2, 8 10 C12 48, 5 86, 11 122 C6 158, 14 194, 7 230 C3 264, 12 286, 9 294 C14 300, 5 306, 8 308",
-  "M9 -8 C6 -2, 14 2, 10 6 C5 44, 13 80, 7 116 C2 152, 14 188, 9 224 C4 258, 12 284, 8 294 C3 300, 11 306, 9 308",
-  "M7 -6 C4 0, 13 4, 8 8 C3 52, 15 90, 9 126 C4 162, 13 198, 7 234 C2 268, 14 288, 9 294 C3 300, 12 306, 8 308",
-  "M10 -8 C13 -2, 5 4, 9 10 C14 54, 4 92, 11 128 C5 164, 15 200, 8 236 C3 270, 12 286, 9 292 C14 298, 6 304, 9 308",
-];
 
 export type CarouselSource = {
   key: string;
@@ -28,32 +17,6 @@ export type CarouselSource = {
 type CarouselImage = CarouselSource & {
   displayWidth: number;
 };
-
-function FrameSeparator({ variant }: { variant: number }) {
-  return (
-    <div
-      className="shrink-0 self-center flex items-center justify-center text-black"
-      style={{ width: SEPARATOR_WIDTH, height: SEPARATOR_HEIGHT }}
-      aria-hidden="true"
-    >
-      <svg
-        width={SEPARATOR_WIDTH}
-        height={SEPARATOR_HEIGHT}
-        viewBox={`0 ${-SEPARATOR_OVERFLOW} ${SEPARATOR_WIDTH} ${SEPARATOR_HEIGHT}`}
-        fill="none"
-        className="h-full w-full"
-      >
-        <path
-          d={SQUIGGLE_PATHS[variant % SQUIGGLE_PATHS.length]}
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </div>
-  );
-}
 
 const ArtCarousel = ({ images: sources }: { images: CarouselSource[] }) => {
   const [images, setImages] = useState<CarouselImage[]>(() =>
@@ -119,6 +82,7 @@ const ArtCarousel = ({ images: sources }: { images: CarouselSource[] }) => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("wheel", handleWheel);
+      pausedRef.current = false;
     };
   }, [expanded, goNext, goPrev]);
 
@@ -196,48 +160,40 @@ const ArtCarousel = ({ images: sources }: { images: CarouselSource[] }) => {
   }, [expanded, images.length]);
 
   const renderStrip = (stripKey: string) =>
-    images.flatMap((img, i) => {
-      const frame = (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          key={`${stripKey}-${img.key}-${i}`}
-          src={getThumbnailUrl(img.key, img.bucket)}
-          alt=""
-          width={img.displayWidth}
-          height={FRAME_HEIGHT}
-          className="h-[300px] w-auto shrink-0 cursor-pointer block"
-          draggable={false}
-          loading={i < EAGER_IMAGE_COUNT ? "eager" : "lazy"}
-          decoding="async"
-          fetchPriority={i < EAGER_IMAGE_COUNT ? "high" : "auto"}
-          onLoad={(e) =>
-            handleImageLoad(
-              img.key,
-              e.currentTarget.naturalWidth,
-              e.currentTarget.naturalHeight
-            )
-          }
-          onClick={() => {
-            setExpandedIndex(i);
-            setScrolledAway(false);
-            setExpanded(true);
-          }}
-        />
-      );
-
-      if (i === 0) return [frame];
-
-      return [
-        <FrameSeparator key={`${stripKey}-sep-${i}`} variant={i - 1} />,
-        frame,
-      ];
-    });
+    images.map((img, i) => (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        key={`${stripKey}-${img.key}-${i}`}
+        src={getThumbnailUrl(img.key, img.bucket)}
+        alt=""
+        width={img.displayWidth}
+        height={FRAME_HEIGHT}
+        className="h-[300px] w-auto shrink-0 cursor-pointer block"
+        style={{ marginLeft: i === 0 ? 0 : FRAME_GAP }}
+        draggable={false}
+        loading={i < EAGER_IMAGE_COUNT ? "eager" : "lazy"}
+        decoding="async"
+        fetchPriority={i < EAGER_IMAGE_COUNT ? "high" : "auto"}
+        onLoad={(e) =>
+          handleImageLoad(
+            img.key,
+            e.currentTarget.naturalWidth,
+            e.currentTarget.naturalHeight
+          )
+        }
+        onClick={() => {
+          setExpandedIndex(i);
+          setScrolledAway(false);
+          setExpanded(true);
+        }}
+      />
+    ));
 
   if (images.length === 0) {
     return (
       <div
         className="w-full animate-pulse"
-        style={{ height: SEPARATOR_HEIGHT }}
+        style={{ height: FRAME_HEIGHT }}
       />
     );
   }
@@ -245,7 +201,7 @@ const ArtCarousel = ({ images: sources }: { images: CarouselSource[] }) => {
   return (
     <div
       className="relative w-full overflow-x-hidden"
-      style={{ height: SEPARATOR_HEIGHT }}
+      style={{ height: FRAME_HEIGHT }}
       onMouseEnter={() => {
         pausedRef.current = true;
       }}

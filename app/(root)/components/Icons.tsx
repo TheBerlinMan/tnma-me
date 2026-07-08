@@ -79,7 +79,7 @@ const Icons = () => {
   const iconClass = "block transition-colors hover-text-custom";
 
   return (
-    <div className="mt-auto flex flex-col items-end gap-2.5 pt-6 text-black">
+    <div className="flex flex-col items-end gap-2.5 pt-3 text-black">
       <Link href="https://github.com/TheBerlinMan" target="_blank" className={iconLinkClass}>
         <GithubIcon
           size={ICON_SIZE}

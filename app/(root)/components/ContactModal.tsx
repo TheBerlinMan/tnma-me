@@ -123,23 +123,24 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
         aria-modal="true"
         aria-labelledby="contact-modal-title"
       >
-        <button
-          type="button"
-          onClick={handleClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 cursor-pointer"
-          aria-label="Close"
-        >
-          <X size={20} strokeWidth={1.5} />
-        </button>
+        <div className="flex items-center justify-between mb-4">
+          <h2 id="contact-modal-title" className="text-[0.95rem] font-medium">
+            {sent ? "" : "Contact me"}
+          </h2>
+          <button
+            type="button"
+            onClick={handleClose}
+            className="text-gray-400 hover:text-gray-600 cursor-pointer"
+            aria-label="Close"
+          >
+            <X size={20} strokeWidth={1.5} />
+          </button>
+        </div>
 
         {sent ? (
           <p className="text-sm py-2">Thank you! Your message has been sent.</p>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <h2 id="contact-modal-title" className="text-[0.95rem] font-medium">
-              Contact me
-            </h2>
-
             <div className="flex flex-col gap-3">
               <input
                 type="text"
@@ -147,14 +148,14 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
                 placeholder="Name"
                 required
                 maxLength={200}
-                className="w-full border border-gray-300 px-3 py-2 text-sm font-light focus:outline-none focus:border-gray-500 bg-white"
+                className="w-full border border-gray-300 px-3 py-2 text-base md:text-sm font-light focus:outline-none focus:border-gray-500 bg-white"
               />
               <input
                 type="email"
                 name="email"
                 placeholder="Email"
                 required
-                className="w-full border border-gray-300 px-3 py-2 text-sm font-light focus:outline-none focus:border-gray-500 bg-white"
+                className="w-full border border-gray-300 px-3 py-2 text-base md:text-sm font-light focus:outline-none focus:border-gray-500 bg-white"
               />
               <textarea
                 name="message"
@@ -162,7 +163,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
                 required
                 maxLength={5000}
                 rows={4}
-                className="w-full border border-gray-300 px-3 py-2 text-sm font-light focus:outline-none focus:border-gray-500 bg-white resize-none"
+                className="w-full border border-gray-300 px-3 py-2 text-base md:text-sm font-light focus:outline-none focus:border-gray-500 bg-white resize-none"
               />
             </div>
 
@@ -186,7 +187,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
               <button
                 type="submit"
                 disabled={sending}
-                className="text-sm hover:underline cursor-pointer disabled:opacity-50 text-left w-fit"
+                className="w-full border border-gray-300 px-3 py-2 text-base md:text-sm font-light cursor-pointer disabled:opacity-50 text-center transition-colors hover:bg-black hover:text-white hover:border-black"
               >
                 {sending ? "Sending..." : "Send"}
               </button>

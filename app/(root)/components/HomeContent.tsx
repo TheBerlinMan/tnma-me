@@ -42,7 +42,7 @@ const HomeContent = ({ carouselImages }: { carouselImages: CarouselSource[] }) =
   const [contactOpen, setContactOpen] = useState(false);
 
   return (
-  <div className="min-h-screen flex flex-col p-12 md:p-24">
+  <div className="min-h-screen flex flex-col p-6 md:p-24">
     <Header />
     <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
     <div className="flex-1">

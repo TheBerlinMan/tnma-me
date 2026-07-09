@@ -5,15 +5,14 @@ import { useEffect, useState } from "react";
 
 const AboutPage = () => {
   const [clicked, setClicked] = useState(false);
-  const [mobileRevealed, setMobileRevealed] = useState(false);
+  const [autoRevealed, setAutoRevealed] = useState(false);
 
   useEffect(() => {
-    if (window.innerWidth >= 768) return;
-    const timer = setTimeout(() => setMobileRevealed(true), 3000);
+    const timer = setTimeout(() => setAutoRevealed(true), 3000);
     return () => clearTimeout(timer);
   }, []);
 
-  const visible = clicked || mobileRevealed;
+  const visible = clicked || autoRevealed;
 
   return (
     <div className="min-h-screen flex flex-col">

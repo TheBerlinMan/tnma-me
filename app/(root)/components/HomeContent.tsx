@@ -34,8 +34,10 @@ const degreeItems = [
 const courseItems = [
   { label: "Intro to Tailoring & Alterations", info: "Fashion Institute of Technology · 2026 · New York, NY" },
   { label: "Software Engineering Bootcamp", info: "General Assembly · 2025 · Remote" },
-  { label: "Graphic Design", info: "School of Visual Arts · 2020 · New York, NY" },
-  { label: "Color Theory", info: "School of Visual Arts · 2020 · New York, NY" },
+  { label: "Basic Jewelry Making", info: "Studio Jewelers Ltd. · 2023 · New York, NY" },
+  { label: "Intro to Furniture Making", info: "The DIY Joint · 2021 · Union City, NJ" },
+  { label: "Graphic Design", info: "School of Visual Arts · 2020 · Remote" },
+  { label: "Color Theory", info: "School of Visual Arts · 2020 · Remote" },
 ];
 
 const HomeContent = ({ carouselImages }: { carouselImages: CarouselSource[] }) => {

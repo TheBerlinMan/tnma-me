@@ -109,7 +109,7 @@ const Icons = () => {
           style={
             {
               "--hover-color": `var(--${
-                hoverColors["instagram"] || "blue-200"
+                hoverColors["instagram"] || "blue-600"
               })`,
             } as React.CSSProperties
           }
@@ -123,7 +123,7 @@ const Icons = () => {
           style={
             {
               "--hover-color": `var(--${
-                hoverColors["github"] || "blue-200"
+                hoverColors["github"] || "blue-600"
               })`,
             } as React.CSSProperties
           }
@@ -137,7 +137,7 @@ const Icons = () => {
           style={
             {
               "--hover-color": `var(--${
-                hoverColors["x"] || "blue-200"
+                hoverColors["x"] || "blue-600"
               })`,
             } as React.CSSProperties
           }
@@ -151,7 +151,7 @@ const Icons = () => {
           style={
             {
               "--hover-color": `var(--${
-                hoverColors["chess"] || "blue-200"
+                hoverColors["chess"] || "blue-600"
               })`,
             } as React.CSSProperties
           }

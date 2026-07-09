@@ -14,16 +14,16 @@ export function getCurrentDateLong(): string {
 
 export const getRandomColor = (prevColor: string = "") => {
   const colors = [
-    'red-200',
-    'blue-200', 
-    'green-200',
-    'yellow-100',
-    'purple-200',
-    'pink-200',
-    'orange-200',
-    'teal-200',
-    'indigo-200',
-    'rose-200'
+    'red-600',
+    'blue-600',
+    'green-600',
+    'yellow-500',
+    'purple-600',
+    'pink-600',
+    'orange-500',
+    'teal-600',
+    'indigo-600',
+    'rose-600'
   ];
 
   let newColor = colors[Math.floor(Math.random() * colors.length)];
